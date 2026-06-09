@@ -52,7 +52,7 @@
           "settings": {
             "quote": "Over this last week I've had the pleasure of using one heck of a comfortable, easy to use bow sling. They are hand made here in south central Minnesota even! This thing makes it super easy to sling your bow, it's comfortable to wear, and it stows very nicely on the outside of your bow while you shoot. Head on over to VSling Archery and get yourself an amazing addition to your bow! You'll be going from slinging your bow, to slinging arrows in no time!",
             "author": "Verified Buyer",
-            "detail": "Glencoe, Minnesota",
+            "detail": "",
             "rating": 5
           }
         },
@@ -61,14 +61,34 @@
           "settings": {
             "quote": "It's super quiet, it's light, it's super easy and its effective.",
             "author": "Jay Gregory",
-            "detail": "Falls City, NE",
+            "detail": "",
+            "rating": 5
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "quote": "Love my Vsling bow sling! It's fantastic for keeping my hands free during the ride in on my bike and while climbing up to my treestand. The design is quiet, secure, and allows quick access without ever needing to remove it",
+            "author": "Markis Dettman",
+            "detail": "",
+            "rating": 5
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "quote": "I've tried many bow/gun slings. Vsling is by far the most quiet, easiest and most comfortable sling on the market! I also run the bino Vsling and love it!",
+            "author": "Spenser Glaeser",
+            "detail": "",
             "rating": 5
           }
         }
       },
       "block_order": [
         "review_1",
-        "review_2"
+        "review_2",
+        "review_3",
+        "review_4"
       ],
       "settings": {
         "heading": "What Bowhunters Are Saying",
