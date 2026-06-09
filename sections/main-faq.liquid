@@ -3,13 +3,6 @@
 {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
 {{ 'component-site-faq.css' | asset_url | stylesheet_tag }}
 
-{%- include 'vsling-handles' -%}
-
-{%- liquid
-  assign bow_product_url = vsling_bow_url
-  assign comparison_page_url = vsling_comparison_url
--%}
-
 {%- liquid
   assign hero_image = section.settings.hero_image
   assign hero_alt = section.settings.hero_image_alt | default: 'Bowhunter carrying a harvested turkey with Vsling bow sling, cap, and chest harness in the field'
@@ -65,7 +58,7 @@
   </div>
 </div>
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+<div class="page-width section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
   <header class="site-faq__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <h1 id="SiteFaqHeading" class="main-page-title page-title h0">
       {{ section.settings.heading | default: 'Vsling® Bowhunter FAQ' | escape }}
@@ -84,19 +77,6 @@
   </nav>
 
   {% render 'site-faq', section_id: section.id, render_part: 'accordion' %}
-
-  <div class="site-faq__cta color-{{ section.settings.cta_color_scheme }} gradient content-container">
-    <h2 class="h1 site-faq__cta-heading">{{ section.settings.cta_heading | escape }}</h2>
-    <p class="site-faq__cta-subtext">{{ section.settings.cta_subtext | escape }}</p>
-    <div class="site-faq__cta-buttons">
-      <a href="{{ bow_product_url }}" class="button button--primary">
-        {{ section.settings.cta_primary_label | escape }}
-      </a>
-      <a href="{{ comparison_page_url }}" class="button button--secondary">
-        {{ section.settings.cta_secondary_label | escape }}
-      </a>
-    </div>
-  </div>
 
   {% render 'site-faq', section_id: section.id, render_part: 'schema' %}
   {% render 'breadcrumb-json-ld' %}
@@ -149,36 +129,6 @@
       "id": "color_scheme",
       "label": "Page color scheme",
       "default": "scheme-1"
-    },
-    {
-      "type": "text",
-      "id": "cta_heading",
-      "label": "CTA heading",
-      "default": "Ready to make the switch?"
-    },
-    {
-      "type": "text",
-      "id": "cta_subtext",
-      "label": "CTA subtext",
-      "default": "Join bowhunters who've left the floppy sling behind."
-    },
-    {
-      "type": "text",
-      "id": "cta_primary_label",
-      "label": "CTA primary button",
-      "default": "Shop the Vsling® Bow Sling"
-    },
-    {
-      "type": "text",
-      "id": "cta_secondary_label",
-      "label": "CTA secondary button",
-      "default": "See How It Compares"
-    },
-    {
-      "type": "color_scheme",
-      "id": "cta_color_scheme",
-      "label": "CTA color scheme",
-      "default": "scheme-4"
     },
     {
       "type": "range",

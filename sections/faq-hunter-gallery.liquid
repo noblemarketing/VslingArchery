@@ -1,0 +1,515 @@
+{%- assign gallery_id = section.id | replace: '_', '' | downcase -%}
+
+{% style %}
+  .faq-gallery-heading-{{ section.id }} {
+    background-color: {{ section.settings.heading_background }};
+    color: {{ section.settings.heading_color }};
+    text-align: center;
+    padding: 2.4rem 2rem;
+  }
+
+  .faq-gallery-heading-{{ section.id }} h2 {
+    margin: 0;
+    font-family: 'Menseal', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .faq-slideshow-{{ gallery_id }} {
+    display: block;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_vertical }}px {{ section.settings.padding_horizontal }}px;
+  }
+
+  .faq-slideshow-container-{{ gallery_id }} {
+    position: relative;
+    width: 100%;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .faq-slideshow-track-{{ gallery_id }} {
+    display: flex;
+    gap: {{ section.settings.image_gap }}px;
+    transition: transform 0.5s ease;
+  }
+
+  .faq-slideshow-slide-{{ gallery_id }} {
+    flex: 0 0 calc((100% - ({{ section.settings.image_gap }}px * 2)) / 3);
+    position: relative;
+  }
+
+  .faq-slideshow-image-wrapper-{{ gallery_id }} {
+    width: 100%;
+    aspect-ratio: {{ section.settings.image_aspect_ratio }};
+    overflow: hidden;
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  .faq-slideshow-image-{{ gallery_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .faq-slideshow-controls-{{ gallery_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: {{ section.settings.controls_spacing }}px;
+  }
+
+  .faq-slideshow-button-{{ gallery_id }} {
+    width: {{ section.settings.button_size }}px;
+    height: {{ section.settings.button_size }}px;
+    border-radius: 50%;
+    background-color: {{ section.settings.button_color }};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .faq-slideshow-button-{{ gallery_id }}:hover {
+    background-color: {{ section.settings.button_hover_color }};
+    transform: scale(1.1);
+  }
+
+  .faq-slideshow-button-{{ gallery_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .faq-slideshow-button-{{ gallery_id }} svg {
+    width: calc({{ section.settings.button_size }}px * 0.5);
+    height: calc({{ section.settings.button_size }}px * 0.5);
+    fill: {{ section.settings.button_icon_color }};
+  }
+
+  .faq-slideshow-dots-{{ gallery_id }} {
+    display: flex;
+    gap: 8px;
+  }
+
+  .faq-slideshow-dot-{{ gallery_id }} {
+    width: {{ section.settings.dot_size }}px;
+    height: {{ section.settings.dot_size }}px;
+    border-radius: 50%;
+    background-color: {{ section.settings.dot_color }};
+    border: none;
+    cursor: pointer;
+  }
+
+  .faq-slideshow-dot-{{ gallery_id }}.active {
+    background-color: {{ section.settings.dot_active_color }};
+    transform: scale(1.2);
+  }
+
+  @media screen and (max-width: 749px) {
+    .faq-slideshow-slide-{{ gallery_id }} {
+      {% if section.settings.columns_mobile == '1' %}
+        flex: 0 0 100%;
+      {% else %}
+        flex: 0 0 calc((100% - {{ section.settings.mobile_image_gap }}px) / 2);
+      {% endif %}
+    }
+
+    .faq-slideshow-track-{{ gallery_id }} {
+      gap: {{ section.settings.mobile_image_gap }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="faq-gallery-heading-{{ section.id }}">
+  <h2>{{ section.settings.heading | escape }}</h2>
+</div>
+
+<faq-hunter-slideshow-{{ gallery_id }}
+  class="faq-slideshow-{{ gallery_id }}"
+  data-mobile-columns="{{ section.settings.columns_mobile }}"
+  data-mobile-gap="{{ section.settings.mobile_image_gap }}"
+  data-image-gap="{{ section.settings.image_gap }}"
+  data-total-slides="9"
+>
+  <div class="faq-slideshow-container-{{ gallery_id }}">
+    <div class="faq-slideshow-track-{{ gallery_id }}">
+      {% for i in (1..9) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign image = section.settings[image_key]
+        %}
+        <div class="faq-slideshow-slide-{{ gallery_id }}" data-slide-index="{{ forloop.index0 }}">
+          <div class="faq-slideshow-image-wrapper-{{ gallery_id }}">
+            {% if image != blank %}
+              {%- assign slideshow_img_class = 'faq-slideshow-image-' | append: gallery_id -%}
+              {{
+                image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '300, 400, 600, 800',
+                  sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, 90vw',
+                  class: slideshow_img_class,
+                  alt: image.alt | default: 'Bowhunter using Vsling bow sling in the field'
+              }}
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="faq-slideshow-controls-{{ gallery_id }}">
+      <button class="faq-slideshow-button-{{ gallery_id }} faq-slideshow-prev-{{ gallery_id }}" aria-label="Previous slide" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      <div class="faq-slideshow-dots-{{ gallery_id }}"></div>
+      <button class="faq-slideshow-button-{{ gallery_id }} faq-slideshow-next-{{ gallery_id }}" aria-label="Next slide" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</faq-hunter-slideshow-{{ gallery_id }}>
+
+<script>
+  (function() {
+    class FaqHunterSlideshow{{ gallery_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.totalSlides = 9;
+        this.slidesPerView = 3;
+        this.isMobile = window.innerWidth <= 749;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.faq-slideshow-track-{{ gallery_id }}');
+        this.slides = this.querySelectorAll('.faq-slideshow-slide-{{ gallery_id }}');
+        this.prevButton = this.querySelector('.faq-slideshow-prev-{{ gallery_id }}');
+        this.nextButton = this.querySelector('.faq-slideshow-next-{{ gallery_id }}');
+        this.dotsContainer = this.querySelector('.faq-slideshow-dots-{{ gallery_id }}');
+        this.mobileColumns = parseInt(this.dataset.mobileColumns, 10);
+        this.mobileGap = parseInt(this.dataset.mobileGap, 10);
+        this.desktopGap = parseInt(this.dataset.imageGap, 10);
+
+        this.checkMobile();
+        this.createDots();
+        this.updateSlideshow();
+        this.setupEventListeners();
+      }
+
+      checkMobile() {
+        this.isMobile = window.innerWidth <= 749;
+        this.slidesPerView = this.isMobile ? this.mobileColumns : 3;
+      }
+
+      createDots() {
+        this.dotsContainer.innerHTML = '';
+        const maxIndex = Math.max(0, this.totalSlides - this.slidesPerView);
+
+        for (let i = 0; i <= maxIndex; i++) {
+          const dot = document.createElement('button');
+          dot.classList.add('faq-slideshow-dot-{{ gallery_id }}');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.addEventListener('click', () => this.goToSlide(i));
+          this.dotsContainer.appendChild(dot);
+        }
+      }
+
+      setupEventListeners() {
+        this.prevButton.addEventListener('click', () => this.prevSlide());
+        this.nextButton.addEventListener('click', () => this.nextSlide());
+
+        window.addEventListener('resize', () => {
+          const wasMobile = this.isMobile;
+          this.checkMobile();
+          if (wasMobile !== this.isMobile) {
+            this.currentIndex = 0;
+            this.createDots();
+            this.updateSlideshow();
+          } else {
+            this.updateSlideshow();
+          }
+        });
+      }
+
+      prevSlide() {
+        if (this.currentIndex > 0) {
+          this.currentIndex--;
+          this.updateSlideshow();
+        }
+      }
+
+      nextSlide() {
+        const maxIndex = this.totalSlides - this.slidesPerView;
+        if (this.currentIndex < maxIndex) {
+          this.currentIndex++;
+          this.updateSlideshow();
+        }
+      }
+
+      goToSlide(index) {
+        this.currentIndex = index;
+        this.updateSlideshow();
+      }
+
+      updateSlideshow() {
+        if (!this.slides.length) return;
+
+        const slideWidth = this.slides[0].offsetWidth;
+        const gap = this.isMobile ? this.mobileGap : this.desktopGap;
+        const offset = -(this.currentIndex * (slideWidth + gap));
+
+        this.track.style.transform = `translateX(${offset}px)`;
+
+        const maxIndex = this.totalSlides - this.slidesPerView;
+        this.prevButton.disabled = this.currentIndex === 0;
+        this.nextButton.disabled = this.currentIndex === maxIndex;
+
+        const dots = this.dotsContainer.querySelectorAll('.faq-slideshow-dot-{{ gallery_id }}');
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentIndex);
+        });
+      }
+    }
+
+    customElements.define('faq-hunter-slideshow-{{ gallery_id }}', FaqHunterSlideshow{{ gallery_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ hunter gallery",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "TRUSTED BY BOW HUNTERS EVERYWHERE"
+    },
+    {
+      "type": "color",
+      "id": "heading_background",
+      "label": "Heading background",
+      "default": "#FFFF00"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading text color",
+      "default": "#000000"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_9",
+      "label": "Image 9"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Gallery background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap between images",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_gap",
+      "min": 0,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Gap on mobile",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Widescreen" },
+        { "value": "3 / 4", "label": "Portrait" }
+      ],
+      "default": "4 / 3"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Button size",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_icon_color",
+      "label": "Button icon color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "controls_spacing",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Spacing above controls",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "min": 6,
+      "max": 14,
+      "step": 2,
+      "unit": "px",
+      "label": "Dot size",
+      "default": 10
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Active dot color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ hunter gallery"
+    }
+  ]
+}
+{% endschema %}

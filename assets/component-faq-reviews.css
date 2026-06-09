@@ -1,0 +1,68 @@
+.faq-reviews__header {
+  text-align: center;
+  margin-bottom: 3.2rem;
+}
+
+.faq-reviews__header .h0 {
+  margin: 0 0 0.8rem;
+}
+
+.faq-reviews__subheading {
+  margin: 0;
+  font-size: 1.6rem;
+  opacity: 0.85;
+}
+
+.faq-reviews__grid {
+  display: grid;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .faq-reviews__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .faq-reviews__grid--3-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.faq-reviews__card {
+  padding: 2.4rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  border-radius: var(--text-boxes-radius, 0.4rem);
+  background: rgba(var(--color-foreground), 0.03);
+  height: 100%;
+}
+
+.faq-reviews__stars {
+  color: #ffd700;
+  font-size: 1.6rem;
+  letter-spacing: 0.15rem;
+  margin-bottom: 1.2rem;
+}
+
+.faq-reviews__quote {
+  margin: 0 0 1.6rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.faq-reviews__author {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.faq-reviews__detail {
+  margin: 0.4rem 0 0;
+  font-size: 1.3rem;
+  opacity: 0.75;
+}

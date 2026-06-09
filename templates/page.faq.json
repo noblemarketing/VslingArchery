@@ -6,17 +6,105 @@
         "heading": "Vsling® Bowhunter FAQ",
         "subheading": "Everything you need to know before you buy, install, and hunt with the Vsling®.",
         "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "hunter_gallery": {
+      "type": "faq-hunter-gallery",
+      "settings": {
+        "heading": "TRUSTED BY BOW HUNTERS EVERYWHERE",
+        "heading_background": "#ffff00",
+        "heading_color": "#000000",
+        "image_1": "shopify://shop_images/10AE7B26-6F68-48BD-8785-86112E3D605A.jpg",
+        "image_2": "shopify://shop_images/260BAE6A-6B4F-47FD-A2A7-1993570E6A1C.jpg",
+        "image_3": "shopify://shop_images/F6B85301-DCB2-4081-9B75-82121AE98211.jpg",
+        "image_4": "shopify://shop_images/A69AACE6-EE00-475F-9027-712CE937DA07.jpg",
+        "image_5": "shopify://shop_images/A12E40D4-BF5B-480C-AE72-12DD78BBA44C.jpg",
+        "image_6": "shopify://shop_images/IMG_6434.jpg",
+        "image_7": "shopify://shop_images/2B218436-BD49-4CA3-970E-04233C75C4E9.jpg",
+        "image_8": "shopify://shop_images/IMG_8474.jpg",
+        "image_9": "shopify://shop_images/IMG_8475_bdeb157e-8f63-40aa-8bff-59a4d3d97c23.png",
+        "max_width": 1200,
+        "background_color": "#ffffff",
+        "padding_vertical": 15,
+        "padding_horizontal": 20,
+        "image_gap": 20,
+        "columns_mobile": "1",
+        "mobile_image_gap": 10,
+        "image_aspect_ratio": "4 / 3",
+        "image_border_radius": 8,
+        "button_size": 50,
+        "button_color": "#000000",
+        "button_hover_color": "#333333",
+        "button_icon_color": "#ffffff",
+        "controls_spacing": 30,
+        "dot_size": 10,
+        "dot_color": "#cccccc",
+        "dot_active_color": "#000000"
+      }
+    },
+    "reviews": {
+      "type": "faq-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "quote": "Finally a sling I do not have to remove before the shot. That alone sold me.",
+            "author": "Jake M.",
+            "detail": "Whitetail hunter, Wisconsin",
+            "rating": 5
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "quote": "Climbed my stand with both hands free and my bow stayed quiet the whole way up.",
+            "author": "Ryan T.",
+            "detail": "Treestand hunter, Minnesota",
+            "rating": 5
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "quote": "No more dangling strap slapping my bow on every step. The Vsling stays tight all day.",
+            "author": "Chris D.",
+            "detail": "Public land bowhunter",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "settings": {
+        "heading": "What Bowhunters Are Saying",
+        "subheading": "Real feedback from hunters who made the switch to Vsling®.",
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "cta": {
+      "type": "faq-cta",
+      "settings": {
         "cta_heading": "Ready to make the switch?",
         "cta_subtext": "Join bowhunters who've left the floppy sling behind.",
         "cta_primary_label": "Shop the Vsling® Bow Sling",
         "cta_secondary_label": "See How It Compares",
-        "cta_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
         "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "hunter_gallery",
+    "reviews",
+    "cta"
   ]
 }

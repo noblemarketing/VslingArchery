@@ -1,0 +1,102 @@
+{{ 'component-site-faq.css' | asset_url | stylesheet_tag }}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign bow_product_url = vsling_bow_url
+  assign comparison_page_url = vsling_comparison_url
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="page-width page-width--narrow section-{{ section.id }}-padding">
+  <div class="site-faq__cta color-{{ section.settings.color_scheme }} gradient content-container">
+    <h2 class="h1 site-faq__cta-heading">{{ section.settings.cta_heading | escape }}</h2>
+    <p class="site-faq__cta-subtext">{{ section.settings.cta_subtext | escape }}</p>
+    <div class="site-faq__cta-buttons">
+      <a href="{{ bow_product_url }}" class="button button--primary">
+        {{ section.settings.cta_primary_label | escape }}
+      </a>
+      <a href="{{ comparison_page_url }}" class="button button--secondary">
+        {{ section.settings.cta_secondary_label | escape }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ CTA",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Ready to make the switch?"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtext",
+      "label": "CTA subtext",
+      "default": "Join bowhunters who've left the floppy sling behind."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "CTA primary button",
+      "default": "Shop the Vsling® Bow Sling"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "CTA secondary button",
+      "default": "See How It Compares"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "CTA color scheme",
+      "default": "scheme-4"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ CTA"
+    }
+  ]
+}
+{% endschema %}
