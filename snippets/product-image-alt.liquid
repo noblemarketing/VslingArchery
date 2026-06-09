@@ -1,0 +1,50 @@
+{%- comment -%}
+  Outputs SEO alt text for a product gallery image (for use with capture + render).
+
+  Accepts: product, media, media_position
+{%- endcomment -%}
+
+{%- liquid
+  assign seo_alt = media.alt | default: product.title
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign is_bow_sling_product = false
+  assign is_crossbow_product = false
+
+  if product.handle == 'vsling-crossbow-gun-sling' or product.handle == 'untitled-mar22_12-23' or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+    assign is_crossbow_product = true
+  elsif product.handle == 'bow-sling' or product_handle_downcase contains 'bow-sling' or product_title_downcase contains 'bow sling'
+    unless product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
+      assign is_bow_sling_product = true
+    endunless
+  endif
+
+  if is_bow_sling_product
+    case media_position
+      when 1
+        assign seo_alt = 'Vsling elastic bow sling laid flat for compound bow hunters on a clean product background.'
+      when 2
+        assign seo_alt = 'Vsling bow sling installed on a Mathews compound bow for hands-free bowhunting carry.'
+      when 3
+        assign seo_alt = 'Hunter crossing a fence with Vsling bow sling on a Mathews compound bow in timber.'
+      when 4
+        assign seo_alt = 'Close-up of Vsling bow sling elastic attachment secured to a Hoyt compound bow riser.'
+      when 5
+        assign seo_alt = 'Vsling bow sling size guide showing fit on Mathews, Hoyt, and Bear compound bows.'
+    endcase
+  elsif is_crossbow_product
+    case media_position
+      when 1
+        assign seo_alt = 'Vsling elastic crossbow sling laid flat for hands-free crossbow hunting carry.'
+      when 2
+        assign seo_alt = 'Vsling crossbow sling installed on a Barnett crossbow for hands-free hunting carry.'
+      when 3
+        assign seo_alt = 'Hunter climbing a treestand with Vsling crossbow sling on a TenPoint crossbow.'
+      when 4
+        assign seo_alt = 'Close-up of Vsling crossbow sling elastic band attached to a crossbow stock.'
+      when 5
+        assign seo_alt = 'Vsling crossbow sling fit guide for pistol grip and rifle-style crossbow models.'
+    endcase
+  endif
+-%}
+{{- seo_alt -}}

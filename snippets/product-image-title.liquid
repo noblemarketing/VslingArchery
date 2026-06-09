@@ -1,0 +1,50 @@
+{%- comment -%}
+  Outputs SEO title text for a product gallery image (for use with capture + render).
+
+  Accepts: product, media, media_position
+{%- endcomment -%}
+
+{%- liquid
+  assign seo_title = product.title
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign is_bow_sling_product = false
+  assign is_crossbow_product = false
+
+  if product.handle == 'vsling-crossbow-gun-sling' or product.handle == 'untitled-mar22_12-23' or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+    assign is_crossbow_product = true
+  elsif product.handle == 'bow-sling' or product_handle_downcase contains 'bow-sling' or product_title_downcase contains 'bow sling'
+    unless product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
+      assign is_bow_sling_product = true
+    endunless
+  endif
+
+  if is_bow_sling_product
+    case media_position
+      when 1
+        assign seo_title = 'Vsling Elastic Bow Sling'
+      when 2
+        assign seo_title = 'Vsling Bow Sling on Mathews Compound Bow'
+      when 3
+        assign seo_title = 'Vsling Bow Sling Fence Crossing'
+      when 4
+        assign seo_title = 'Vsling Bow Sling on Hoyt Compound Bow'
+      when 5
+        assign seo_title = 'Vsling Bow Sling Compatibility Guide'
+    endcase
+  elsif is_crossbow_product
+    case media_position
+      when 1
+        assign seo_title = 'Vsling Elastic Crossbow Sling'
+      when 2
+        assign seo_title = 'Vsling Crossbow Sling on Barnett Crossbow'
+      when 3
+        assign seo_title = 'Vsling Crossbow Sling Treestand Climb'
+      when 4
+        assign seo_title = 'Vsling Crossbow Sling Attachment Detail'
+      when 5
+        assign seo_title = 'Vsling Crossbow Sling Compatibility Guide'
+    endcase
+  endif
+-%}
+{{- seo_title -}}

@@ -37,7 +37,7 @@
         if product.selected_or_first_available_variant.featured_media != null
           assign modal_media_position = 1
           assign media = product.selected_or_first_available_variant.featured_media
-          render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants, media_position: modal_media_position
+          render 'product-media', product: product, media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants, media_position: modal_media_position
         endif
       -%}
 
@@ -51,7 +51,7 @@
 
           unless media.id == product.selected_or_first_available_variant.featured_media.id
             assign modal_media_position = modal_media_position | plus: 1
-            render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: variant_image, media_position: modal_media_position
+            render 'product-media', product: product, media: media, loop: section.settings.enable_video_looping, variant_image: variant_image, media_position: modal_media_position
           endunless
         -%}
       {%- endfor -%}

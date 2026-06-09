@@ -16,23 +16,27 @@
 
 {%- if media.media_type == 'image' -%}
   {%- if media_position != blank -%}
-    {%- include 'product-image-seo', product: product, media_position: media_position, media: media -%}
+    {%- capture product_image_alt -%}
+      {%- render 'product-image-alt', product: product, media: media, media_position: media_position -%}
+    {%- endcapture -%}
+    {%- capture product_image_title -%}
+      {%- render 'product-image-title', product: product, media: media, media_position: media_position -%}
+    {%- endcapture -%}
   {%- else -%}
     {%- assign product_image_alt = media.alt | default: product.title -%}
     {%- assign product_image_title = product.title -%}
   {%- endif -%}
-  {%- include 'product-image-url', media: media -%}
   <img
     class="global-media-settings global-media-settings--no-shadow{% if variant_image %} product__media-item--variant{% endif %}"
     srcset="
-      {%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550, format: 'webp', quality: 80 }} 550w,{%- endif -%}
-      {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100, format: 'webp', quality: 80 }} 1100w,{%- endif -%}
-      {{ media.preview_image | image_url: width: 1100, format: 'webp', quality: 80 }} 1100w
+      {%- if media.preview_image.width >= 550 -%}{{ media.preview_image | image_url: width: 550 }} 550w,{%- endif -%}
+      {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+      {{ media.preview_image | image_url: width: 1100 }} 1100w
     "
     sizes="(min-width: 750px) calc(100vw - 22rem), 1100px"
-    src="{{ vsling_product_image_url }}"
-    alt="{{ product_image_alt | escape }}"
-    title="{{ product_image_title | escape }}"
+    src="{{ media.preview_image | image_url: width: 1100 }}"
+    alt="{{ product_image_alt | strip | escape }}"
+    title="{{ product_image_title | strip | escape }}"
     loading="lazy"
     width="1100"
     height="{{ 1100 | divided_by: media.preview_image.aspect_ratio | ceil }}"

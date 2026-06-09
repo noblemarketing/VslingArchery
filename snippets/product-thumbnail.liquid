@@ -78,13 +78,16 @@
     </span>
     {%- render 'loading-spinner' -%}
     <div class="product__media media media--transparent">
-      {%- include 'product-image-seo', product: product, media_position: position, media: media -%}
+      {%- capture product_image_alt -%}
+        {%- render 'product-image-alt', product: product, media: media, media_position: position -%}
+      {%- endcapture -%}
+      {%- capture product_image_title -%}
+        {%- render 'product-image-title', product: product, media: media, media_position: position -%}
+      {%- endcapture -%}
       {{
         media.preview_image
         | image_tag:
           width: 1100,
-          format: 'webp',
-          quality: 80,
           alt: product_image_alt,
           title: product_image_title,
           class: image_class,
@@ -125,13 +128,16 @@
           </span>
         {%- endif -%}
       </span>
-      {%- include 'product-image-seo', product: product, media_position: position, media: media -%}
+      {%- capture product_image_alt -%}
+        {%- render 'product-image-alt', product: product, media: media, media_position: position -%}
+      {%- endcapture -%}
+      {%- capture product_image_title -%}
+        {%- render 'product-image-title', product: product, media: media, media_position: position -%}
+      {%- endcapture -%}
       {{
         media.preview_image
         | image_tag:
           width: 1100,
-          format: 'webp',
-          quality: 80,
           alt: product_image_alt,
           title: product_image_title,
           loading: lazy,
