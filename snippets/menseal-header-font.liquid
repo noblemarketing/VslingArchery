@@ -1,16 +1,8 @@
 {%- comment -%}
-  Loads Menseal Regular (body) and Menseal Black (headings/header).
+  Loads Menseal Black for headings/header. Body font uses theme Montserrat setting.
 {%- endcomment -%}
 
 {% style %}
-  @font-face {
-    font-family: 'Menseal';
-    src: url('{{ 'menseal-regular.ttf' | asset_url }}') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
   @font-face {
     font-family: 'Menseal';
     src: url('{{ 'menseal-black.ttf' | asset_url }}') format('truetype');
@@ -20,11 +12,6 @@
   }
 
   :root {
-    --font-body-family: 'Menseal', sans-serif;
-    --font-body-style: normal;
-    --font-body-weight: 400;
-    --font-body-weight-bold: 900;
-
     --font-heading-family: 'Menseal', sans-serif;
     --font-heading-style: normal;
     --font-heading-weight: 900;

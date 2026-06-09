@@ -18,8 +18,32 @@
 -%}
 
 {%- style -%}
-  #ComparisonHero-{{ section.id }}::after {
+  #ComparisonHero-{{ section.id }}::after,
+  #ComparisonHero-{{ section.id }} .banner__media::after {
     opacity: {{ section.settings.hero_overlay_opacity | divided_by: 100.0 }};
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__box {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__box.content-container:after {
+    display: none;
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__heading {
+    font-family: 'Menseal', sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    color: #fff;
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__text,
+  #ComparisonHero-{{ section.id }} .banner__text p {
+    color: #fff;
   }
 
   .comparison-section-{{ section.id }} {
@@ -150,7 +174,7 @@
   {%- comment -%} 1. Hero {%- endcomment -%}
   <div
     id="ComparisonHero-{{ section.id }}"
-    class="banner banner--content-align-center banner--content-align-mobile-center banner--medium{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    class="banner banner--content-align-center banner--content-align-mobile-center banner--medium banner--desktop-transparent{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
   >
     <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {%- if hero_image != blank -%}
@@ -180,7 +204,7 @@
     </div>
 
     <div class="banner__content banner__content--middle-center page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.hero_color_scheme }} gradient">
+      <div class="banner__box content-container content-container--full-width-mobile">
         <h1 class="banner__heading inline-richtext h0">
           Vsling® vs Traditional Bow Sling — There's No Comparison
         </h1>
@@ -508,13 +532,7 @@
       "step": 10,
       "unit": "%",
       "label": "Hero image overlay",
-      "default": 30
-    },
-    {
-      "type": "color_scheme",
-      "id": "hero_color_scheme",
-      "label": "Hero text box color scheme",
-      "default": "scheme-3"
+      "default": 55
     },
     {
       "type": "color_scheme",
