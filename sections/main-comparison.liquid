@@ -11,6 +11,7 @@
   assign faq_url = vsling_faq_url
 
   assign hero_image = section.settings.hero_image
+  assign hero_alt = section.settings.hero_image_alt | default: 'Hunter carrying a wild turkey and compound bow using a Vsling hands-free bow sling in a field'
   assign scenario_1_image = section.settings.scenario_1_image
   assign scenario_2_image = section.settings.scenario_2_image
   assign scenario_3_image = section.settings.scenario_3_image
@@ -114,6 +115,13 @@
     margin: 0;
     padding: 0;
   }
+
+  .comparison-section-{{ section.id }} .comparison__hero-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 {%- endstyle -%}
 
 <div class="comparison-section-{{ section.id }}">
@@ -122,8 +130,8 @@
     id="ComparisonHero-{{ section.id }}"
     class="banner banner--content-align-center banner--content-align-mobile-center banner--medium{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
   >
-    {%- if hero_image != blank -%}
-      <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {%- if hero_image != blank -%}
         {{
           hero_image
           | image_url: width: 3840
@@ -132,15 +140,22 @@
             height: hero_image.width | divided_by: hero_image.aspect_ratio,
             sizes: '100vw',
             widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
-            alt: 'Hunter carrying a compound bow with Vsling bow sling in the field',
+            alt: hero_alt,
             fetchpriority: 'high'
         }}
-      </div>
-    {%- else -%}
-      <div class="banner__media media placeholder">
-        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-      </div>
-    {%- endif -%}
+      {%- else -%}
+        <img
+          src="{{ 'comparison-hero-hunter-turkey.png' | asset_url }}"
+          alt="{{ hero_alt | escape }}"
+          width="2000"
+          height="1333"
+          loading="eager"
+          fetchpriority="high"
+          sizes="100vw"
+          class="comparison__hero-image"
+        >
+      {%- endif -%}
+    </div>
 
     <div class="banner__content banner__content--middle-center page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.hero_color_scheme }} gradient">
@@ -452,7 +467,14 @@
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero image"
+      "label": "Hero image",
+      "info": "Leave blank to use the default hunter carrying turkey photo."
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Hunter carrying a wild turkey and compound bow using a Vsling hands-free bow sling in a field"
     },
     {
       "type": "range",

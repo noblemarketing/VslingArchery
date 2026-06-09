@@ -3,7 +3,6 @@
     "main": {
       "type": "main-comparison",
       "settings": {
-        "hero_image": "shopify://shop_images/IMG_7445.jpg",
         "hero_overlay_opacity": 30,
         "hero_color_scheme": "scheme-3",
         "content_color_scheme": "scheme-4",
