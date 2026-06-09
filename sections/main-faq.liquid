@@ -72,13 +72,11 @@
     <a href="#faq-product" class="button button--secondary site-faq__nav-pill">Product</a>
     <a href="#faq-compatibility" class="button button--secondary site-faq__nav-pill">Compatibility</a>
     <a href="#faq-installation" class="button button--secondary site-faq__nav-pill">Installation</a>
-    <a href="#faq-field" class="button button--secondary site-faq__nav-pill">In The Field</a>
-    <a href="#faq-purchasing" class="button button--secondary site-faq__nav-pill">Purchasing &amp; Shipping</a>
+    <a href="#faq-field" class="button button--secondary site-faq__nav-pill">Hunting</a>
   </nav>
 
   {% include 'site-faq', section_id: section.id, render_part: 'accordion' %}
 
-  {% include 'site-faq', section_id: section.id, render_part: 'schema' %}
   {% render 'breadcrumb-json-ld' %}
 </div>
 

@@ -12,8 +12,8 @@
   <site-faq class="site-faq" data-site-faq>
     <section id="{{ cat_1_id }}" class="site-faq__category">
       <h2 class="h1 site-faq__category-title">{{ cat_1_title }}</h2>
-      {%- assign questions = p_q1 | append: '~~~' | append: p_q2 | append: '~~~' | append: p_q3 | append: '~~~' | append: p_q4 | append: '~~~' | append: p_q5 | append: '~~~' | append: p_q6 | append: '~~~' | append: p_q7 | append: '~~~' | append: p_q8 | split: '~~~' -%}
-      {%- assign answers = p_a1_plain | append: '~~~' | append: p_a2_plain | append: '~~~' | append: p_a3_plain | append: '~~~' | append: p_a4_plain | append: '~~~' | append: p_a5_plain | append: '~~~' | append: p_a6_plain | append: '~~~' | append: p_a7_plain | append: '~~~' | append: p_a8_plain | split: '~~~' -%}
+      {%- assign questions = p_q1 | append: '~~~' | append: p_q2 | append: '~~~' | append: p_q3 | append: '~~~' | append: p_q4 | append: '~~~' | append: p_q5 | append: '~~~' | append: p_q6 | append: '~~~' | append: p_q7 | split: '~~~' -%}
+      {%- assign answers = p_a1_plain | append: '~~~' | append: p_a2_plain | append: '~~~' | append: p_a3_plain | append: '~~~' | append: p_a4_plain | append: '~~~' | append: p_a5_plain | append: '~~~' | append: p_a6_plain | append: '~~~' | append: p_a7_plain | split: '~~~' -%}
       {%- for question in questions -%}
         {%- assign answer_plain = answers[forloop.index0] -%}
         {%- assign global_index = forloop.index -%}
@@ -41,11 +41,11 @@
 
     <section id="{{ cat_2_id }}" class="site-faq__category">
       <h2 class="h1 site-faq__category-title">{{ cat_2_title }}</h2>
-      {%- assign questions = c_q1 | append: '~~~' | append: c_q2 | append: '~~~' | append: c_q3 | append: '~~~' | append: c_q4 | split: '~~~' -%}
-      {%- assign answers = c_a1_plain | append: '~~~' | append: c_a2_plain | append: '~~~' | append: c_a3_plain | append: '~~~' | append: c_a4_plain | split: '~~~' -%}
+      {%- assign questions = c_q1 | append: '~~~' | append: c_q2 | append: '~~~' | append: c_q3 | split: '~~~' -%}
+      {%- assign answers = c_a1_plain | append: '~~~' | append: c_a2_plain | append: '~~~' | append: c_a3_plain | split: '~~~' -%}
       {%- for question in questions -%}
         {%- assign answer_plain = answers[forloop.index0] -%}
-        {%- assign global_index = forloop.index | plus: 8 -%}
+        {%- assign global_index = forloop.index | plus: 7 -%}
         {%- include 'site-faq-answer-html', answer_plain: answer_plain, global_index: global_index -%}
         <details class="site-faq__item accordion" id="Details-SiteFAQ-{{ global_index }}-{{ section_id }}">
           <summary id="Summary-SiteFAQ-{{ global_index }}-{{ section_id }}">
@@ -65,11 +65,11 @@
 
     <section id="{{ cat_3_id }}" class="site-faq__category">
       <h2 class="h1 site-faq__category-title">{{ cat_3_title }}</h2>
-      {%- assign questions = i_q1 | append: '~~~' | append: i_q2 | append: '~~~' | append: i_q3 | append: '~~~' | append: i_q4 | split: '~~~' -%}
-      {%- assign answers = i_a1_plain | append: '~~~' | append: i_a2_plain | append: '~~~' | append: i_a3_plain | append: '~~~' | append: i_a4_plain | split: '~~~' -%}
+      {%- assign questions = i_q1 | append: '~~~' | append: i_q2 | append: '~~~' | append: i_q3 | split: '~~~' -%}
+      {%- assign answers = i_a1_plain | append: '~~~' | append: i_a2_plain | append: '~~~' | append: i_a3_plain | split: '~~~' -%}
       {%- for question in questions -%}
         {%- assign answer_plain = answers[forloop.index0] -%}
-        {%- assign global_index = forloop.index | plus: 12 -%}
+        {%- assign global_index = forloop.index | plus: 10 -%}
         {%- include 'site-faq-answer-html', answer_plain: answer_plain, global_index: global_index -%}
         <details class="site-faq__item accordion" id="Details-SiteFAQ-{{ global_index }}-{{ section_id }}">
           <summary id="Summary-SiteFAQ-{{ global_index }}-{{ section_id }}">
@@ -89,35 +89,11 @@
 
     <section id="{{ cat_4_id }}" class="site-faq__category">
       <h2 class="h1 site-faq__category-title">{{ cat_4_title }}</h2>
-      {%- assign questions = f_q1 | append: '~~~' | append: f_q2 | append: '~~~' | append: f_q3 | append: '~~~' | append: f_q4 | append: '~~~' | append: f_q5 | split: '~~~' -%}
-      {%- assign answers = f_a1_plain | append: '~~~' | append: f_a2_plain | append: '~~~' | append: f_a3_plain | append: '~~~' | append: f_a4_plain | append: '~~~' | append: f_a5_plain | split: '~~~' -%}
+      {%- assign questions = f_q1 | append: '~~~' | append: f_q2 | append: '~~~' | append: f_q3 | append: '~~~' | append: f_q4 | split: '~~~' -%}
+      {%- assign answers = f_a1_plain | append: '~~~' | append: f_a2_plain | append: '~~~' | append: f_a3_plain | append: '~~~' | append: f_a4_plain | split: '~~~' -%}
       {%- for question in questions -%}
         {%- assign answer_plain = answers[forloop.index0] -%}
-        {%- assign global_index = forloop.index | plus: 16 -%}
-        {%- include 'site-faq-answer-html', answer_plain: answer_plain, global_index: global_index -%}
-        <details class="site-faq__item accordion" id="Details-SiteFAQ-{{ global_index }}-{{ section_id }}">
-          <summary id="Summary-SiteFAQ-{{ global_index }}-{{ section_id }}">
-            <div class="site-faq__summary-inner">
-              <h3 class="site-faq__question">{{ question | escape }}</h3>
-              <span class="site-faq__toggle-icon" aria-hidden="true">+</span>
-            </div>
-          </summary>
-          <div class="site-faq__panel">
-            <div class="site-faq__panel-inner">
-              <p class="site-faq__answer rte">{{ answer_html }}</p>
-            </div>
-          </div>
-        </details>
-      {%- endfor -%}
-    </section>
-
-    <section id="{{ cat_5_id }}" class="site-faq__category">
-      <h2 class="h1 site-faq__category-title">{{ cat_5_title }}</h2>
-      {%- assign questions = s_q1 | append: '~~~' | append: s_q2 | append: '~~~' | append: s_q3 | append: '~~~' | append: s_q4 | split: '~~~' -%}
-      {%- assign answers = s_a1_plain | append: '~~~' | append: s_a2_plain | append: '~~~' | append: s_a3_plain | append: '~~~' | append: s_a4_plain | split: '~~~' -%}
-      {%- for question in questions -%}
-        {%- assign answer_plain = answers[forloop.index0] -%}
-        {%- assign global_index = forloop.index | plus: 21 -%}
+        {%- assign global_index = forloop.index | plus: 13 -%}
         {%- include 'site-faq-answer-html', answer_plain: answer_plain, global_index: global_index -%}
         <details class="site-faq__item accordion" id="Details-SiteFAQ-{{ global_index }}-{{ section_id }}">
           <summary id="Summary-SiteFAQ-{{ global_index }}-{{ section_id }}">
@@ -143,16 +119,70 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {%- for question in faq_questions -%}
         {
           "@type": "Question",
-          "name": {{ question | json }},
+          "name": {{ schema_q1 | json }},
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": {{ faq_answers_plain[forloop.index0] | json }}
+            "text": {{ schema_a1 | json }}
           }
-        }{%- unless forloop.last -%},{%- endunless -%}
-        {%- endfor -%}
+        },
+        {
+          "@type": "Question",
+          "name": {{ schema_q2 | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ schema_a2 | json }}
+          }
+        },
+        {
+          "@type": "Question",
+          "name": {{ schema_q3 | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ schema_a3 | json }}
+          }
+        },
+        {
+          "@type": "Question",
+          "name": {{ schema_q4 | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ schema_a4 | json }}
+          }
+        },
+        {
+          "@type": "Question",
+          "name": {{ schema_q5 | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ schema_a5 | json }}
+          }
+        },
+        {
+          "@type": "Question",
+          "name": {{ schema_q6 | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ schema_a6 | json }}
+          }
+        },
+        {
+          "@type": "Question",
+          "name": {{ schema_q7 | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ schema_a7 | json }}
+          }
+        },
+        {
+          "@type": "Question",
+          "name": {{ schema_q8 | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ schema_a8 | json }}
+          }
+        }
       ]
     }
   </script>

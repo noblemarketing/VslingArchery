@@ -12,17 +12,5 @@
     assign comparison_tail = 'See the full comparison at vslingarchery.com/pages/vsling-vs-traditional-bow-sling.'
     assign comparison_linked = 'See the full comparison at <a href="' | append: comparison_page_url | append: '">vslingarchery.com/pages/vsling-vs-traditional-bow-sling</a>.'
     assign answer_html = answer_plain | replace: comparison_tail, comparison_linked
-  elsif global_index == 10
-    assign crossbow_tail = 'Shop the crossbow/gun sling at vslingarchery.com/products/vsling-crossbow-gun-sling.'
-    assign crossbow_linked = 'Shop the <a href="' | append: crossbow_product_url | append: '">crossbow/gun sling</a> at vslingarchery.com/products/vsling-crossbow-gun-sling.'
-    assign answer_html = answer_plain | replace: crossbow_tail, crossbow_linked
-  elsif global_index == 8
-    assign bow_label = 'The Vsling® Bow Sling is available'
-    assign bow_linked = 'The <a href="' | append: bow_product_url | append: '">Vsling® Bow Sling</a> is available'
-    assign answer_html = answer_plain | replace: bow_label, bow_linked
-  elsif global_index == 22
-    assign shop_tail = 'Shop it at vslingarchery.com/products/bow-sling.'
-    assign shop_linked = 'Shop it at <a href="' | append: bow_product_url | append: '">vslingarchery.com/products/bow-sling</a>.'
-    assign answer_html = answer_plain | replace: shop_tail, shop_linked
   endif
 -%}

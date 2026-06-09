@@ -47,6 +47,10 @@
 
     {% include 'meta-tags' %}
 
+    {%- if template.name == 'page' and page.handle == 'faq' -%}
+      {% include 'site-faq', section_id: 'head', render_part: 'schema' %}
+    {%- endif -%}
+
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
