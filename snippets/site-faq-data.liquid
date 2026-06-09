@@ -1,0 +1,59 @@
+{%- comment -%}
+  Site-wide FAQ data for /pages/faq. Sets faq_groups and flat faq_questions/faq_answers arrays.
+  Included via include (shared scope). Accepts: render_part ('accordion' or 'schema')
+{%- endcomment -%}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign bow_product_url = vsling_bow_url
+  assign crossbow_product_url = vsling_crossbow_url
+  assign all_products_url = vsling_all_products_url
+  assign comparison_page_url = vsling_comparison_url
+
+  assign group_1_title = 'Vsling Bow Sling'
+  assign group_1_q1 = 'Will this get in the way when I draw?'
+  assign group_1_a1 = 'No — the Vsling stays tight to your bow and out of your string path. You can draw and shoot with it on from a stand, the ground, or uphill and downhill.'
+  assign group_1_q2 = 'Do I have to take it off before I shoot?'
+  assign group_1_a2 = 'No. You shoot with the Vsling on — no unclipping, no sliding it off, no last-second fumble. The elastic stays clear when you draw.'
+  assign group_1_q3 = 'How does the Vsling compare to a traditional bow sling?'
+  assign group_1_a3 = 'A traditional sling dangles, flaps, and usually comes off before you shoot. The Vsling is elastic, stays quiet on your body, and you draw and shoot without removing it. See the full Vsling vs traditional bow sling comparison for a side-by-side breakdown.'
+  assign group_1_q4 = 'What compound bows has the Vsling been tested on?'
+  assign group_1_a4 = 'The Vsling has been tested on Mathews V3 31, Mathews Phase 4, Hoyt RX-7 Ultra, Hoyt Ventum Pro 33, Elite EnKore, Elite Remedy, Prime Nexus 2, Prime Inline 5, Bear Refine EKO, Bear Alaskan XT, PSE Fortis, Bowtech Revolt X, and Darton Spectra E. It fits most modern compounds with no extra hardware.'
+  assign group_1_q5 = 'How do I put the Vsling on my bow?'
+  assign group_1_a5 = 'Attach it to your bow, adjust the elastic to your body, and lock it in with a snug double knot. Takes a few minutes and you fine-tune it once.'
+  assign group_1_q6 = 'Is the Vsling good for treestand hunting?'
+  assign group_1_a6 = 'Yes. The Vsling keeps your bow tight while you climb and sit in the stand. Your hands stay free and you are draw-ready when a deer steps out.'
+  assign group_1_q7 = 'How tough is the Vsling bow sling?'
+  assign group_1_a7 = 'The Vsling is built from durable elastic made for hard hunting use. Machine wash it and air dry. Check it before each season like any gear you trust your hunt to.'
+  assign group_1_q8 = 'Does the Vsling bow sling have a warranty?'
+  assign group_1_a8 = 'Yes — every Vsling comes with a 1-year warranty. Email sam@vslingarchery.com if anything is not right and we will take care of it.'
+
+  assign group_2_title = 'Vsling Crossbow/Gun Sling'
+  assign group_2_q1 = 'Will the Vsling work on a pistol grip crossbow?'
+  assign group_2_a1 = 'Yes. The Vsling fits pistol grip and rifle-style crossbows. Adjust the elastic once to your stock and you are set.'
+  assign group_2_q2 = 'Can I keep my crossbow on me climbing down from a treestand?'
+  assign group_2_a2 = 'Yes. The Vsling holds your crossbow tight to your body on the way down. Your hands stay free for the ladder and the bow stays quiet.'
+  assign group_2_q3 = 'Will this get in the way when I shoot my crossbow?'
+  assign group_2_a3 = 'No. You shoot with the Vsling on — no need to pull it off first. The elastic stays out of your shooting path.'
+  assign group_2_q4 = 'How do I put the Vsling on my crossbow?'
+  assign group_2_a4 = 'Mount it to your crossbow, adjust the fit, and secure it with a tight double knot. A few minutes and you are done.'
+  assign group_2_q5 = 'Is this good for hunting out of a treestand?'
+  assign group_2_a5 = 'Yes. The Vsling keeps your crossbow close in the stand so your hands are free for glassing and climbing. You stay ready when the shot comes.'
+  assign group_2_q6 = 'How tough is the Vsling crossbow sling?'
+  assign group_2_a6 = 'The Vsling is made from durable elastic built for field use. Machine wash and air dry. Give it a quick check before each hunt.'
+  assign group_2_q7 = 'Does the Vsling crossbow sling have a warranty?'
+  assign group_2_a7 = 'Yes — every Vsling has a 1-year warranty. Email sam@vslingarchery.com if something is off and we will fix it.'
+
+  assign group_3_title = 'Orders & Support'
+  assign group_3_q1 = 'How long does Vsling shipping take?'
+  assign group_3_a1 = 'We ship within 1-3 business days. Most U.S. orders arrive in 3-7 business days. Orders over $99 ship free.'
+  assign group_3_q2 = 'What is the Vsling return policy?'
+  assign group_3_a2 = 'All sales are final. If your Vsling arrives damaged or incorrect, contact sam@vslingarchery.com within 7 days of delivery and we will make it right.'
+  assign group_3_q3 = 'How do I reach Vsling Archery?'
+  assign group_3_a3 = 'Email sam@vslingarchery.com for product questions, orders, or warranty help. We are based in Minnesota and built for North American bowhunters.'
+
+  assign faq_questions = group_1_q1 | append: '|||' | append: group_1_q2 | append: '|||' | append: group_1_q3 | append: '|||' | append: group_1_q4 | append: '|||' | append: group_1_q5 | append: '|||' | append: group_1_q6 | append: '|||' | append: group_1_q7 | append: '|||' | append: group_1_q8 | append: '|||' | append: group_2_q1 | append: '|||' | append: group_2_q2 | append: '|||' | append: group_2_q3 | append: '|||' | append: group_2_q4 | append: '|||' | append: group_2_q5 | append: '|||' | append: group_2_q6 | append: '|||' | append: group_2_q7 | append: '|||' | append: group_3_q1 | append: '|||' | append: group_3_q2 | append: '|||' | append: group_3_q3 | split: '|||'
+
+  assign faq_answers = group_1_a1 | append: '|||' | append: group_1_a2 | append: '|||' | append: group_1_a3 | append: '|||' | append: group_1_a4 | append: '|||' | append: group_1_a5 | append: '|||' | append: group_1_a6 | append: '|||' | append: group_1_a7 | append: '|||' | append: group_1_a8 | append: '|||' | append: group_2_a1 | append: '|||' | append: group_2_a2 | append: '|||' | append: group_2_a3 | append: '|||' | append: group_2_a4 | append: '|||' | append: group_2_a5 | append: '|||' | append: group_2_a6 | append: '|||' | append: group_2_a7 | append: '|||' | append: group_3_a1 | append: '|||' | append: group_3_a2 | append: '|||' | append: group_3_a3 | split: '|||'
+-%}

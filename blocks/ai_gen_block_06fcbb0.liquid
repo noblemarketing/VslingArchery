@@ -1,0 +1,394 @@
+{% doc %}
+  @prompt
+    Create an image banner for both desktop (1920 x1080) and mobile (1080 x 1920) with one image and a button able to be moved
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-banner-{{ ai_gen_id }} {
+    position: relative;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    display: block;
+  }
+
+  .ai-image-banner-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ai-image-banner-desktop-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-image-banner-mobile-{{ ai_gen_id }} {
+    display: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .ai-image-banner-placeholder-{{ ai_gen_id }} {
+    background-color: #f4f4f4;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-image-banner-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .ai-image-banner-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-image-banner-button-container-{{ ai_gen_id }} {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .ai-image-banner-button-container-{{ ai_gen_id }}--desktop {
+    top: {{ block.settings.button_position_y_desktop }}%;
+    left: {{ block.settings.button_position_x_desktop }}%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ai-image-banner-button-container-{{ ai_gen_id }}--mobile {
+    top: {{ block.settings.button_position_y_mobile }}%;
+    left: {{ block.settings.button_position_x_mobile }}%;
+    transform: translate(-50%, -50%);
+    display: none;
+  }
+
+  .ai-image-banner-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: {{ block.settings.button_font_weight }};
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .ai-image-banner-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-banner-desktop-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-image-banner-mobile-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .ai-image-banner-button-container-{{ ai_gen_id }}--desktop {
+      display: none;
+    }
+
+    .ai-image-banner-button-container-{{ ai_gen_id }}--mobile {
+      display: block;
+    }
+
+    .ai-image-banner-placeholder-{{ ai_gen_id }} {
+      aspect-ratio: 9 / 16;
+    }
+  }
+{% endstyle %}
+
+<image-banner-{{ ai_gen_id }}
+  class="ai-image-banner-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-image-banner-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.desktop_image %}
+      <img
+        src="{{ block.settings.desktop_image | image_url: width: 1920 }}"
+        alt="{{ block.settings.desktop_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.desktop_image.width }}"
+        height="{{ block.settings.desktop_image.height }}"
+        class="ai-image-banner-desktop-{{ ai_gen_id }}"
+      >
+    {% else %}
+      <div class="ai-image-banner-placeholder-{{ ai_gen_id }} ai-image-banner-desktop-{{ ai_gen_id }}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag }}
+        <div class="ai-image-banner-empty-state-{{ ai_gen_id }}">
+          Add a desktop image (1920 x 1080)
+        </div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.mobile_image %}
+      <img
+        src="{{ block.settings.mobile_image | image_url: width: 1080 }}"
+        alt="{{ block.settings.mobile_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.mobile_image.width }}"
+        height="{{ block.settings.mobile_image.height }}"
+        class="ai-image-banner-mobile-{{ ai_gen_id }}"
+      >
+    {% else %}
+      <div class="ai-image-banner-placeholder-{{ ai_gen_id }} ai-image-banner-mobile-{{ ai_gen_id }}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag }}
+        <div class="ai-image-banner-empty-state-{{ ai_gen_id }}">
+          Add a mobile image (1080 x 1920)
+        </div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.button_text != blank %}
+      <div class="ai-image-banner-button-container-{{ ai_gen_id }} ai-image-banner-button-container-{{ ai_gen_id }}--desktop">
+        <a
+          href="{{ block.settings.button_link }}"
+          class="ai-image-banner-button-{{ ai_gen_id }}"
+        >
+          {{ block.settings.button_text }}
+        </a>
+      </div>
+
+      <div class="ai-image-banner-button-container-{{ ai_gen_id }} ai-image-banner-button-container-{{ ai_gen_id }}--mobile">
+        <a
+          href="{{ block.settings.button_link }}"
+          class="ai-image-banner-button-{{ ai_gen_id }}"
+        >
+          {{ block.settings.button_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</image-banner-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ImageBanner{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('image-banner-{{ ai_gen_id }}', ImageBanner{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image"
+    },
+    {
+      "type": "header",
+      "content": "Mobile image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background color",
+      "default": "#b7aca2"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#262626"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background color",
+      "default": "#797068"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Button position on desktop"
+    },
+    {
+      "type": "range",
+      "id": "button_position_x_desktop",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "button_position_y_desktop",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Button position on mobile"
+    },
+    {
+      "type": "range",
+      "id": "button_position_x_mobile",
+      "label": "Horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "button_position_y_mobile",
+      "label": "Vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image banner"
+    }
+  ]
+}
+{% endschema %}

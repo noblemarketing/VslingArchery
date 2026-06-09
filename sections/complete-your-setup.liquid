@@ -1,0 +1,261 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-related-products.css' | asset_url | stylesheet_tag }}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign bow_handle = vsling_bow_handle
+  assign crossbow_handle = vsling_crossbow_handle
+  assign bino_handle = vsling_bino_handle
+  assign show_section = false
+
+  if product.handle == bow_handle
+    assign show_section = true
+    assign section_heading = section.settings.heading_bow | default: 'Complete Your Setup'
+    assign section_subtext = section.settings.subtext_bow
+    assign companion_one = all_products[crossbow_handle]
+    assign companion_two = all_products[bino_handle]
+  elsif product.handle == crossbow_handle
+    assign show_section = true
+    assign section_heading = section.settings.heading_crossbow | default: 'Complete Your Setup'
+    assign section_subtext = section.settings.subtext_crossbow
+    assign companion_one = all_products[bow_handle]
+    assign companion_two = all_products[bino_handle]
+  elsif product.handle == bino_handle
+    assign show_section = true
+    assign section_heading = section.settings.heading_bino | default: 'Complete Your Setup'
+    assign section_subtext = section.settings.subtext_bino
+    assign companion_one = all_products[bow_handle]
+    assign companion_two = all_products[crossbow_handle]
+  endif
+-%}
+
+{%- if show_section -%}
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+
+    .complete-your-setup__subtext {
+      margin: 0 0 2rem;
+      max-width: 62rem;
+    }
+  {%- endstyle -%}
+
+  <div class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
+      <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
+        {{ section_heading }}
+      </h2>
+      {%- if section_subtext != blank -%}
+        <p class="complete-your-setup__subtext">{{ section_subtext }}</p>
+      {%- endif -%}
+      <ul
+        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+        role="list"
+      >
+        {%- assign skip_card_product_styles = false -%}
+        {%- if companion_one != blank -%}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: companion_one,
+              media_aspect_ratio: section.settings.image_ratio,
+              image_shape: section.settings.image_shape,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              skip_styles: skip_card_product_styles,
+              section_id: section.id
+            %}
+          </li>
+          {%- assign skip_card_product_styles = true -%}
+        {%- endif -%}
+        {%- if companion_two != blank -%}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: companion_two,
+              media_aspect_ratio: section.settings.image_ratio,
+              image_shape: section.settings.image_shape,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              skip_styles: skip_card_product_styles,
+              section_id: section.id
+            %}
+          </li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Complete Your Setup",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Bow Sling page"
+    },
+    {
+      "type": "text",
+      "id": "heading_bow",
+      "label": "Heading on Bow Sling page",
+      "default": "Complete Your Setup"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_bow",
+      "label": "Subtext on Bow Sling page",
+      "default": "Pair your compound bow sling with a Vsling crossbow sling or bino sling for full hands-free carry in the field."
+    },
+    {
+      "type": "header",
+      "content": "Crossbow/Gun Sling page"
+    },
+    {
+      "type": "text",
+      "id": "heading_crossbow",
+      "label": "Heading on Crossbow page",
+      "default": "Complete Your Setup"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_crossbow",
+      "label": "Subtext on Crossbow page",
+      "default": "Run a Vsling bow sling on your compound and a crossbow sling on your rig — same shoot-ready carry system, built for every hunt."
+    },
+    {
+      "type": "header",
+      "content": "Bino Sling page"
+    },
+    {
+      "type": "text",
+      "id": "heading_bino",
+      "label": "Heading on Bino Sling page",
+      "default": "Complete Your Setup"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_bino",
+      "label": "Subtext on Bino Sling page",
+      "default": "Add a Vsling bow sling or crossbow sling to match your hands-free bino carry."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "label": "Columns on desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "1",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "arch", "label": "Arch" },
+        { "value": "blob", "label": "Blob" }
+      ],
+      "default": "default",
+      "label": "Image shape"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "Show product rating"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Complete Your Setup"
+    }
+  ]
+}
+{% endschema %}

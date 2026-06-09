@@ -1,0 +1,298 @@
+{%- comment -%}
+  Renders schema.org Product JSON-LD for Vsling Archery products.
+
+  Usage (in sections/main-product.liquid or any product template):
+    {% render 'product-json-ld', product: product %}
+
+  aggregateRating is included only when Shopify review metafields are populated.
+  Update the shipping/return defaults below to match your store policies.
+{%- endcomment -%}
+
+{%- if product_schema_description == blank and seo_meta_description == blank -%}
+  {%- include 'seo-meta-data' -%}
+{%- endif -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_price = product.price | divided_by: 100.0
+  assign product_url = canonical_url
+
+  if product_schema_description != blank
+    assign product_description = product_schema_description
+  elsif seo_meta_description != blank
+    assign product_description = seo_meta_description
+  else
+    assign product_description = product.description | strip_html | strip_newlines
+  endif
+  assign brand_url = 'https://vslingarchery.com'
+  assign product_sku = current_variant.id | append: ''
+
+  assign variant_barcode = current_variant.barcode | strip
+  if variant_barcode != blank
+    assign barcode_length = variant_barcode | size
+    case barcode_length
+      when 8
+        assign gtin_property = 'gtin8'
+      when 12
+        assign gtin_property = 'gtin12'
+      when 13
+        assign gtin_property = 'gtin13'
+      when 14
+        assign gtin_property = 'gtin14'
+      else
+        assign gtin_property = 'gtin'
+    endcase
+  endif
+
+  if current_variant.sku != blank
+    assign product_mpn = current_variant.sku
+  endif
+
+  for option in product.options_with_values
+    assign option_name_downcase = option.name | downcase
+    case option.position
+      when 1
+        assign option_value = current_variant.option1
+      when 2
+        assign option_value = current_variant.option2
+      when 3
+        assign option_value = current_variant.option3
+    endcase
+
+    if option_name_downcase == 'color' or option_name_downcase == 'colour'
+      assign product_color = option_value
+    elsif option_name_downcase == 'material'
+      assign product_material = option_value
+    endif
+  endfor
+
+  if product_color == blank and product.metafields.shopify['color-pattern'] != blank
+    assign product_color = product.metafields.shopify['color-pattern'].value
+  endif
+
+  if product_material == blank and product.metafields.shopify.material != blank
+    assign product_material = product.metafields.shopify.material.value
+  endif
+
+  if current_variant.available
+    assign availability = 'https://schema.org/InStock'
+  else
+    assign availability = 'https://schema.org/OutOfStock'
+  endif
+
+  assign has_reviews = false
+  if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count > 0
+    assign has_reviews = true
+    assign rating_value = product.metafields.reviews.rating.value.rating
+    assign rating_scale_max = product.metafields.reviews.rating.value.scale_max
+    assign review_count = product.metafields.reviews.rating_count
+  endif
+
+  comment
+    Shipping — https://vslingarchery.com/policies/shipping-policy
+    Ships in 1-3 business days; U.S. delivery in 3-7 business days.
+    Free on orders over $99; standard rates vary by recipient location (calculated at checkout).
+  endcomment
+  assign shipping_country = 'US'
+  assign free_shipping_threshold = 99
+  assign handling_time_min = 1
+  assign handling_time_max = 3
+  assign transit_time_min = 3
+  assign transit_time_max = 7
+
+  if product_price >= free_shipping_threshold
+    assign qualifies_for_free_shipping = true
+  endif
+
+  comment
+    Returns — https://vslingarchery.com/policies/refund-policy
+    All sales final; no returns or refunds (damaged/incorrect handled separately).
+  endcomment
+  assign return_policy_category = 'https://schema.org/MerchantReturnNotPermitted'
+
+  if shop.refund_policy.url != blank
+    assign return_policy_url = request.origin | append: shop.refund_policy.url
+  else
+    assign return_policy_url = brand_url | append: '/policies/refund-policy'
+  endif
+-%}
+
+{%- assign schema_image_json = '' -%}
+{%- assign schema_image_count = 0 -%}
+{%- for media in product.media -%}
+  {%- if media.media_type == 'image' -%}
+    {%- include 'product-image-url', media: media -%}
+    {%- capture image_url_json -%}{{ vsling_product_image_url | prepend: 'https:' | json }}{%- endcapture -%}
+    {%- if schema_image_json != '' -%}
+      {%- assign schema_image_json = schema_image_json | append: ',' -%}
+    {%- endif -%}
+    {%- assign schema_image_json = schema_image_json | append: image_url_json -%}
+    {%- assign schema_image_count = schema_image_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ product_url | json }},
+    "description": {{ product_description | json }},
+    {%- if schema_image_count > 0 -%}
+    "image": [{{ schema_image_json }}],
+    {%- endif -%}
+    "sku": {{ product_sku | json }},
+    {%- if gtin_property != blank -%}
+    "{{ gtin_property }}": {{ variant_barcode | json }},
+    {%- endif -%}
+    {%- if product_mpn != blank -%}
+    "mpn": {{ product_mpn | json }},
+    {%- endif -%}
+    {%- if product_color != blank -%}
+    "color": {{ product_color | json }},
+    {%- endif -%}
+    {%- if product_material != blank -%}
+    "material": {{ product_material | json }},
+    {%- endif -%}
+    "brand": {
+      "@type": "Organization",
+      "name": "Vsling Archery",
+      "url": {{ brand_url | json }}
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": {{ product_url | json }},
+      "priceCurrency": "USD",
+      "price": {{ product_price | json }},
+      "availability": {{ availability | json }},
+      "itemCondition": "https://schema.org/NewCondition",
+      "shippingDetails": [
+        {%- if qualifies_for_free_shipping -%}
+        {
+          "@type": "OfferShippingDetails",
+          "name": "Free U.S. shipping on orders over $99",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "USD"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": {{ shipping_country | json }}
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": {{ handling_time_min }},
+              "maxValue": {{ handling_time_max }},
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": {{ transit_time_min }},
+              "maxValue": {{ transit_time_max }},
+              "unitCode": "DAY"
+            },
+            "businessDays": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "https://schema.org/Monday",
+                "https://schema.org/Tuesday",
+                "https://schema.org/Wednesday",
+                "https://schema.org/Thursday",
+                "https://schema.org/Friday"
+              ]
+            }
+          }
+        }
+        {%- else -%}
+        {
+          "@type": "OfferShippingDetails",
+          "name": "Standard U.S. shipping (rate varies by destination)",
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": {{ shipping_country | json }}
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": {{ handling_time_min }},
+              "maxValue": {{ handling_time_max }},
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": {{ transit_time_min }},
+              "maxValue": {{ transit_time_max }},
+              "unitCode": "DAY"
+            },
+            "businessDays": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "https://schema.org/Monday",
+                "https://schema.org/Tuesday",
+                "https://schema.org/Wednesday",
+                "https://schema.org/Thursday",
+                "https://schema.org/Friday"
+              ]
+            }
+          }
+        },
+        {
+          "@type": "OfferShippingDetails",
+          "name": "Free U.S. shipping on orders over $99",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": 0,
+            "currency": "USD"
+          },
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": {{ shipping_country | json }}
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": {{ handling_time_min }},
+              "maxValue": {{ handling_time_max }},
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": {{ transit_time_min }},
+              "maxValue": {{ transit_time_max }},
+              "unitCode": "DAY"
+            },
+            "businessDays": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "https://schema.org/Monday",
+                "https://schema.org/Tuesday",
+                "https://schema.org/Wednesday",
+                "https://schema.org/Thursday",
+                "https://schema.org/Friday"
+              ]
+            }
+          }
+        }
+        {%- endif -%}
+      ],
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": {{ shipping_country | json }},
+        "returnPolicyCategory": {{ return_policy_category | json }},
+        "merchantReturnLink": {{ return_policy_url | json }}
+      }
+    }{%- if has_reviews -%},
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ rating_value | json }},
+      "reviewCount": {{ review_count | json }},
+      "bestRating": {{ rating_scale_max | json }}
+    }
+    {%- endif -%}
+  }
+</script>

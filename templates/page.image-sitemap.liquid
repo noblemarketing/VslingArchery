@@ -1,0 +1,32 @@
+{% layout none %}
+{%- comment -%}
+  Image sitemap for Google Search Console.
+  Setup: Shopify Admin → Online Store → Pages → Add page
+  Title: Image Sitemap | Handle: image-sitemap | Template: image-sitemap
+  Submit to GSC: https://vslingarchery.com/pages/image-sitemap
+{%- endcomment -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+{%- paginate collections.all.products by 250 -%}
+  {%- for product in collections.all.products -%}
+  <url>
+    <loc>{{ shop.url }}{{ product.url }}</loc>
+    {%- assign image_position = 0 -%}
+    {%- for media in product.media -%}
+      {%- if media.media_type == 'image' -%}
+        {%- assign image_position = image_position | plus: 1 -%}
+        {%- include 'product-image-seo', media_position: image_position -%}
+        {%- include 'product-image-url', media: media -%}
+        <image:image>
+          <image:loc>{{ vsling_product_image_url | prepend: 'https:' | escape }}</image:loc>
+          <image:title>{{ product_image_title | default: product.title | escape }}</image:title>
+          {%- if product_image_alt != blank -%}
+          <image:caption>{{ product_image_alt | escape }}</image:caption>
+          {%- endif -%}
+        </image:image>
+      {%- endif -%}
+    {%- endfor -%}
+  </url>
+  {%- endfor -%}
+{%- endpaginate -%}
+</urlset>

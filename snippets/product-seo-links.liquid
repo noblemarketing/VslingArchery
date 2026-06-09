@@ -1,0 +1,35 @@
+{%- comment -%}
+  Internal SEO links for flagship Vsling product pages.
+  Renders FAQ and comparison page links with keyword-rich anchor text.
+{%- endcomment -%}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign is_bow_sling_product = false
+  assign is_crossbow_product = false
+
+  if product.handle == vsling_crossbow_handle or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+    assign is_crossbow_product = true
+  elsif product.handle == vsling_bow_handle or product_handle_downcase contains 'bow-sling' or product_title_downcase contains 'bow sling'
+    unless product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
+      assign is_bow_sling_product = true
+    endunless
+  endif
+
+  assign faq_url = vsling_faq_url
+  assign comparison_url = vsling_comparison_url
+-%}
+
+{%- if is_bow_sling_product or is_crossbow_product -%}
+  <nav class="product-seo-links quick-add-hidden" aria-label="Related resources">
+    <p class="product-seo-links__faq">
+      <a href="{{ faq_url }}">Common questions about the Vsling</a>
+    </p>
+    <p class="product-seo-links__comparison">
+      <a href="{{ comparison_url }}">Vsling vs traditional bow sling — full comparison</a>
+    </p>
+  </nav>
+{%- endif -%}

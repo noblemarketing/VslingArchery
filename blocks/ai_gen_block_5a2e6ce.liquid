@@ -1,0 +1,398 @@
+{% doc %}
+  @prompt
+    Create a trust badge section for product pages that displays 4 badges in a horizontal row: 1) A shield icon with "1-Year Warranty" text linking to /pages/warranty-policy, 2) A US flag icon with "Minnesota Made" text, 3) A checkmark icon with "Patented Design" text, 4) Five gold stars with "5-Star Rated" text. The badges should have an icon on top and bold label text below. Style should be clean, minimal, and match a rugged outdoor/archery brand aesthetic. The section should be insertable as a block on product pages.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-trust-badges-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 0;
+  }
+
+  .ai-trust-badges__container-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: {{ block.settings.badge_spacing }}px;
+    flex-wrap: wrap;
+  }
+
+  .ai-trust-badge-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: {{ block.settings.icon_text_gap }}px;
+    padding: {{ block.settings.badge_padding }}px;
+    background-color: {{ block.settings.badge_background }};
+    border-radius: {{ block.settings.badge_border_radius }}px;
+    border: {{ block.settings.badge_border_width }}px solid {{ block.settings.badge_border_color }};
+    flex: 1 1 auto;
+    min-width: 120px;
+    max-width: 200px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ai-trust-badge-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-trust-badge__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-trust-badge__icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ai-trust-badge__label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_font_size }}px;
+    font-weight: {{ block.settings.label_font_weight }};
+    color: {{ block.settings.label_color }};
+    line-height: 1.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-trust-badges__container-{{ ai_gen_id }} {
+      gap: {{ block.settings.badge_spacing | times: 0.7 }}px;
+    }
+
+    .ai-trust-badge-{{ ai_gen_id }} {
+      min-width: 100px;
+      padding: {{ block.settings.badge_padding | times: 0.8 }}px;
+    }
+
+    .ai-trust-badge__icon-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.8 }}px;
+      height: {{ block.settings.icon_size | times: 0.8 }}px;
+    }
+
+    .ai-trust-badge__label-{{ ai_gen_id }} {
+      font-size: {{ block.settings.label_font_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<trust-badges-{{ ai_gen_id }} class="ai-trust-badges-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-trust-badges__container-{{ ai_gen_id }}">
+    {% if block.settings.show_warranty %}
+      <a href="/pages/warranty-policy" class="ai-trust-badge-{{ ai_gen_id }}">
+        <div class="ai-trust-badge__icon-{{ ai_gen_id }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M9 12l2 2 4-4"></path>
+          </svg>
+        </div>
+        <div class="ai-trust-badge__label-{{ ai_gen_id }}">{{ block.settings.warranty_text }}</div>
+      </a>
+    {% endif %}
+
+    {% if block.settings.show_minnesota %}
+      <div class="ai-trust-badge-{{ ai_gen_id }}">
+        <div class="ai-trust-badge__icon-{{ ai_gen_id }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" fill="none">
+            <rect width="60" height="30" fill="#B22234"/>
+            <rect y="2.3" width="60" height="2.3" fill="white"/>
+            <rect y="6.9" width="60" height="2.3" fill="white"/>
+            <rect y="11.5" width="60" height="2.3" fill="white"/>
+            <rect y="16.1" width="60" height="2.3" fill="white"/>
+            <rect y="20.7" width="60" height="2.3" fill="white"/>
+            <rect y="25.3" width="60" height="2.3" fill="white"/>
+            <rect width="24" height="13.8" fill="#3C3B6E"/>
+            <circle cx="4" cy="2.3" r="0.8" fill="white"/>
+            <circle cx="8" cy="2.3" r="0.8" fill="white"/>
+            <circle cx="12" cy="2.3" r="0.8" fill="white"/>
+            <circle cx="16" cy="2.3" r="0.8" fill="white"/>
+            <circle cx="20" cy="2.3" r="0.8" fill="white"/>
+            <circle cx="6" cy="4.6" r="0.8" fill="white"/>
+            <circle cx="10" cy="4.6" r="0.8" fill="white"/>
+            <circle cx="14" cy="4.6" r="0.8" fill="white"/>
+            <circle cx="18" cy="4.6" r="0.8" fill="white"/>
+            <circle cx="4" cy="6.9" r="0.8" fill="white"/>
+            <circle cx="8" cy="6.9" r="0.8" fill="white"/>
+            <circle cx="12" cy="6.9" r="0.8" fill="white"/>
+            <circle cx="16" cy="6.9" r="0.8" fill="white"/>
+            <circle cx="20" cy="6.9" r="0.8" fill="white"/>
+            <circle cx="6" cy="9.2" r="0.8" fill="white"/>
+            <circle cx="10" cy="9.2" r="0.8" fill="white"/>
+            <circle cx="14" cy="9.2" r="0.8" fill="white"/>
+            <circle cx="18" cy="9.2" r="0.8" fill="white"/>
+            <circle cx="4" cy="11.5" r="0.8" fill="white"/>
+            <circle cx="8" cy="11.5" r="0.8" fill="white"/>
+            <circle cx="12" cy="11.5" r="0.8" fill="white"/>
+            <circle cx="16" cy="11.5" r="0.8" fill="white"/>
+            <circle cx="20" cy="11.5" r="0.8" fill="white"/>
+          </svg>
+        </div>
+        <div class="ai-trust-badge__label-{{ ai_gen_id }}">{{ block.settings.minnesota_text }}</div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_patented %}
+      <div class="ai-trust-badge-{{ ai_gen_id }}">
+        <div class="ai-trust-badge__icon-{{ ai_gen_id }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9 12l2 2 4-4"></path>
+          </svg>
+        </div>
+        <div class="ai-trust-badge__label-{{ ai_gen_id }}">{{ block.settings.patented_text }}</div>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_rating %}
+      <div class="ai-trust-badge-{{ ai_gen_id }}">
+        <div class="ai-trust-badge__icon-{{ ai_gen_id }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" fill="{{ block.settings.star_color }}">
+            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+            <path d="M36 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+            <path d="M60 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+            <path d="M84 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+            <path d="M108 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/>
+          </svg>
+        </div>
+        <div class="ai-trust-badge__label-{{ ai_gen_id }}">{{ block.settings.rating_text }}</div>
+      </div>
+    {% endif %}
+  </div>
+</trust-badges-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TrustBadges{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('trust-badges-{{ ai_gen_id }}', TrustBadges{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Trust badges",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Badge visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_warranty",
+      "label": "Show warranty badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "warranty_text",
+      "label": "Warranty text",
+      "default": "1-Year Warranty"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_minnesota",
+      "label": "Show Minnesota made badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "minnesota_text",
+      "label": "Minnesota text",
+      "default": "Minnesota Made"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_patented",
+      "label": "Show patented badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "patented_text",
+      "label": "Patented text",
+      "default": "Patented Design"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "5-Star Rated"
+    },
+    {
+      "type": "header",
+      "content": "Badge style"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 24,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#2b2c2d"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#FFD700"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "label_font_weight",
+      "label": "Label font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#2b2c2d"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "badge_border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "badge_padding",
+      "label": "Badge padding",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap",
+      "label": "Icon to text gap",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "badge_spacing",
+      "label": "Badge spacing",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust badges"
+    }
+  ]
+}
+{% endschema %}

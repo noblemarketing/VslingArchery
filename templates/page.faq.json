@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-faq",
+      "settings": {
+        "heading": "Vsling FAQ for Bowhunters",
+        "intro": "<p>Answers about the Vsling bow sling, crossbow sling, shipping, and support. Shop the <a href=\"/products/bow-sling\">hands-free compound bow sling</a> or the <a href=\"/products/vsling-crossbow-gun-sling\">Vsling crossbow sling</a>, read the <a href=\"/pages/vsling-vs-traditional-bow-sling\">Vsling vs traditional bow sling comparison</a>, or <a href=\"/collections/all\">browse all Vsling products</a>.</p>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

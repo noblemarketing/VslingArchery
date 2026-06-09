@@ -1,0 +1,14 @@
+{%- comment -%}
+  Builds optimised WebP product image CDN URLs for img tags and JSON-LD.
+  Sets vsling_product_image_url (single) when media is passed.
+  Target: WebP delivery, typically under 100KB via width/quality caps.
+
+  Accepts: media (required)
+{%- endcomment -%}
+
+{%- liquid
+  assign vsling_image_width = 1100
+  assign vsling_image_quality = 80
+  assign vsling_image_source = media.preview_image | default: media
+  assign vsling_product_image_url = vsling_image_source | image_url: width: vsling_image_width, format: 'webp', quality: vsling_image_quality
+-%}

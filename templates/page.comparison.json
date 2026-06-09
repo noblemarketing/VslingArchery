@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-comparison",
+      "settings": {
+        "heading": "Vsling vs Traditional Bow Sling",
+        "intro": "<p>Choosing between a traditional bow sling and the Vsling comes down to one question: do you want to remove your sling before every shot? The Vsling is a shoot-ready, hands-free elastic bow sling built for compound bow hunters who need quiet carry and instant draw readiness in the stand or on the ground.</p>",
+        "cta_label": "Shop the Vsling Bow Sling",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

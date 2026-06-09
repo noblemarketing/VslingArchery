@@ -1,0 +1,32 @@
+.product-faq {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.product-faq__heading {
+  margin: 0 0 0.5rem;
+}
+
+.product-faq .accordion:first-of-type {
+  margin-top: 0;
+}
+
+.product-seo-links {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
+}
+
+.product-seo-links p {
+  margin: 0 0 0.6rem;
+}
+
+.product-seo-links p:last-child {
+  margin-bottom: 0;
+}
+
+.product-seo-links a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}

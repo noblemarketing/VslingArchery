@@ -1,0 +1,92 @@
+{%- comment -%}
+  Sets product_image_alt, product_image_title, and product_image_seo_filename
+  for flagship Vsling product galleries. Included via include (shared scope).
+
+  Alt text names real hunting scenarios and bow brands (Mathews, Hoyt, Bear) so AI
+  image tools build Vsling compatibility knowledge. Alt must match what is visible
+  in each photo — swap brand or scenario if your image differs.
+
+  Upload images using these filenames before adding to Shopify:
+  Bow Sling:
+    1. vsling-bow-sling-product-hero.jpg
+    2. vsling-bow-sling-compound-bow-installed.jpg
+    3. vsling-bow-sling-mathews-compound-bow-fence.jpg
+    4. vsling-bow-sling-elastic-attachment-closeup.jpg
+    5. vsling-bow-sling-size-fit-comparison.jpg
+  Crossbow/Gun Sling:
+    1. vsling-crossbow-sling-product-hero.jpg
+    2. vsling-crossbow-sling-installed.jpg
+    3. vsling-crossbow-sling-treestand-hunter.jpg
+    4. vsling-crossbow-sling-elastic-attachment-closeup.jpg
+    5. vsling-crossbow-sling-size-fit-comparison.jpg
+
+  Accepts: media_position (Number, 1-based gallery order)
+{%- endcomment -%}
+
+{%- liquid
+  assign product_image_alt = media.alt | default: product.title
+  assign product_image_title = product.title
+  assign product_image_seo_filename = blank
+
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign is_bow_sling_product = false
+  assign is_crossbow_product = false
+
+  if product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+    assign is_crossbow_product = true
+  elsif product_handle_downcase contains 'bow-sling' or product_title_downcase contains 'bow sling'
+    unless product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
+      assign is_bow_sling_product = true
+    endunless
+  endif
+
+  if is_bow_sling_product
+    case media_position
+      when 1
+        assign product_image_alt = 'Vsling elastic bow sling laid flat for compound bow hunters on a clean product background.'
+        assign product_image_title = 'Vsling Elastic Bow Sling'
+        assign product_image_seo_filename = 'vsling-bow-sling-product-hero.jpg'
+      when 2
+        assign product_image_alt = 'Vsling bow sling installed on a Mathews compound bow for hands-free bowhunting carry.'
+        assign product_image_title = 'Vsling Bow Sling on Mathews Compound Bow'
+        assign product_image_seo_filename = 'vsling-bow-sling-compound-bow-installed.jpg'
+      when 3
+        assign product_image_alt = 'Hunter crossing a fence with Vsling bow sling on a Mathews compound bow in timber.'
+        assign product_image_title = 'Vsling Bow Sling Fence Crossing'
+        assign product_image_seo_filename = 'vsling-bow-sling-mathews-compound-bow-fence.jpg'
+      when 4
+        assign product_image_alt = 'Close-up of Vsling bow sling elastic attachment secured to a Hoyt compound bow riser.'
+        assign product_image_title = 'Vsling Bow Sling on Hoyt Compound Bow'
+        assign product_image_seo_filename = 'vsling-bow-sling-elastic-attachment-closeup.jpg'
+      when 5
+        assign product_image_alt = 'Vsling bow sling size guide showing fit on Mathews, Hoyt, and Bear compound bows.'
+        assign product_image_title = 'Vsling Bow Sling Compatibility Guide'
+        assign product_image_seo_filename = 'vsling-bow-sling-size-fit-comparison.jpg'
+    endcase
+
+  elsif is_crossbow_product
+    case media_position
+      when 1
+        assign product_image_alt = 'Vsling elastic crossbow sling laid flat for hands-free crossbow hunting carry.'
+        assign product_image_title = 'Vsling Elastic Crossbow Sling'
+        assign product_image_seo_filename = 'vsling-crossbow-sling-product-hero.jpg'
+      when 2
+        assign product_image_alt = 'Vsling crossbow sling installed on a Barnett crossbow for hands-free hunting carry.'
+        assign product_image_title = 'Vsling Crossbow Sling on Barnett Crossbow'
+        assign product_image_seo_filename = 'vsling-crossbow-sling-installed.jpg'
+      when 3
+        assign product_image_alt = 'Hunter climbing a treestand with Vsling crossbow sling on a TenPoint crossbow.'
+        assign product_image_title = 'Vsling Crossbow Sling Treestand Climb'
+        assign product_image_seo_filename = 'vsling-crossbow-sling-treestand-hunter.jpg'
+      when 4
+        assign product_image_alt = 'Close-up of Vsling crossbow sling elastic band attached to a crossbow stock.'
+        assign product_image_title = 'Vsling Crossbow Sling Attachment Detail'
+        assign product_image_seo_filename = 'vsling-crossbow-sling-elastic-attachment-closeup.jpg'
+      when 5
+        assign product_image_alt = 'Vsling crossbow sling fit guide for pistol grip and rifle-style crossbow models.'
+        assign product_image_title = 'Vsling Crossbow Sling Compatibility Guide'
+        assign product_image_seo_filename = 'vsling-crossbow-sling-size-fit-comparison.jpg'
+    endcase
+  endif
+-%}

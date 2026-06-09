@@ -1,0 +1,121 @@
+{%- comment -%}
+  Sets page-level SEO variables for title, meta description, Open Graph, and Twitter cards.
+  Included from layout/theme.liquid (shared template scope).
+
+  Titles: one primary keyword, naturally placed. Differentiators: Shoot-Ready, Hands-Free.
+  Descriptions: one complete standalone sentence — readable aloud, AI-quotable.
+{%- endcomment -%}
+
+{%- liquid
+  assign seo_page_title = blank
+  assign seo_meta_description = blank
+  assign seo_meta_keywords = blank
+  assign seo_og_title = blank
+  assign seo_og_description = blank
+  assign seo_twitter_title = blank
+  assign seo_twitter_description = blank
+  assign product_schema_description = blank
+  assign current_year = 'now' | date: '%Y'
+
+  if request.page_type == 'index'
+    assign seo_page_title = 'Vsling Shoot-Ready Bow Sling — Hands-Free ' | append: current_year
+    assign seo_meta_description = 'The Vsling keeps your compound bow hands-free and shoot-ready, so you draw and shoot without ever removing your sling.'
+    assign seo_og_title = 'Vsling — Shoot Without Removing Your Sling'
+    assign seo_og_description = 'The Vsling is a patented elastic bow sling that keeps your bow quiet, secure, and ready to shoot from the moment game steps in.'
+    assign seo_twitter_title = seo_og_title
+    assign seo_twitter_description = seo_og_description
+
+  elsif request.page_type == 'product'
+    assign product_handle_downcase = product.handle | downcase
+    assign product_title_downcase = product.title | downcase
+
+    if product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+      assign seo_page_title = 'Vsling Crossbow Sling — Hands-Free Carry'
+      assign seo_meta_description = 'The Vsling keeps your crossbow hands-free and shoot-ready — elastic, silent, and built for stand hunts, long walks, and the shot that counts.'
+      assign product_schema_description = seo_meta_description
+      assign seo_meta_keywords = 'crossbow sling, hands-free crossbow carrier'
+      assign seo_og_title = 'Vsling Crossbow Sling — Shoot With It On'
+      assign seo_og_description = 'The Vsling holds your crossbow tight and quiet, so you stay hands-free from the stand to the shot.'
+
+    elsif product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
+      assign seo_page_title = product.title | append: ' | Vsling Archery'
+      assign seo_meta_description = 'The Vsling Bino Sling keeps your binoculars hands-free and steady with elastic tension that stays quiet and comfortable all day.'
+      assign seo_og_title = product.title | append: ' | Vsling Archery'
+      assign seo_og_description = seo_meta_description
+
+    elsif product_handle_downcase contains 'bow-sling' or product_title_downcase contains 'bow sling'
+      assign seo_page_title = 'Vsling Bow Sling — Hands-Free & Shoot-Ready'
+      assign seo_meta_description = 'The Vsling keeps your compound bow hands-free and shoot-ready — elastic, silent, and compatible with all major bow brands.'
+      assign product_schema_description = seo_meta_description
+      assign seo_meta_keywords = 'bow sling, hands-free bow sling'
+      assign seo_og_title = 'Vsling Bow Sling — Draw and Shoot With It On'
+      assign seo_og_description = 'The Vsling is the elastic bow sling you never take off — quiet carry, instant draw, and a shot that starts ready.'
+
+    else
+      assign seo_page_title = product.title | append: ' | Vsling Archery'
+      if product.description != blank
+        assign seo_meta_description = product.description | strip_html | strip_newlines | truncate: 155
+      endif
+      assign seo_og_title = product.title | append: ' | Vsling Archery'
+      assign seo_og_description = seo_meta_description
+    endif
+
+    assign seo_twitter_title = seo_og_title
+    assign seo_twitter_description = seo_og_description
+
+  elsif request.page_type == 'collection'
+    assign collection_handle = collection.handle | downcase
+
+    case collection_handle
+      when 'all', 'frontpage', 'products'
+        assign seo_page_title = 'Bow Slings | Vsling Archery'
+        assign seo_meta_description = 'Vsling builds hands-free bow slings, crossbow slings, and hunting gear for bowhunters who want to stay shoot-ready in the stand and on the move.'
+        assign seo_og_title = 'Shop Vsling — Hands-Free Hunting Carry'
+        assign seo_og_description = 'Every Vsling product is built around one idea: keep your bow or crossbow shoot-ready without the noise, bulk, or hassle of a traditional sling.'
+      when 'accessories', 'vsling-accessories'
+        assign seo_page_title = 'Bowhunting Accessories | Vsling'
+        assign seo_meta_description = 'Vsling accessories let you rep the brand and gear up with the same Minnesota-made team behind the patented shoot-ready bow sling.'
+        assign seo_og_title = 'Vsling Accessories'
+        assign seo_og_description = seo_meta_description
+      when 'bow-slings', 'bow-sling'
+        assign seo_page_title = 'Bow Slings | Vsling Archery'
+        assign seo_meta_description = 'Every Vsling bow sling is a hands-free, shoot-ready carry system you draw and shoot with — no removal, no dangling straps, no lost time.'
+        assign seo_og_title = 'Vsling Bow Slings'
+        assign seo_og_description = seo_meta_description
+      when 'crossbow-slings', 'crossbow-slings'
+        assign seo_page_title = 'Crossbow Slings | Vsling'
+        assign seo_meta_description = 'The Vsling crossbow sling keeps your weapon hands-free and shoot-ready through the climb, the wait, and the shot.'
+        assign seo_og_title = 'Vsling Crossbow Slings'
+        assign seo_og_description = seo_meta_description
+      when 'apparel', 'clothing', 'hats', 'shirts'
+        assign seo_page_title = 'Vsling Apparel | Archery Gear'
+        assign seo_meta_description = 'Vsling apparel is made for bowhunters who already know the difference a shoot-ready sling makes in the field.'
+        assign seo_og_title = 'Vsling Archery Apparel'
+        assign seo_og_description = seo_meta_description
+      else
+        assign seo_page_title = collection.title | append: ' | Vsling Archery'
+        assign seo_meta_description = 'Shop ' | append: collection.title | append: ' from Vsling Archery — hands-free carry and shoot-ready gear built for serious bowhunters.'
+        assign seo_og_title = collection.title | append: ' | Vsling Archery'
+        assign seo_og_description = seo_meta_description
+    endcase
+
+    assign seo_twitter_title = seo_og_title
+    assign seo_twitter_description = seo_og_description
+
+  elsif request.page_type == 'page' and page.handle == 'faq'
+    assign seo_page_title = 'Vsling FAQ for Bowhunters | Vsling Archery'
+    assign seo_meta_description = 'Get answers about the Vsling bow sling, crossbow sling, shipping, warranty, and fit — built for compound bow and crossbow hunters in North America.'
+    assign seo_og_title = 'Vsling Product FAQ for Bowhunters'
+    assign seo_og_description = 'Common questions about Vsling hands-free bow slings, crossbow slings, installation, treestand use, and orders answered in one place.'
+    assign seo_twitter_title = seo_og_title
+    assign seo_twitter_description = seo_og_description
+
+  elsif request.page_type == 'page' and page.handle == 'vsling-vs-traditional-bow-sling'
+    assign seo_page_title = 'Vsling vs Traditional Bow Sling | Shoot-Ready Comparison'
+    assign seo_meta_description = 'Compare the Vsling elastic bow sling to a traditional bow sling — shoot with sling on, hands-free treestand carry, silent elastic tension, and universal compound bow fit.'
+    assign seo_og_title = 'Vsling vs Traditional Bow Sling'
+    assign seo_og_description = 'See how the shoot-ready Vsling hands-free bow sling compares to old strap slings for compound bow and treestand hunting.'
+    assign seo_twitter_title = seo_og_title
+    assign seo_twitter_description = seo_og_description
+  endif
+-%}
