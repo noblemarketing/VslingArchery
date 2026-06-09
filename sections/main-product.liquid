@@ -486,7 +486,7 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
-                {% render 'product-faq', section_id: section.id, render_part: 'accordion' %}
+                {% include 'product-faq', section_id: section.id, render_part: 'accordion' %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -734,9 +734,9 @@
       endif
     -%}
 
-    {% render 'product-json-ld', product: product %}
+    {% include 'product-json-ld', product: product %}
     {% render 'breadcrumb-json-ld' %}
-    {% render 'product-faq', section_id: section.id, render_part: 'schema' %}
+    {% include 'product-faq', section_id: section.id, render_part: 'schema' %}
   </div>
 </product-info>
 

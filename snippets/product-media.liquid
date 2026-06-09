@@ -16,7 +16,7 @@
 
 {%- if media.media_type == 'image' -%}
   {%- if media_position != blank -%}
-    {%- include 'product-image-seo', media_position: media_position -%}
+    {%- include 'product-image-seo', product: product, media_position: media_position, media: media -%}
   {%- else -%}
     {%- assign product_image_alt = media.alt | default: product.title -%}
     {%- assign product_image_title = product.title -%}

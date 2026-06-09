@@ -4,9 +4,7 @@
 
 {%- include 'vsling-handles' -%}
 
-{%- liquid
-  assign bow_product_url = vsling_bow_url
--%}
+{%- assign bow_product_url = vsling_bow_url -%}
 
 {%- style -%}
   .email-popup {
@@ -66,10 +64,10 @@
 {%- endstyle -%}
 
 <email-popup
-  class="email-popup color-{{ section.settings.color_scheme }} gradient{% if form.posted_successfully? %} is-open{% endif %}"
+  class="email-popup color-{{ section.settings.color_scheme }} gradient"
   data-delay="{{ section.settings.delay_seconds }}"
   data-show-once="{{ section.settings.show_once }}"
-  {% unless form.posted_successfully? %}hidden{% endunless %}
+  hidden
 >
   <div class="email-popup__overlay" data-email-popup-close></div>
   <div
@@ -82,7 +80,7 @@
       {{- 'icon-close.svg' | inline_asset_content -}}
     </button>
 
-    <div class="email-popup__form" data-email-popup-form{% if form.posted_successfully? %} hidden{% endif %}>
+    <div class="email-popup__form" data-email-popup-form>
       {%- if section.settings.heading != blank -%}
         <h2 id="EmailPopupHeading-{{ section.id }}" class="h2 email-popup__heading">
           {{ section.settings.heading | escape }}
@@ -130,7 +128,7 @@
       {%- endform -%}
     </div>
 
-    <div class="email-popup__success" data-email-popup-success{% unless form.posted_successfully? %} hidden{% endunless %}>
+    <div class="email-popup__success" data-email-popup-success hidden>
       <h2 class="h2 email-popup__heading">{{ section.settings.success_heading | escape }}</h2>
       <p class="email-popup__subheading">{{ section.settings.success_message | escape }}</p>
       <p class="email-popup__success-link">

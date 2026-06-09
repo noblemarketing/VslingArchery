@@ -78,7 +78,7 @@
     </span>
     {%- render 'loading-spinner' -%}
     <div class="product__media media media--transparent">
-      {%- include 'product-image-seo', media_position: position -%}
+      {%- include 'product-image-seo', product: product, media_position: position, media: media -%}
       {{
         media.preview_image
         | image_tag:
@@ -125,7 +125,7 @@
           </span>
         {%- endif -%}
       </span>
-      {%- include 'product-image-seo', media_position: position -%}
+      {%- include 'product-image-seo', product: product, media_position: position, media: media -%}
       {{
         media.preview_image
         | image_tag:
