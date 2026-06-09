@@ -5,6 +5,14 @@
 {% style %}
   @font-face {
     font-family: 'Menseal';
+    src: url('{{ 'menseal-regular.ttf' | asset_url }}') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Menseal';
     src: url('{{ 'menseal-black.ttf' | asset_url }}') format('truetype');
     font-weight: 900;
     font-style: normal;
@@ -23,13 +31,18 @@
   .header__menu-item span,
   .header__active-menu-item,
   .menseal-heading,
-  .comparison__hero .banner__heading,
   .crossbow-treestand__hero .banner__heading,
-  #ComparisonHeading,
   #CrossbowTreestandHeading,
   #SiteFaqHeading {
     font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
     font-weight: var(--font-heading-weight);
+  }
+
+  .comparison__hero .banner__heading,
+  #ComparisonHeading {
+    font-family: 'Menseal', sans-serif;
+    font-style: normal;
+    font-weight: 400;
   }
 {% endstyle %}
