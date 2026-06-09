@@ -117,5 +117,14 @@
     assign seo_og_description = 'Traditional bow slings get in the way. The Vsling® stays on for the shot — 100% elastic, hands-free, and silent. See the full comparison.'
     assign seo_twitter_title = seo_og_title
     assign seo_twitter_description = seo_og_description
+
+  elsif request.page_type == 'page' and page.handle == 'vsling-crossbow-sling-treestand-hunting'
+    assign seo_page_title = 'Vsling Crossbow Sling for Treestand Hunting'
+    assign seo_meta_description = 'The Vsling™ crossbow sling keeps your weapon hands-free and shoot-ready on the climb, in the stand, and at the shot. Made in the USA.'
+    assign seo_meta_keywords = 'crossbow sling, crossbow sling for treestand hunting, hands-free crossbow carrier, treestand crossbow sling'
+    assign seo_og_title = 'Vsling Crossbow Sling for Treestand Hunting'
+    assign seo_og_description = seo_meta_description
+    assign seo_twitter_title = seo_og_title
+    assign seo_twitter_description = seo_og_description
   endif
 -%}

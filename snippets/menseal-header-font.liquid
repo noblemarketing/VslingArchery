@@ -1,0 +1,42 @@
+{%- comment -%}
+  Loads Menseal Regular (body) and Menseal Black (headings/header).
+{%- endcomment -%}
+
+{% style %}
+  @font-face {
+    font-family: 'Menseal';
+    src: url('{{ 'menseal-regular.ttf' | asset_url }}') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Menseal';
+    src: url('{{ 'menseal-black.ttf' | asset_url }}') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --font-body-family: 'Menseal', sans-serif;
+    --font-body-style: normal;
+    --font-body-weight: 400;
+    --font-body-weight-bold: 900;
+
+    --font-heading-family: 'Menseal', sans-serif;
+    --font-heading-style: normal;
+    --font-heading-weight: 900;
+  }
+
+  .header__heading,
+  .header__heading-link,
+  .header__menu-item,
+  .header__menu-item span,
+  .header__active-menu-item {
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+  }
+{% endstyle %}

@@ -122,6 +122,28 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .comparison-section-{{ section.id }} .comparison__shot-section {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__shot-section h2,
+  .comparison-section-{{ section.id }} .comparison__shot-section p,
+  .comparison-section-{{ section.id }} .comparison__shot-section strong {
+    color: #fff;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__shot-section a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__shot-section a:hover {
+    opacity: 0.85;
+  }
 {%- endstyle -%}
 
 <div class="comparison-section-{{ section.id }}">
@@ -257,18 +279,20 @@
   </div>
 
   {%- comment -%} 4. Does It Get In The Way? {%- endcomment -%}
-  <div class="page-width page-width--narrow comparison__block color-{{ section.settings.content_color_scheme }} gradient">
-    <div class="rte">
-      <h2>Will it interfere with my shot?</h2>
-      <p>
-        A simple design that keeps the sling snug to your bow and out of the way during the shot.
-        Unlike traditional slings that hang loose or require removal before the shot, the Vsling system allows smooth, quiet transitions from carry to full draw without interfering with the arrow path.
-      </p>
-      <p>
-        With patent-pending technology, the Vsling® doesn't restrict movement — it enhances it.
-        Crossbow hunters get the same shoot-with-it-on advantage from the <a href="{{ crossbow_product_url }}">Vsling® Crossbow Sling</a> when climbing stands or moving through cover.
-      </p>
-      <p><strong>The Vsling® stays completely clear of your arrow path — you draw, shoot, and never think about it.</strong></p>
+  <div class="comparison__shot-section comparison__block">
+    <div class="page-width page-width--narrow">
+      <div class="rte">
+        <h2>Will it interfere with my shot?</h2>
+        <p>
+          A simple design that keeps the sling snug to your bow and out of the way during the shot.
+          Unlike traditional slings that hang loose or require removal before the shot, the Vsling system allows smooth, quiet transitions from carry to full draw without interfering with the arrow path.
+        </p>
+        <p>
+          With patent-pending technology, the Vsling® doesn't restrict movement — it enhances it.
+          Crossbow hunters get the same shoot-with-it-on advantage from the <a href="{{ crossbow_product_url }}">Vsling® Crossbow Sling</a> when climbing stands or moving through cover.
+        </p>
+        <p><strong>The Vsling® stays completely clear of your arrow path — you draw, shoot, and never think about it.</strong></p>
+      </div>
     </div>
   </div>
 

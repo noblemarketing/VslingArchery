@@ -21,6 +21,7 @@
 
   assign faq_url = vsling_faq_url
   assign comparison_url = vsling_comparison_url
+  assign crossbow_treestand_url = vsling_crossbow_treestand_url
 -%}
 
 {%- if is_bow_sling_product or is_crossbow_product -%}
@@ -31,5 +32,10 @@
     <p class="product-seo-links__comparison">
       <a href="{{ comparison_url }}">Vsling vs traditional bow sling — full comparison</a>
     </p>
+    {%- if is_crossbow_product -%}
+      <p class="product-seo-links__treestand">
+        <a href="{{ crossbow_treestand_url }}">Vsling crossbow sling for treestand hunting</a>
+      </p>
+    {%- endif -%}
   </nav>
 {%- endif -%}

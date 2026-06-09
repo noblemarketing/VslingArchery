@@ -1,0 +1,26 @@
+{%- comment -%}
+  Shared copy and FAQ data for the Vsling Crossbow Sling treestand landing page.
+{%- endcomment -%}
+
+{%- liquid
+  assign ct_q1 = 'Why do treestand hunters need a crossbow sling?'
+  assign ct_a1 = 'You need both hands on the ladder when you climb. A loose strap lets your crossbow swing, bang the stand, and make noise. A good crossbow sling for treestand hunting keeps your weapon tight, quiet, and ready before you ever settle in.'
+
+  assign ct_q2 = 'Will the Vsling stay on during the shot from a treestand?'
+  assign ct_a2 = 'Yes. The Vsling stays on your crossbow during the shot. You do not remove it or slide a strap off your shoulder when a deer steps in below. You go from carry to full draw in seconds with no extra movement.'
+
+  assign ct_q3 = 'Can I climb a treestand with both hands free?'
+  assign ct_a3 = 'Yes. The 100% elastic Vsling keeps your crossbow snug against your body so both hands stay on the ladder or climbing sticks. No dangling sling slapping metal on the way up.'
+
+  assign ct_q4 = 'Does the Vsling work with pistol grip crossbows?'
+  assign ct_a4 = 'Yes. Each Vsling Crossbow/Gun Sling ships with two key rings so you can build a custom install on pistol-grip crossbows, rifle-style crossbows, and firearms with standard sling points.'
+
+  assign ct_q5 = 'Can I use the Vsling during a treestand descent?'
+  assign ct_a5 = 'Yes. The elastic design keeps your crossbow secure on the way down the same way it does on the climb. Your hands stay free and your crossbow stays quiet against your body.'
+
+  assign ct_q6 = 'How do I install the Vsling on my crossbow?'
+  assign ct_a6 = 'Attach the two included key rings to your front and rear sling points. Loop the sling through the rear ring, run it forward through the front ring, return to the rear, and tie a snug double knot. Adjust tension and you are set. Full video at @VslingArchery on YouTube.'
+
+  assign ct_questions = ct_q1 | append: '~~~' | append: ct_q2 | append: '~~~' | append: ct_q3 | append: '~~~' | append: ct_q4 | append: '~~~' | append: ct_q5 | append: '~~~' | append: ct_q6 | split: '~~~'
+  assign ct_answers = ct_a1 | append: '~~~' | append: ct_a2 | append: '~~~' | append: ct_a3 | append: '~~~' | append: ct_a4 | append: '~~~' | append: ct_a5 | append: '~~~' | append: ct_a6 | split: '~~~'
+-%}
