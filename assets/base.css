@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Menseal';
+  src: url('menseal-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
@@ -3594,4 +3602,12 @@ details-disclosure > details {
   100% {
     transform: translateX(100%) scaleX(0);
   }
+}
+
+.page-vsling-vs-traditional-bow-sling h1 {
+  font-family: 'Menseal', sans-serif !important;
+}
+
+#ComparisonHeading {
+  font-family: 'Menseal', sans-serif !important;
 }
