@@ -311,19 +311,6 @@
         "show_text_below": true
       }
     },
-    "image_with_text_KcnAie": {
-      "type": "watch-how-it-works",
-      "settings": {
-        "image": "shopify://shop_images/683920710_122153296328981170_1918040051791031295_n.jpg",
-        "image_alt": "Vsling bow sling, crossbow sling, and bino sling on a rock with hunting gear",
-        "overlay_opacity": 20,
-        "button_label": "WATCH HOW IT WORKS",
-        "button_link": "https://youtube.com/shorts/zmkgFhbN6K4?si=pWNTuv9qKuUNizFX",
-        "button_style_secondary": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "multicolumn_x6JiNU": {
       "type": "multicolumn",
       "blocks": {
@@ -587,14 +574,13 @@
     "featured_collection1",
     "rich_text_Cye7g7",
     "image_banner_bWbd9X",
-    "image_with_text_KcnAie",
+    "image_banner_6xc3Xk",
     "multicolumn_x6JiNU",
     "video_qYD8qE",
     "rich_text_3kffG7",
     "rich_text_LPM9tB",
     "1769174455c66e60e5",
     "177514160585e82340",
-    "17795070818929cdfc",
-    "image_banner_6xc3Xk"
+    "17795070818929cdfc"
   ]
 }
