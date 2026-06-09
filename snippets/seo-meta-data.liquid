@@ -18,12 +18,12 @@
   assign current_year = 'now' | date: '%Y'
 
   if request.page_type == 'index'
-    assign seo_page_title = 'Vsling Shoot-Ready Bow Sling — Hands-Free ' | append: current_year
-    assign seo_meta_description = 'The Vsling keeps your compound bow hands-free and shoot-ready, so you draw and shoot without ever removing your sling.'
-    assign seo_og_title = 'Vsling — Shoot Without Removing Your Sling'
-    assign seo_og_description = 'The Vsling is a patented elastic bow sling that keeps your bow quiet, secure, and ready to shoot from the moment game steps in.'
-    assign seo_twitter_title = seo_og_title
-    assign seo_twitter_description = seo_og_description
+    assign seo_page_title = 'Vsling® Bow Sling — Hands-Free Compound Bow Carry for Bowhunters'
+    assign seo_meta_description = 'The Vsling® is the only bow sling you can shoot with on. 100% elastic, hands-free, and silent. Its quiet, flexible design keeps your compound bow snug and shoot-ready. Made in Minnesota, USA.'
+    assign seo_og_title = seo_page_title
+    assign seo_og_description = seo_meta_description
+    assign seo_twitter_title = seo_page_title
+    assign seo_twitter_description = seo_meta_description
 
   elsif request.page_type == 'product'
     assign product_handle_downcase = product.handle | downcase
@@ -124,6 +124,16 @@
     assign seo_meta_keywords = 'crossbow sling, crossbow sling for treestand hunting, hands-free crossbow carrier, treestand crossbow sling'
     assign seo_og_title = 'Vsling Crossbow Sling for Treestand Hunting'
     assign seo_og_description = seo_meta_description
+    assign seo_twitter_title = seo_og_title
+    assign seo_twitter_description = seo_og_description
+
+  elsif request.page_type == 'page'
+    assign seo_page_title = page_title | default: page.title
+    if page_description != blank
+      assign seo_meta_description = page_description
+    endif
+    assign seo_og_title = page.title
+    assign seo_og_description = seo_meta_description | default: page_description
     assign seo_twitter_title = seo_og_title
     assign seo_twitter_description = seo_og_description
   endif

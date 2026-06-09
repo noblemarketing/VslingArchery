@@ -45,7 +45,7 @@
       <meta name="keywords" content="{{ seo_meta_keywords | escape }}">
     {%- endif -%}
 
-    {% render 'meta-tags' %}
+    {% include 'meta-tags' %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
