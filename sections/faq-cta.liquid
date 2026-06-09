@@ -4,6 +4,8 @@
 
 {%- liquid
   assign bow_product_url = vsling_bow_url
+  assign crossbow_product_url = vsling_crossbow_url
+  assign bino_product_url = vsling_bino_url
   assign comparison_page_url = vsling_comparison_url
 -%}
 
@@ -29,6 +31,12 @@
       <a href="{{ bow_product_url }}" class="button button--primary">
         {{ section.settings.cta_primary_label | escape }}
       </a>
+      <a href="{{ crossbow_product_url }}" class="button button--secondary">
+        {{ section.settings.cta_crossbow_label | escape }}
+      </a>
+      <a href="{{ bino_product_url }}" class="button button--secondary">
+        {{ section.settings.cta_bino_label | escape }}
+      </a>
       <a href="{{ comparison_page_url }}" class="button button--secondary">
         {{ section.settings.cta_secondary_label | escape }}
       </a>
@@ -52,13 +60,25 @@
       "type": "text",
       "id": "cta_subtext",
       "label": "CTA subtext",
-      "default": "Join bowhunters who've left the floppy sling behind."
+      "default": "Complete your hands-free setup with a Vsling bow sling, crossbow sling, or bino sling."
     },
     {
       "type": "text",
       "id": "cta_primary_label",
       "label": "CTA primary button",
       "default": "Shop the Vsling® Bow Sling"
+    },
+    {
+      "type": "text",
+      "id": "cta_crossbow_label",
+      "label": "CTA crossbow button",
+      "default": "Shop the Crossbow Sling"
+    },
+    {
+      "type": "text",
+      "id": "cta_bino_label",
+      "label": "CTA bino button",
+      "default": "Shop the Bino Sling"
     },
     {
       "type": "text",

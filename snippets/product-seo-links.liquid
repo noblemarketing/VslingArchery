@@ -22,6 +22,9 @@
   assign faq_url = vsling_faq_url
   assign comparison_url = vsling_comparison_url
   assign crossbow_treestand_url = vsling_crossbow_treestand_url
+  assign bino_url = vsling_bino_url
+  assign crossbow_url = vsling_crossbow_url
+  assign bow_url = vsling_bow_url
 -%}
 
 {%- if is_bow_sling_product or is_crossbow_product -%}
@@ -35,6 +38,19 @@
     {%- if is_crossbow_product -%}
       <p class="product-seo-links__treestand">
         <a href="{{ crossbow_treestand_url }}">Vsling crossbow sling for treestand hunting</a>
+      </p>
+      <p class="product-seo-links__bino">
+        <a href="{{ bino_url }}">Vsling bino sling for hands-free glassing</a>
+      </p>
+      <p class="product-seo-links__bow">
+        <a href="{{ bow_url }}">Vsling bow sling for compound bows</a>
+      </p>
+    {%- elsif is_bow_sling_product -%}
+      <p class="product-seo-links__crossbow">
+        <a href="{{ crossbow_url }}">Vsling crossbow sling for treestand hunting</a>
+      </p>
+      <p class="product-seo-links__bino">
+        <a href="{{ bino_url }}">Vsling bino sling for hands-free glassing</a>
       </p>
     {%- endif -%}
   </nav>

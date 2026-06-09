@@ -14,11 +14,13 @@
 
   assign vsling_bow_product = all_products[vsling_bow_handle]
   assign vsling_crossbow_product = all_products[vsling_crossbow_handle]
+  assign vsling_bino_product = all_products[vsling_bino_handle]
   assign vsling_bow_url = vsling_bow_product.url | default: '/products/bow-sling'
   assign vsling_crossbow_url = vsling_crossbow_product.url | default: '/products/vsling-crossbow-gun-sling'
   assign vsling_bow_title = vsling_bow_product.title | default: 'Vsling® Bow Sling'
   assign vsling_crossbow_title = vsling_crossbow_product.title | default: 'Vsling™ Crossbow / Gun Sling'
-  assign vsling_bino_url = all_products[vsling_bino_handle].url | default: '/products/vsling-bino-sling'
+  assign vsling_bino_url = vsling_bino_product.url | default: '/products/vsling-bino-sling'
+  assign vsling_bino_title = vsling_bino_product.title | default: 'Vsling™ Bino Sling'
   assign vsling_faq_page = pages[vsling_faq_page_handle]
   assign vsling_faq_url = vsling_faq_page.url | default: '/pages/faq'
   assign vsling_comparison_page = pages['vsling-vs-traditional-bow-sling']

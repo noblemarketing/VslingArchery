@@ -12,6 +12,7 @@
   assign hero_alt = section.settings.hero_image_alt | default: 'Hunter climbing a treestand with Vsling crossbow sling for hands-free treestand hunting'
   assign crossbow_product_url = vsling_crossbow_url
   assign bow_product_url = vsling_bow_url
+  assign bino_product_url = vsling_bino_url
   assign faq_page_url = vsling_faq_url
   assign comparison_page_url = vsling_comparison_url
 -%}
@@ -159,6 +160,7 @@
     <p>
       No tools required. Installation takes under two minutes.
       Compound bow hunters in your group can run the same system with the <a href="{{ bow_product_url }}">Vsling® Bow Sling</a>.
+      Glass hands-free from the stand with the <a href="{{ bino_product_url }}">Vsling™ Bino Sling</a>.
       Read the full <a href="{{ comparison_page_url }}">Vsling vs Traditional Bow Sling</a> comparison or browse the <a href="{{ faq_page_url }}">Bowhunter FAQ</a>.
     </p>
 
@@ -168,7 +170,7 @@
 
   <div class="crossbow-treestand__cta color-{{ section.settings.cta_color_scheme }} gradient content-container">
     <h2 class="h1">{{ section.settings.cta_heading | default: 'Ready for your next treestand hunt?' | escape }}</h2>
-    <p class="rte">{{ section.settings.cta_subtext | default: 'The Vsling™ Crossbow/Gun Sling keeps your weapon hands-free, silent, and shoot-ready from the climb to the shot.' | escape }}</p>
+    <p class="rte">{{ section.settings.cta_subtext | default: 'The Vsling™ Crossbow/Gun Sling keeps your weapon hands-free, silent, and shoot-ready from the climb to the shot. Complete your setup with the Vsling™ Bino Sling for hands-free glassing.' | escape }}</p>
     <div class="crossbow-treestand__cta-buttons">
       <a href="{{ crossbow_product_url }}" class="button button--primary">
         {{ section.settings.cta_primary_label | default: 'Shop the Vsling™ Crossbow Sling' | escape }}

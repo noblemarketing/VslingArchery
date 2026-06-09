@@ -5,6 +5,8 @@
   Accepts: answer_plain, global_index
 {%- endcomment -%}
 
+{%- include 'vsling-handles' -%}
+
 {%- liquid
   assign answer_html = answer_plain
 
@@ -12,5 +14,9 @@
     assign comparison_tail = 'See the full comparison at vslingarchery.com/pages/vsling-vs-traditional-bow-sling.'
     assign comparison_linked = 'See the full comparison at <a href="' | append: comparison_page_url | append: '">vslingarchery.com/pages/vsling-vs-traditional-bow-sling</a>.'
     assign answer_html = answer_plain | replace: comparison_tail, comparison_linked
+  elsif global_index == 11
+    assign bino_tail = 'Shop it at vslingarchery.com/products/vsling-bino-sling.'
+    assign bino_linked = 'Shop the <a href="' | append: vsling_bino_url | append: '">Vsling™ Bino Sling</a> at vslingarchery.com/products/vsling-bino-sling.'
+    assign answer_html = answer_plain | replace: bino_tail, bino_linked
   endif
 -%}
