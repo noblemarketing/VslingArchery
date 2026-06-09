@@ -42,6 +42,9 @@
 
   if media.media_type == 'image'
     assign image_class = 'image-magnify-' | append: section.settings.image_zoom
+    assign thumbnail_image = media
+  else
+    assign thumbnail_image = media.preview_image
   endif
 -%}
 
@@ -78,23 +81,28 @@
     </span>
     {%- render 'loading-spinner' -%}
     <div class="product__media media media--transparent">
-      {%- capture product_image_alt -%}
-        {%- render 'product-image-alt', product: product, media: media, media_position: position -%}
-      {%- endcapture -%}
-      {%- capture product_image_title -%}
-        {%- render 'product-image-title', product: product, media: media, media_position: position -%}
-      {%- endcapture -%}
-      {{
-        media.preview_image
-        | image_tag:
-          width: 1100,
-          alt: product_image_alt,
-          title: product_image_title,
-          class: image_class,
-          loading: lazy,
-          sizes: sizes,
-          widths: '246, 493, 600, 713, 823, 990, 1100'
-      }}
+      {%- if thumbnail_image != blank -%}
+        {%- capture product_image_alt -%}
+          {%- render 'product-image-alt', product: product, media: media, media_position: position -%}
+        {%- endcapture -%}
+        {%- capture product_image_title -%}
+          {%- render 'product-image-title', product: product, media: media, media_position: position -%}
+        {%- endcapture -%}
+        {%- assign img_height = 1100 | divided_by: thumbnail_image.aspect_ratio | ceil -%}
+        {{
+          thumbnail_image
+          | image_url: width: 1100
+          | image_tag:
+            alt: product_image_alt,
+            title: product_image_title,
+            class: image_class,
+            loading: lazy,
+            sizes: sizes,
+            widths: '246, 493, 600, 713, 823, 990, 1100',
+            width: 1100,
+            height: img_height
+        }}
+      {%- endif -%}
     </div>
     <button
       class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}"
@@ -128,22 +136,27 @@
           </span>
         {%- endif -%}
       </span>
-      {%- capture product_image_alt -%}
-        {%- render 'product-image-alt', product: product, media: media, media_position: position -%}
-      {%- endcapture -%}
-      {%- capture product_image_title -%}
-        {%- render 'product-image-title', product: product, media: media, media_position: position -%}
-      {%- endcapture -%}
-      {{
-        media.preview_image
-        | image_tag:
-          width: 1100,
-          alt: product_image_alt,
-          title: product_image_title,
-          loading: lazy,
-          sizes: sizes,
-          widths: '246, 493, 600, 713, 823, 990, 1100'
-      }}
+      {%- if thumbnail_image != blank -%}
+        {%- capture product_image_alt -%}
+          {%- render 'product-image-alt', product: product, media: media, media_position: position -%}
+        {%- endcapture -%}
+        {%- capture product_image_title -%}
+          {%- render 'product-image-title', product: product, media: media, media_position: position -%}
+        {%- endcapture -%}
+        {%- assign poster_height = 1100 | divided_by: thumbnail_image.aspect_ratio | ceil -%}
+        {{
+          thumbnail_image
+          | image_url: width: 1100
+          | image_tag:
+            alt: product_image_alt,
+            title: product_image_title,
+            loading: lazy,
+            sizes: sizes,
+            widths: '246, 493, 600, 713, 823, 990, 1100',
+            width: 1100,
+            height: poster_height
+        }}
+      {%- endif -%}
     </button>
     <template>
       {%- liquid
