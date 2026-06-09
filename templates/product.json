@@ -49,15 +49,6 @@
             "page": ""
           }
         },
-        "collapsible-row-2": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Merchandising tips",
-            "icon": "check_mark",
-            "content": "<p>• Demo it. Once people feel the stretch and see how it works in real use, it sells itself.<br/>• Put it on the gear. Customers instantly understand Vsling® when they see it in action.<br/></p>",
-            "page": ""
-          }
-        },
         "share": {
           "type": "share",
           "settings": {
@@ -72,7 +63,6 @@
         "description",
         "collapsible-row-1",
         "collapsible-row-0",
-        "collapsible-row-2",
         "share"
       ],
       "settings": {
@@ -154,3 +144,4 @@
     "related-products"
   ]
 }
+

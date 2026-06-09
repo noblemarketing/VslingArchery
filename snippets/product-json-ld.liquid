@@ -33,7 +33,7 @@
     assign product_description = product.description | strip_html | strip_newlines
   endif
 
-  if is_crossbow_page
+  if is_crossbow_page or product.handle == 'bow-sling'
     assign product_material_schema = '100% elastic'
     assign product_country_origin = 'US'
   endif
@@ -180,7 +180,7 @@
       "name": "Vsling Archery",
       "url": {{ brand_url | json }}
     },
-    {%- if is_crossbow_page -%}
+    {%- if is_crossbow_page or product.handle == 'bow-sling' -%}
     "manufacturer": {
       "@type": "Organization",
       "name": "Vsling Archery",
@@ -199,6 +199,10 @@
       "price": {{ product_price | json }},
       "availability": {{ availability | json }},
       "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": "Vsling Archery"
+      },
       "shippingDetails": [
         {%- if qualifies_for_free_shipping -%}
         {

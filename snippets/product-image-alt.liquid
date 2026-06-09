@@ -6,6 +6,8 @@
 
 {%- liquid
   assign seo_alt = media.alt | default: product.title
+  assign media_src = media.src | default: media.preview_image.src | downcase
+  assign media_alt_raw = media.alt | downcase
   assign product_handle_downcase = product.handle | downcase
   assign product_title_downcase = product.title | downcase
   assign is_bow_sling_product = false
@@ -20,18 +22,117 @@
   endif
 
   if is_bow_sling_product
-    case media_position
-      when 1
+    if media_alt_raw contains 'pantyhose'
+      assign seo_alt = 'Black Vsling® elastic bow sling on a compound bow — hands-free bowhunting carry'
+    elsif media_src contains 'acad9399'
+      if media_position == 1
         assign seo_alt = 'Vsling elastic bow sling laid flat for compound bow hunters on a clean product background.'
-      when 2
+      else
+        assign seo_alt = 'Black Vsling® elastic bow sling on a compound bow — hands-free bowhunting carry'
+      endif
+    elsif media_src contains '4a5e7f34'
+      if media_position == 2
         assign seo_alt = 'Vsling bow sling installed on a Mathews compound bow for hands-free bowhunting carry.'
-      when 3
-        assign seo_alt = 'Hunter crossing a fence with Vsling bow sling on a Mathews compound bow in timber.'
-      when 4
-        assign seo_alt = 'Close-up of Vsling bow sling elastic attachment secured to a Hoyt compound bow riser.'
-      when 5
-        assign seo_alt = 'Vsling bow sling size guide showing fit on Mathews, Hoyt, and Bear compound bows.'
-    endcase
+      else
+        assign seo_alt = 'Black Vsling® elastic bow sling on a compound bow — hands-free bowhunting carry'
+      endif
+    elsif media_src contains '7f9b9828'
+      assign seo_alt = 'Hunter crossing a fence with Vsling bow sling on a Mathews compound bow in timber.'
+    elsif media_src contains 'img_3218'
+      assign seo_alt = 'Close-up of Vsling bow sling elastic attachment secured to a Hoyt compound bow riser.'
+    elsif media_src contains 'img_1391'
+      assign seo_alt = 'Vsling bow sling size guide showing fit on Mathews, Hoyt, and Bear compound bows.'
+    elsif media_src contains 'be4e3303'
+      assign seo_alt = 'Vsling® Bow Sling colour variants — Black, Brown, Camouflage, and Red'
+    elsif media_src contains 'bd895b0b'
+      assign seo_alt = 'Bowhunter carrying compound bow hands-free with Vsling® bow sling in timber'
+    elsif media_src contains 'f05f1048'
+      assign seo_alt = 'Turkey hunter in camouflage with Vsling® bow sling and harvested turkey'
+    elsif media_src contains '13a57599'
+      assign seo_alt = 'Hunter with compound bow on Vsling® sling at lakeside hunting access point'
+    elsif media_src contains '6bd560ac'
+      assign seo_alt = 'Young hunter carrying compound bow hands-free with Vsling® bow sling'
+    elsif media_src contains '95642412'
+      assign seo_alt = 'Bowhunter loading into truck with compound bow secured by Vsling® sling'
+    elsif media_src contains 'cf5b2029'
+      assign seo_alt = 'Vsling® elastic bow sling — the only sling you can draw and shoot with on'
+    elsif media_src contains 'eb863a16'
+      assign seo_alt = 'Bowhunter climbing treestand with both hands free using Vsling® bow sling'
+    elsif media_src contains '0a479f0c'
+      assign seo_alt = 'Bowhunter at full draw with Vsling® bow sling staying clear of arrow path'
+    elsif media_src contains 'c58c0b7f'
+      assign seo_alt = 'Canadian bowhunter on backcountry hunt with Vsling® hands-free bow carry'
+    elsif media_src contains '78998f6b'
+      assign seo_alt = 'Vsling® elastic bow sling installed on compound bow — shoot-ready carry'
+    elsif media_src contains '4175020d'
+      assign seo_alt = 'Successful turkey hunter with harvested bird and Vsling® black bow sling'
+    elsif media_src contains '685769b8'
+      assign seo_alt = 'Turkey bowhunter in open field with Vsling® bow sling and harvested gobbler'
+    elsif media_src contains '63f407dc'
+      assign seo_alt = 'Bowfisherman with compound bow on Vsling® sling preparing to shoot'
+    elsif media_src contains 'b69fc3f9'
+      assign seo_alt = 'Vsling® Bow Sling in Camouflage — elastic compound bow sling for bowhunters'
+    elsif media_src contains 'ec4fd421'
+      assign seo_alt = 'Vsling® Bow Sling in Red — hands-free elastic bow carry sling'
+    elsif media_src contains 'deee4d66'
+      assign seo_alt = 'Vsling® Bow Sling in Brown — hands-free elastic bow carry sling'
+    elsif media_src contains '34277d3a'
+      assign seo_alt = 'Vsling® Bow Sling in Black — hands-free elastic bow carry sling'
+    else
+      case media_position
+        when 1
+          assign seo_alt = 'Vsling elastic bow sling laid flat for compound bow hunters on a clean product background.'
+        when 2
+          assign seo_alt = 'Vsling bow sling installed on a Mathews compound bow for hands-free bowhunting carry.'
+        when 3
+          assign seo_alt = 'Hunter crossing a fence with Vsling bow sling on a Mathews compound bow in timber.'
+        when 4
+          assign seo_alt = 'Close-up of Vsling bow sling elastic attachment secured to a Hoyt compound bow riser.'
+        when 5
+          assign seo_alt = 'Vsling bow sling size guide showing fit on Mathews, Hoyt, and Bear compound bows.'
+        when 6
+          assign seo_alt = 'Vsling® Bow Sling colour variants — Black, Brown, Camouflage, and Red'
+        when 7
+          assign seo_alt = 'Bowhunter carrying compound bow hands-free with Vsling® bow sling in timber'
+        when 8
+          assign seo_alt = 'Turkey hunter in camouflage with Vsling® bow sling and harvested turkey'
+        when 9
+          assign seo_alt = 'Hunter with compound bow on Vsling® sling at lakeside hunting access point'
+        when 10
+          assign seo_alt = 'Young hunter carrying compound bow hands-free with Vsling® bow sling'
+        when 11
+          assign seo_alt = 'Bowhunter loading into truck with compound bow secured by Vsling® sling'
+        when 12
+          assign seo_alt = 'Vsling® elastic bow sling — the only sling you can draw and shoot with on'
+        when 13
+          assign seo_alt = 'Bowhunter climbing treestand with both hands free using Vsling® bow sling'
+        when 14
+          assign seo_alt = 'Bowhunter at full draw with Vsling® bow sling staying clear of arrow path'
+        when 15
+          assign seo_alt = 'Canadian bowhunter on backcountry hunt with Vsling® hands-free bow carry'
+        when 16
+          assign seo_alt = 'Vsling® elastic bow sling installed on compound bow — shoot-ready carry'
+        when 17
+          assign seo_alt = 'Successful turkey hunter with harvested bird and Vsling® black bow sling'
+        when 18
+          assign seo_alt = 'Turkey bowhunter in open field with Vsling® bow sling and harvested gobbler'
+        when 19
+          assign seo_alt = 'Bowfisherman with compound bow on Vsling® sling preparing to shoot'
+        when 20
+          assign seo_alt = 'Vsling® Bow Sling in Camouflage — elastic compound bow sling for bowhunters'
+        when 21
+          assign seo_alt = 'Vsling® Bow Sling in Red — hands-free elastic bow carry sling'
+        when 22
+          assign seo_alt = 'Vsling® Bow Sling in Brown — hands-free elastic bow carry sling'
+        when 23
+          assign seo_alt = 'Vsling® Bow Sling in Black — hands-free elastic bow carry sling'
+      endcase
+    endif
+
+    if seo_alt == product.title or seo_alt == 'Vsling® Bow Sling' or seo_alt == 'Vslingr Bow Sling'
+      assign seo_alt = 'Vsling® elastic bow sling for hands-free compound bow carry'
+    endif
+
   elsif is_crossbow_product
     case media_position
       when 1

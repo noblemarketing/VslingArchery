@@ -239,6 +239,9 @@
               aria-controls="GalleryViewer-{{ section.id }}"
               aria-describedby="{{ thumbnail_id }}"
             >
+              {%- capture featured_thumbnail_alt -%}
+                {%- render 'product-image-alt', product: product, media: featured_media, media_position: media_index -%}
+              {%- endcapture -%}
               {{
                 featured_media.preview_image
                 | image_url: width: 416
@@ -247,7 +250,7 @@
                   sizes: sizes,
                   widths: '54, 74, 104, 162, 208, 324, 416',
                   id: thumbnail_id,
-                  alt: featured_media.alt
+                  alt: featured_thumbnail_alt
                 | escape
               }}
             </button>
@@ -301,6 +304,9 @@
                 aria-controls="GalleryViewer-{{ section.id }}"
                 aria-describedby="{{ thumbnail_id }}"
               >
+                {%- capture thumbnail_alt -%}
+                  {%- render 'product-image-alt', product: product, media: media, media_position: media_index -%}
+                {%- endcapture -%}
                 {{
                   media.preview_image
                   | image_url: width: 416
@@ -309,7 +315,7 @@
                     sizes: sizes,
                     widths: '54, 74, 104, 162, 208, 324, 416',
                     id: thumbnail_id,
-                    alt: media.alt
+                    alt: thumbnail_alt
                   | escape
                 }}
               </button>
