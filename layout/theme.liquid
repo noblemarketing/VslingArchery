@@ -24,14 +24,16 @@
     {%- include 'seo-meta-data' -%}
 
     <title>
-  {%- if request.page_type == 'index' -%}
-    {{ page_title }}
-  {%- elsif page_title == blank -%}
-    {{ shop.name }}
-  {%- else -%}
-    {{ page_title }} – {{ shop.name }}
-  {%- endif -%}
-</title>
+      {%- if seo_page_title != blank -%}
+        {{ seo_page_title | escape }}
+      {%- elsif request.page_type == 'index' -%}
+        {{ page_title | escape }}
+      {%- elsif page_title == blank -%}
+        {{ shop.name | escape }}
+      {%- else -%}
+        {{ page_title | escape }} – {{ shop.name | escape }}
+      {%- endif -%}
+    </title>
 
     {%- if seo_meta_description != blank -%}
       <meta name="description" content="{{ seo_meta_description | escape }}">

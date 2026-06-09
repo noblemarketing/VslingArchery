@@ -152,14 +152,22 @@
       {% for i in (1..9) %}
         {% liquid
           assign image_key = 'image_' | append: i
+          assign alt_key = 'alt_' | append: i
           assign image = block.settings[image_key]
+          assign slide_alt = block.settings[alt_key]
+          if slide_alt == blank
+            assign slide_alt = image.alt
+          endif
+          if slide_alt == blank
+            assign slide_alt = 'Bowhunter using Vsling bow sling in the field'
+          endif
         %}
         <div class="ai-slideshow-slide-{{ ai_gen_id }}" data-slide-index="{{ forloop.index0 }}">
           <div class="ai-slideshow-image-wrapper-{{ ai_gen_id }}">
             {% if image %}
               <img
                 src="{{ image | image_url: width: 800 }}"
-                alt="{{ image.alt | escape }}"
+                alt="{{ slide_alt | escape }}"
                 loading="lazy"
                 width="{{ image.width }}"
                 height="{{ image.height }}"
@@ -319,9 +327,21 @@
       "label": "Image 1"
     },
     {
+      "type": "text",
+      "id": "alt_1",
+      "label": "Image 1 alt text",
+      "default": "Bowhunter carrying compound bow with Vsling bow sling in the woods"
+    },
+    {
       "type": "image_picker",
       "id": "image_2",
       "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "alt_2",
+      "label": "Image 2 alt text",
+      "default": "Hunter wearing Vsling bow sling while moving through timber"
     },
     {
       "type": "image_picker",
@@ -329,9 +349,21 @@
       "label": "Image 3"
     },
     {
+      "type": "text",
+      "id": "alt_3",
+      "label": "Image 3 alt text",
+      "default": "Bowhunter with Vsling hands-free bow sling in the field"
+    },
+    {
       "type": "image_picker",
       "id": "image_4",
       "label": "Image 4"
+    },
+    {
+      "type": "text",
+      "id": "alt_4",
+      "label": "Image 4 alt text",
+      "default": "Hunter using Vsling elastic bow sling on a compound bow"
     },
     {
       "type": "image_picker",
@@ -339,9 +371,21 @@
       "label": "Image 5"
     },
     {
+      "type": "text",
+      "id": "alt_5",
+      "label": "Image 5 alt text",
+      "default": "Bowhunter with Vsling bow sling ready in hunting terrain"
+    },
+    {
       "type": "image_picker",
       "id": "image_6",
       "label": "Image 6"
+    },
+    {
+      "type": "text",
+      "id": "alt_6",
+      "label": "Image 6 alt text",
+      "default": "Hunter carrying bow hands-free with Vsling bow sling"
     },
     {
       "type": "image_picker",
@@ -349,14 +393,32 @@
       "label": "Image 7"
     },
     {
+      "type": "text",
+      "id": "alt_7",
+      "label": "Image 7 alt text",
+      "default": "Bowhunter in the field wearing a Vsling bow sling"
+    },
+    {
       "type": "image_picker",
       "id": "image_8",
       "label": "Image 8"
     },
     {
+      "type": "text",
+      "id": "alt_8",
+      "label": "Image 8 alt text",
+      "default": "Hunter with Vsling bow sling during a bowhunting trip"
+    },
+    {
       "type": "image_picker",
       "id": "image_9",
       "label": "Image 9"
+    },
+    {
+      "type": "text",
+      "id": "alt_9",
+      "label": "Image 9 alt text",
+      "default": "Bowhunter using Vsling shoot-ready bow sling in the outdoors"
     },
     {
       "type": "header",

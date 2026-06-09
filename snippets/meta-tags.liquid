@@ -1,11 +1,21 @@
+{%- include 'seo-meta-data' -%}
+
 {%- liquid
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
 
   if seo_og_title != blank
     assign og_title = seo_og_title
+  elsif request.page_type == 'index'
+    assign og_title = 'Vsling® Bow Sling — Hands-Free Compound Bow Carry for Bowhunters'
+  elsif request.page_type == 'page' and page.handle == 'vsling-vs-traditional-bow-sling'
+    assign og_title = 'Vsling vs Traditional Bow Sling — Why Bowhunters Are Making the Switch'
+  elsif request.page_type == 'page' and page.handle == 'faq'
+    assign og_title = 'Vsling® Bowhunter FAQ | Bow Sling Questions Answered'
   elsif request.page_type == 'page' and page.title != blank
     assign og_title = page.title
+  elsif seo_page_title != blank
+    assign og_title = seo_page_title
   else
     assign og_title = page_title | default: shop.name
   endif
@@ -14,10 +24,16 @@
     assign og_description = seo_og_description
   elsif seo_meta_description != blank
     assign og_description = seo_meta_description
+  elsif request.page_type == 'index'
+    assign og_description = 'The Vsling® is the only bow sling you can shoot with on. 100% elastic, hands-free, and silent. Its quiet, flexible design keeps your compound bow snug and shoot-ready. Made in Minnesota, USA.'
+  elsif request.page_type == 'page' and page.handle == 'vsling-vs-traditional-bow-sling'
+    assign og_description = 'Traditional bow slings get in the way. The Vsling® stays on for the shot — 100% elastic, hands-free, and silent. Pair with the Vsling bino sling for full hands-free carry.'
+  elsif request.page_type == 'page' and page.handle == 'faq'
+    assign og_description = 'Does the Vsling® get in the way? What bows does it fit? How do you install it? Bow sling, crossbow sling, and bino sling questions answered — straight from Vsling Archery.'
   elsif request.page_type == 'page' and page_description != blank
     assign og_description = page_description
   else
-    assign og_description = page_description | default: shop.description | default: shop.name
+    assign og_description = page_description | default: shop.name
   endif
 
   if seo_twitter_title != blank
