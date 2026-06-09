@@ -73,12 +73,32 @@
             "detail": "Public land bowhunter",
             "rating": 5
           }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "quote": "Over this last week I've had the pleasure of using one heck of a comfortable, easy to use bow sling. They are hand made here in south central Minnesota even! This thing makes it super easy to sling your bow, it's comfortable to wear, and it stows very nicely on the outside of your bow while you shoot. Head on over to VSling Archery and get yourself an amazing addition to your bow! You'll be going from slinging your bow, to slinging arrows in no time!",
+            "author": "Verified Buyer",
+            "detail": "Glencoe, Minnesota",
+            "rating": 5
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "quote": "It's super quiet, it's light, it's super easy and its effective.",
+            "author": "Jay Gregory",
+            "detail": "Falls City, NE",
+            "rating": 5
+          }
         }
       },
       "block_order": [
         "review_1",
         "review_2",
-        "review_3"
+        "review_3",
+        "review_4",
+        "review_5"
       ],
       "settings": {
         "heading": "What Bowhunters Are Saying",

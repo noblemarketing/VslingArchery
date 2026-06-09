@@ -76,9 +76,9 @@
     <a href="#faq-purchasing" class="button button--secondary site-faq__nav-pill">Purchasing &amp; Shipping</a>
   </nav>
 
-  {% render 'site-faq', section_id: section.id, render_part: 'accordion' %}
+  {% include 'site-faq', section_id: section.id, render_part: 'accordion' %}
 
-  {% render 'site-faq', section_id: section.id, render_part: 'schema' %}
+  {% include 'site-faq', section_id: section.id, render_part: 'schema' %}
   {% render 'breadcrumb-json-ld' %}
 </div>
 

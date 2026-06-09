@@ -187,7 +187,7 @@
     </p>
 
     <h2>Treestand Crossbow Sling FAQ</h2>
-    {% render 'crossbow-treestand-faq', section_id: section.id, render_part: 'accordion' %}
+    {% include 'crossbow-treestand-faq', section_id: section.id, render_part: 'accordion' %}
   </div>
 
   <div class="crossbow-treestand__cta color-{{ section.settings.cta_color_scheme }} gradient content-container">
@@ -203,7 +203,7 @@
     </div>
   </div>
 
-  {% render 'crossbow-treestand-faq', section_id: section.id, render_part: 'schema' %}
+  {% include 'crossbow-treestand-faq', section_id: section.id, render_part: 'schema' %}
   {% render 'breadcrumb-json-ld' %}
 
   <script type="application/ld+json">
