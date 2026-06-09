@@ -144,11 +144,19 @@
       {% for i in (1..9) %}
         {% liquid
           assign image_key = 'image_' | append: i
+          assign alt_key = 'alt_' | append: i
           assign image = section.settings[image_key]
+          assign slide_alt = section.settings[alt_key]
+          if slide_alt == blank
+            assign slide_alt = image.alt
+          endif
         %}
         <div class="faq-slideshow-slide-{{ gallery_id }}" data-slide-index="{{ forloop.index0 }}">
           <div class="faq-slideshow-image-wrapper-{{ gallery_id }}">
             {% if image != blank %}
+              {%- if slide_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               {%- assign slideshow_img_class = 'faq-slideshow-image-' | append: gallery_id -%}
               {{
                 image
@@ -158,7 +166,7 @@
                   widths: '300, 400, 600, 800',
                   sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, 90vw',
                   class: slideshow_img_class,
-                  alt: image.alt | default: 'Bowhunter using Vsling bow sling in the field'
+                  alt: slide_alt
               }}
             {% endif %}
           </div>
@@ -318,9 +326,19 @@
       "label": "Image 1"
     },
     {
+      "type": "text",
+      "id": "alt_1",
+      "label": "Image 1 alt text"
+    },
+    {
       "type": "image_picker",
       "id": "image_2",
       "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "alt_2",
+      "label": "Image 2 alt text"
     },
     {
       "type": "image_picker",
@@ -328,9 +346,19 @@
       "label": "Image 3"
     },
     {
+      "type": "text",
+      "id": "alt_3",
+      "label": "Image 3 alt text"
+    },
+    {
       "type": "image_picker",
       "id": "image_4",
       "label": "Image 4"
+    },
+    {
+      "type": "text",
+      "id": "alt_4",
+      "label": "Image 4 alt text"
     },
     {
       "type": "image_picker",
@@ -338,9 +366,19 @@
       "label": "Image 5"
     },
     {
+      "type": "text",
+      "id": "alt_5",
+      "label": "Image 5 alt text"
+    },
+    {
       "type": "image_picker",
       "id": "image_6",
       "label": "Image 6"
+    },
+    {
+      "type": "text",
+      "id": "alt_6",
+      "label": "Image 6 alt text"
     },
     {
       "type": "image_picker",
@@ -348,14 +386,29 @@
       "label": "Image 7"
     },
     {
+      "type": "text",
+      "id": "alt_7",
+      "label": "Image 7 alt text"
+    },
+    {
       "type": "image_picker",
       "id": "image_8",
       "label": "Image 8"
     },
     {
+      "type": "text",
+      "id": "alt_8",
+      "label": "Image 8 alt text"
+    },
+    {
       "type": "image_picker",
       "id": "image_9",
       "label": "Image 9"
+    },
+    {
+      "type": "text",
+      "id": "alt_9",
+      "label": "Image 9 alt text"
     },
     {
       "type": "range",

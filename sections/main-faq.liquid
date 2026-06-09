@@ -5,7 +5,7 @@
 
 {%- liquid
   assign hero_image = section.settings.hero_image
-  assign hero_alt = section.settings.hero_image_alt | default: 'Bowhunter carrying a harvested turkey with Vsling bow sling, cap, and chest harness in the field'
+  assign hero_alt = section.settings.hero_image_alt | default: hero_image.alt
 -%}
 
 {%- style -%}
@@ -32,6 +32,9 @@
 >
   <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {%- if hero_image != blank -%}
+      {%- if hero_alt == blank -%}
+        {%- comment -%} TODO alt text: {{ hero_image.src | split: '/' | last }} {%- endcomment -%}
+      {%- endif -%}
       {{
         hero_image
         | image_url: width: 3840
@@ -44,6 +47,7 @@
           fetchpriority: 'high'
       }}
     {%- else -%}
+      {%- comment -%} TODO alt text: faq-hero-hunter-turkey.png {%- endcomment -%}
       <img
         src="{{ 'faq-hero-hunter-turkey.png' | asset_url }}"
         alt="{{ hero_alt | escape }}"
@@ -97,8 +101,7 @@
     {
       "type": "text",
       "id": "hero_image_alt",
-      "label": "Hero image alt text",
-      "default": "Bowhunter carrying a harvested turkey with Vsling bow sling, cap, and chest harness in the field"
+      "label": "Hero image alt text"
     },
     {
       "type": "range",

@@ -24,14 +24,12 @@
     {%- include 'seo-meta-data' -%}
 
     <title>
-      {%- if seo_page_title != blank -%}
-        {{ seo_page_title | escape }}
-      {%- elsif request.page_type == 'index' -%}
-        {{ page_title | escape }}
+      {%- if template.name == 'index' -%}
+        Vsling® Bow Sling | Hands-Free, Shoot-With-It-On Carry
       {%- elsif page_title == blank -%}
-        {{ shop.name | escape }}
+        {{ shop.name }}
       {%- else -%}
-        {{ page_title | escape }} – {{ shop.name | escape }}
+        {{ page_title }} – {{ shop.name }}
       {%- endif -%}
     </title>
 

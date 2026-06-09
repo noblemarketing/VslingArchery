@@ -108,6 +108,10 @@
         <li class="grid__item">
           <div class="multicolumn-card content-container">
             {%- if section.settings.scenario_1_image != blank -%}
+              {%- assign scenario_1_alt = section.settings.scenario_1_image_alt | default: section.settings.scenario_1_image.alt -%}
+              {%- if scenario_1_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ section.settings.scenario_1_image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
                 <div class="media media--transparent media--adapt">
                   {{
@@ -117,7 +121,7 @@
                       widths: '275, 550, 750, 1100',
                       sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
                       class: 'multicolumn-card__image',
-                      alt: 'Hunter climbing treestand with Vsling crossbow sling hands-free'
+                      alt: scenario_1_alt
                   }}
                 </div>
               </div>
@@ -133,6 +137,10 @@
         <li class="grid__item">
           <div class="multicolumn-card content-container">
             {%- if section.settings.scenario_2_image != blank -%}
+              {%- assign scenario_2_alt = section.settings.scenario_2_image_alt | default: section.settings.scenario_2_image.alt -%}
+              {%- if scenario_2_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ section.settings.scenario_2_image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
                 <div class="media media--transparent media--adapt">
                   {{
@@ -142,7 +150,7 @@
                       widths: '275, 550, 750, 1100',
                       sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
                       class: 'multicolumn-card__image',
-                      alt: 'Ground blind hunter with Vsling crossbow sling keeping weapon snug and silent'
+                      alt: scenario_2_alt
                   }}
                 </div>
               </div>
@@ -158,6 +166,10 @@
         <li class="grid__item">
           <div class="multicolumn-card content-container">
             {%- if section.settings.scenario_3_image != blank -%}
+              {%- assign scenario_3_alt = section.settings.scenario_3_image_alt | default: section.settings.scenario_3_image.alt -%}
+              {%- if scenario_3_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ section.settings.scenario_3_image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
                 <div class="media media--transparent media--adapt">
                   {{
@@ -167,7 +179,7 @@
                       widths: '275, 550, 750, 1100',
                       sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
                       class: 'multicolumn-card__image',
-                      alt: 'Spot and stalk hunter with Vsling crossbow sling secured for fast quiet movement'
+                      alt: scenario_3_alt
                   }}
                 </div>
               </div>
@@ -249,14 +261,29 @@
       "label": "Scenario image — Treestand"
     },
     {
+      "type": "text",
+      "id": "scenario_1_image_alt",
+      "label": "Scenario image alt text — Treestand"
+    },
+    {
       "type": "image_picker",
       "id": "scenario_2_image",
       "label": "Scenario image — Ground blind"
     },
     {
+      "type": "text",
+      "id": "scenario_2_image_alt",
+      "label": "Scenario image alt text — Ground blind"
+    },
+    {
       "type": "image_picker",
       "id": "scenario_3_image",
       "label": "Scenario image — Spot and stalk"
+    },
+    {
+      "type": "text",
+      "id": "scenario_3_image_alt",
+      "label": "Scenario image alt text — Spot and stalk"
     },
     {
       "type": "range",

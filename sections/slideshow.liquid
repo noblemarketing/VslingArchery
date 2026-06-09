@@ -135,18 +135,22 @@
               if section.index == 1
                 assign fetch_priority = 'high'
               endif
+              assign slide_image_alt = block.settings.image_alt | default: block.settings.image.alt
             -%}
+            {%- if slide_image_alt == blank -%}
+              {%- comment -%} TODO alt text: {{ block.settings.image.src | split: '/' | last }} {%- endcomment -%}
+            {%- endif -%}
             {%- if forloop.first %}
               {{
                 block.settings.image
                 | image_url: width: 3840
-                | image_tag: height: height, sizes: sizes, widths: widths, fetchpriority: fetch_priority
+                | image_tag: height: height, sizes: sizes, widths: widths, fetchpriority: fetch_priority, alt: slide_image_alt
               }}
             {%- else -%}
               {{
                 block.settings.image
                 | image_url: width: 3840
-                | image_tag: loading: 'lazy', height: height, sizes: sizes, widths: widths
+                | image_tag: loading: 'lazy', height: height, sizes: sizes, widths: widths, alt: slide_image_alt
               }}
             {%- endif -%}
           {%- else -%}
@@ -394,6 +398,11 @@
           "type": "image_picker",
           "id": "image",
           "label": "t:sections.slideshow.blocks.slide.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
         },
         {
           "type": "range",

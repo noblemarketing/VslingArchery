@@ -12,7 +12,7 @@
   assign faq_url = vsling_faq_url
 
   assign hero_image = section.settings.hero_image
-  assign hero_alt = section.settings.hero_image_alt | default: 'Hunter carrying a wild turkey and compound bow using a Vsling hands-free bow sling in a field'
+  assign hero_alt = section.settings.hero_image_alt | default: hero_image.alt
   assign scenario_1_image = section.settings.scenario_1_image
   assign scenario_2_image = section.settings.scenario_2_image
   assign scenario_3_image = section.settings.scenario_3_image
@@ -180,6 +180,9 @@
   >
     <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {%- if hero_image != blank -%}
+        {%- if hero_alt == blank -%}
+          {%- comment -%} TODO alt text: {{ hero_image.src | split: '/' | last }} {%- endcomment -%}
+        {%- endif -%}
         {{
           hero_image
           | image_url: width: 3840
@@ -192,6 +195,7 @@
             fetchpriority: 'high'
         }}
       {%- else -%}
+        {%- comment -%} TODO alt text: comparison-hero-hunter-turkey.png {%- endcomment -%}
         <img
           src="{{ 'comparison-hero-hunter-turkey.png' | asset_url }}"
           alt="{{ hero_alt | escape }}"
@@ -350,6 +354,10 @@
         <li class="grid__item">
           <div class="multicolumn-card content-container">
             {%- if scenario_1_image != blank -%}
+              {%- assign scenario_1_alt = section.settings.scenario_1_image_alt | default: scenario_1_image.alt -%}
+              {%- if scenario_1_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ scenario_1_image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
                 <div class="media media--transparent media--adapt">
                   {{
@@ -359,7 +367,7 @@
                       widths: '275, 550, 750, 1100',
                       sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
                       class: 'multicolumn-card__image',
-                      alt: 'Hunter climbing a treestand with Vsling bow sling securing compound bow hands-free'
+                      alt: scenario_1_alt
                   }}
                 </div>
               </div>
@@ -375,6 +383,10 @@
         <li class="grid__item">
           <div class="multicolumn-card content-container">
             {%- if scenario_2_image != blank -%}
+              {%- assign scenario_2_alt = section.settings.scenario_2_image_alt | default: scenario_2_image.alt -%}
+              {%- if scenario_2_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ scenario_2_image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
                 <div class="media media--transparent media--adapt">
                   {{
@@ -384,7 +396,7 @@
                       widths: '275, 550, 750, 1100',
                       sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
                       class: 'multicolumn-card__image',
-                      alt: 'Bowhunter spot and stalk with Vsling bow sling moving quietly through terrain'
+                      alt: scenario_2_alt
                   }}
                 </div>
               </div>
@@ -400,6 +412,10 @@
         <li class="grid__item">
           <div class="multicolumn-card content-container">
             {%- if scenario_3_image != blank -%}
+              {%- assign scenario_3_alt = section.settings.scenario_3_image_alt | default: scenario_3_image.alt -%}
+              {%- if scenario_3_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ scenario_3_image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
                 <div class="media media--transparent media--adapt">
                   {{
@@ -409,7 +425,7 @@
                       widths: '275, 550, 750, 1100',
                       sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
                       class: 'multicolumn-card__image',
-                      alt: 'Turkey hunter with Vsling bow sling ready for instant draw on gobbler'
+                      alt: scenario_3_alt
                   }}
                 </div>
               </div>
@@ -519,8 +535,7 @@
     {
       "type": "text",
       "id": "hero_image_alt",
-      "label": "Hero image alt text",
-      "default": "Hunter carrying a wild turkey and compound bow using a Vsling hands-free bow sling in a field"
+      "label": "Hero image alt text"
     },
     {
       "type": "range",
@@ -550,14 +565,29 @@
       "label": "Scenario image — Treestand"
     },
     {
+      "type": "text",
+      "id": "scenario_1_image_alt",
+      "label": "Scenario image alt text — Treestand"
+    },
+    {
       "type": "image_picker",
       "id": "scenario_2_image",
       "label": "Scenario image — Spot and stalk"
     },
     {
+      "type": "text",
+      "id": "scenario_2_image_alt",
+      "label": "Scenario image alt text — Spot and stalk"
+    },
+    {
       "type": "image_picker",
       "id": "scenario_3_image",
       "label": "Scenario image — Turkey hunting"
+    },
+    {
+      "type": "text",
+      "id": "scenario_3_image_alt",
+      "label": "Scenario image alt text — Turkey hunting"
     },
     {
       "type": "range",

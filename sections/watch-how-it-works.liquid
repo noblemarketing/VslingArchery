@@ -1,5 +1,5 @@
 {%- liquid
-  assign hero_alt = section.settings.image_alt | default: 'Vsling bow sling, crossbow sling, and bino sling on a rock with hunting gear'
+  assign hero_alt = section.settings.image_alt
   if section.settings.image != blank
     assign background_image = section.settings.image | image_url: width: 3840
   else
@@ -102,7 +102,6 @@
       "type": "text",
       "id": "image_alt",
       "label": "Image alt text",
-      "default": "Vsling bow sling, crossbow sling, and bino sling on a rock with hunting gear"
     },
     {
       "type": "range",

@@ -4,10 +4,10 @@
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
 
-  if seo_og_title != blank
+  if template.name == 'index'
+    assign og_title = 'Vsling® Bow Sling | Hands-Free, Shoot-With-It-On Carry'
+  elsif seo_og_title != blank
     assign og_title = seo_og_title
-  elsif request.page_type == 'index'
-    assign og_title = 'Vsling® Bow Sling — Hands-Free Compound Bow Carry for Bowhunters'
   elsif request.page_type == 'page' and page.handle == 'vsling-vs-traditional-bow-sling'
     assign og_title = 'Vsling vs Traditional Bow Sling — Why Bowhunters Are Making the Switch'
   elsif request.page_type == 'page' and page.handle == 'faq'
@@ -36,7 +36,9 @@
     assign og_description = page_description | default: shop.name
   endif
 
-  if seo_twitter_title != blank
+  if template.name == 'index'
+    assign twitter_title = 'Vsling® Bow Sling | Hands-Free, Shoot-With-It-On Carry'
+  elsif seo_twitter_title != blank
     assign twitter_title = seo_twitter_title
   else
     assign twitter_title = og_title

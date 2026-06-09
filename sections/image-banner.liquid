@@ -49,6 +49,9 @@
   if section.index == 1
     assign fetch_priority = 'high'
   endif
+
+  assign banner_image_alt = section.settings.image_alt | default: section.settings.image.alt
+  assign banner_image_2_alt = section.settings.image_2_alt | default: section.settings.image_2.alt
 -%}
 
 <div
@@ -70,6 +73,9 @@
           assign sizes = full_width
         endif
       -%}
+      {%- if banner_image_alt == blank -%}
+        {%- comment -%} TODO alt text: {{ section.settings.image.src | split: '/' | last }} {%- endcomment -%}
+      {%- endif -%}
       {{
         section.settings.image
         | image_url: width: 3840
@@ -79,7 +85,8 @@
           class: image_class,
           sizes: sizes,
           widths: widths,
-          fetchpriority: fetch_priority
+          fetchpriority: fetch_priority,
+          alt: banner_image_alt
       }}
     </div>
   {%- elsif section.settings.image_2 == blank -%}
@@ -102,6 +109,9 @@
           assign sizes = full_width
         endif
       -%}
+      {%- if banner_image_2_alt == blank -%}
+        {%- comment -%} TODO alt text: {{ section.settings.image_2.src | split: '/' | last }} {%- endcomment -%}
+      {%- endif -%}
       {{
         section.settings.image_2
         | image_url: width: 3840
@@ -111,7 +121,8 @@
           class: image_class_2,
           sizes: sizes,
           widths: widths,
-          fetchpriority: fetch_priority
+          fetchpriority: fetch_priority,
+          alt: banner_image_2_alt
       }}
     </div>
   {%- endif -%}
@@ -181,9 +192,19 @@
       "label": "t:sections.image-banner.settings.image.label"
     },
     {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
       "type": "image_picker",
       "id": "image_2",
       "label": "t:sections.image-banner.settings.image_2.label"
+    },
+    {
+      "type": "text",
+      "id": "image_2_alt",
+      "label": "Second image alt text"
     },
     {
       "type": "range",

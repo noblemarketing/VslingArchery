@@ -128,9 +128,13 @@
 >
   <div class="ai-image-banner-wrapper-{{ ai_gen_id }}">
     {% if block.settings.desktop_image %}
+      {%- assign desktop_alt = block.settings.desktop_image_alt | default: block.settings.desktop_image.alt -%}
+      {%- if desktop_alt == blank -%}
+        {%- comment -%} TODO alt text: {{ block.settings.desktop_image.src | split: '/' | last }} {%- endcomment -%}
+      {%- endif -%}
       <img
         src="{{ block.settings.desktop_image | image_url: width: 1920 }}"
-        alt="{{ block.settings.desktop_image.alt | escape }}"
+        alt="{{ desktop_alt | escape }}"
         loading="lazy"
         width="{{ block.settings.desktop_image.width }}"
         height="{{ block.settings.desktop_image.height }}"
@@ -146,9 +150,13 @@
     {% endif %}
 
     {% if block.settings.mobile_image %}
+      {%- assign mobile_alt = block.settings.mobile_image_alt | default: block.settings.mobile_image.alt -%}
+      {%- if mobile_alt == blank -%}
+        {%- comment -%} TODO alt text: {{ block.settings.mobile_image.src | split: '/' | last }} {%- endcomment -%}
+      {%- endif -%}
       <img
         src="{{ block.settings.mobile_image | image_url: width: 1080 }}"
-        alt="{{ block.settings.mobile_image.alt | escape }}"
+        alt="{{ mobile_alt | escape }}"
         loading="lazy"
         width="{{ block.settings.mobile_image.width }}"
         height="{{ block.settings.mobile_image.height }}"
@@ -215,6 +223,12 @@
       "label": "Desktop image"
     },
     {
+      "type": "text",
+      "id": "desktop_image_alt",
+      "label": "Desktop image alt text",
+      "info": "Leave blank to use the image's alt from Files. Add descriptive alt for content images."
+    },
+    {
       "type": "header",
       "content": "Mobile image"
     },
@@ -222,6 +236,12 @@
       "type": "image_picker",
       "id": "mobile_image",
       "label": "Mobile image"
+    },
+    {
+      "type": "text",
+      "id": "mobile_image_alt",
+      "label": "Mobile image alt text",
+      "info": "Leave blank to use the image's alt from Files. Add descriptive alt for content images."
     },
     {
       "type": "range",

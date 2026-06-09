@@ -22,6 +22,8 @@
   if section.settings.color_scheme == section.settings.section_color_scheme and section.settings.content_layout == 'no-overlap'
     assign remove_color_classes = true
   endif
+
+  assign section_image_alt = section.settings.image_alt | default: section.settings.image.alt
 -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
@@ -49,10 +51,13 @@
               (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
             {%- endcapture -%}
               {%- endif -%}
+              {%- if section_image_alt == blank -%}
+                {%- comment -%} TODO alt text: {{ section.settings.image.src | split: '/' | last }} {%- endcomment -%}
+              {%- endif -%}
               {{
                 section.settings.image
                 | image_url: width: 1500
-                | image_tag: sizes: sizes, widths: widths, fetchpriority: fetch_priority
+                | image_tag: sizes: sizes, widths: widths, fetchpriority: fetch_priority, alt: section_image_alt
               }}
             {%- else -%}
               {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -119,6 +124,11 @@
       "type": "image_picker",
       "id": "image",
       "label": "t:sections.image-with-text.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
     },
     {
       "type": "select",

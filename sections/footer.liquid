@@ -107,10 +107,14 @@
                         {%- assign brand_image_height = settings.brand_image_width
                           | divided_by: settings.brand_image.aspect_ratio
                         -%}
+                        {%- assign brand_image_alt = settings.brand_image.alt -%}
                         <div
                           class="footer-block__image-wrapper"
                           style="max-width: min(100%, {{ settings.brand_image_width }}px);"
                         >
+                          {%- if brand_image_alt == blank -%}
+                            {%- comment -%} TODO alt text: {{ settings.brand_image.src | split: '/' | last }} {%- endcomment -%}
+                          {%- endif -%}
                           {{
                             settings.brand_image
                             | image_url: width: 1100
@@ -118,7 +122,8 @@
                               loading: 'lazy',
                               widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
                               height: brand_image_height,
-                              width: settings.brand_image_width
+                              width: settings.brand_image_width,
+                              alt: brand_image_alt
                           }}
                         </div>
                       {%- endif -%}
@@ -140,10 +145,14 @@
                           class="footer-block__image-wrapper"
                           style="max-width: min(100%, {{ block.settings.image_width }}px);"
                         >
+                          {%- assign footer_image_alt = block.settings.image_alt | default: block.settings.image.alt -%}
+                          {%- if footer_image_alt == blank -%}
+                            {%- comment -%} TODO alt text: {{ block.settings.image.src | split: '/' | last }} {%- endcomment -%}
+                          {%- endif -%}
                           <img
                             srcset="{{ block.settings.image | image_url: width: block.settings.image_width }}, {{ block.settings.image | image_url: width: image_size_2x }} 2x"
                             src="{{ block.settings.image | image_url: width: 760 }}"
-                            alt="{{ block.settings.image.alt | escape }}"
+                            alt="{{ footer_image_alt | escape }}"
                             loading="lazy"
                             width="{{ block.settings.image.width }}"
                             height="{{ block.settings.image.height }}"
@@ -407,6 +416,12 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "info": "Leave blank to use the image's alt from Files. Add descriptive alt for content images."
         },
         {
           "type": "range",
