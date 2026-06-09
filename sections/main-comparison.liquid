@@ -18,8 +18,32 @@
 -%}
 
 {%- style -%}
-  #ComparisonHero-{{ section.id }}::after {
+  #ComparisonHero-{{ section.id }}::after,
+  #ComparisonHero-{{ section.id }} .banner__media::after {
     opacity: {{ section.settings.hero_overlay_opacity | divided_by: 100.0 }};
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__box {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__box.content-container:after {
+    display: none;
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__heading {
+    font-family: 'Menseal', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #fff;
+  }
+
+  #ComparisonHero-{{ section.id }} .banner__text,
+  #ComparisonHero-{{ section.id }} .banner__text p {
+    color: #fff;
   }
 
   .comparison-section-{{ section.id }} {
@@ -150,7 +174,7 @@
   {%- comment -%} 1. Hero {%- endcomment -%}
   <div
     id="ComparisonHero-{{ section.id }}"
-    class="banner banner--content-align-center banner--content-align-mobile-center banner--medium{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    class="comparison__hero banner banner--content-align-center banner--content-align-mobile-center banner--medium banner--desktop-transparent{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
   >
     <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {%- if hero_image != blank -%}
@@ -180,8 +204,8 @@
     </div>
 
     <div class="banner__content banner__content--middle-center page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.hero_color_scheme }} gradient">
-        <h1 class="banner__heading inline-richtext h0">
+      <div class="banner__box content-container content-container--full-width-mobile">
+        <h1 id="ComparisonHeading" class="banner__heading inline-richtext h0">
           Vsling® vs Traditional Bow Sling — There's No Comparison
         </h1>
         <div class="banner__text rte">
