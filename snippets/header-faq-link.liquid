@@ -1,0 +1,54 @@
+{%- comment -%}
+  Appends the Bowhunter FAQ page to header navigation when it is not already in the main menu.
+
+  Accepts:
+    menu_style: 'drawer' | 'inline'
+{%- endcomment -%}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign show_faq_nav = true
+  for link in section.settings.menu.links
+    if link.handle == vsling_faq_page_handle
+      assign show_faq_nav = false
+    endif
+  endfor
+
+  assign faq_nav_active = false
+  if page.handle == vsling_faq_page_handle
+    assign faq_nav_active = true
+  endif
+-%}
+
+{%- if show_faq_nav -%}
+  {%- if menu_style == 'drawer' -%}
+    <li>
+      <a
+        id="HeaderDrawer-faq"
+        href="{{ vsling_faq_url }}"
+        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if faq_nav_active %} menu-drawer__menu-item--active{% endif %}"
+        {% if faq_nav_active %}
+          aria-current="page"
+        {% endif %}
+      >
+        FAQ
+      </a>
+    </li>
+  {%- else -%}
+    <li>
+      <a
+        id="HeaderMenu-faq"
+        href="{{ vsling_faq_url }}"
+        class="header__menu-item list-menu__item link link--text focus-inset"
+        {% if faq_nav_active %}
+          aria-current="page"
+        {% endif %}
+      >
+        <span{% if faq_nav_active %} class="header__active-menu-item"{% endif %}>
+          FAQ
+        </span>
+      </a>
+    </li>
+  {%- endif -%}
+{%- endif -%}

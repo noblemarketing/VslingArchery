@@ -169,13 +169,34 @@
   .comparison-section-{{ section.id }} .comparison__shot-section a:hover {
     opacity: 0.85;
   }
+
+  .comparison-section-{{ section.id }} .comparison__pull-quote {
+    font-family: var(--font-heading-family);
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2.2rem;
+    line-height: 1.35;
+    color: rgb(var(--color-foreground));
+    border-left-width: 0.3rem;
+    margin: 2.4rem 0;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__pull-quote p {
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .comparison-section-{{ section.id }} .comparison__pull-quote {
+      font-size: 2.8rem;
+    }
+  }
 {%- endstyle -%}
 
 <div class="comparison-section-{{ section.id }}">
   {%- comment -%} 1. Hero {%- endcomment -%}
   <div
     id="ComparisonHero-{{ section.id }}"
-    class="banner banner--content-align-center banner--content-align-mobile-center banner--medium banner--desktop-transparent{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    class="comparison__hero banner banner--content-align-center banner--content-align-mobile-center banner--medium banner--desktop-transparent{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
   >
     <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {%- if hero_image != blank -%}
@@ -194,8 +215,8 @@
         <img
           src="{{ 'comparison-hero-hunter-turkey.png' | asset_url }}"
           alt="{{ hero_alt | escape }}"
-          width="2000"
-          height="1333"
+          width="1024"
+          height="768"
           loading="eager"
           fetchpriority="high"
           sizes="100vw"
@@ -206,7 +227,7 @@
 
     <div class="banner__content banner__content--middle-center page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <div class="banner__box content-container content-container--full-width-mobile">
-        <h1 class="banner__heading inline-richtext h0">
+        <h1 id="ComparisonHeading" class="banner__heading menseal-heading inline-richtext h0">
           Vsling® vs Traditional Bow Sling — There's No Comparison
         </h1>
         <div class="banner__text rte">
@@ -229,8 +250,8 @@
         That last-second fumble is exactly what quiet hunters try to avoid when a buck or gobbler is close.
         The <a href="{{ bow_product_url }}">Vsling® Bow Sling</a> was built to eliminate that problem entirely.
       </p>
-      <blockquote>
-        <p><strong>Old slings must be removed before the shot. The Vsling® stays on — always.</strong></p>
+      <blockquote class="comparison__pull-quote menseal-heading">
+        <p>Old slings must be removed before the shot. The Vsling® stays on — always.</p>
       </blockquote>
     </div>
   </div>
@@ -293,11 +314,6 @@
             <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
             <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
           </tr>
-          <tr>
-            <th scope="row">Patent-pending design</th>
-            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
-            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
-          </tr>
         </tbody>
       </table>
     </div>
@@ -314,7 +330,7 @@
         </p>
         <p>
           With patent-pending technology, the Vsling® doesn't restrict movement — it enhances it.
-          Crossbow hunters get the same shoot-with-it-on advantage from the <a href="{{ crossbow_product_url }}">Vsling® Crossbow Sling</a> when climbing stands or moving through cover.
+          Crossbow hunters get the same shoot-with-it-on advantage from the <a href="{{ crossbow_product_url }}">{{ vsling_crossbow_title }}</a> when climbing stands or moving through cover.
         </p>
         <p><strong>The Vsling® stays completely clear of your arrow path — you draw, shoot, and never think about it.</strong></p>
       </div>
@@ -333,7 +349,7 @@
       <p>
         Like a baby carrier for your bow — comfortable, balanced, freeing your hands for glassing, climbing, or calling.
         The elastic stretch makes long hikes easier while keeping your bow tight and ready.
-        Pair your setup with the <a href="{{ bow_product_url }}">Vsling® Bow Sling</a> for compound bows or the <a href="{{ crossbow_product_url }}">Vsling® Crossbow Sling</a> for crossbow season.
+        Pair your setup with the <a href="{{ bow_product_url }}">{{ vsling_bow_title }}</a> for compound bows or the <a href="{{ crossbow_product_url }}">{{ vsling_crossbow_title }}</a> for crossbow season.
       </p>
       <ul>
         <li>Built to stay on — use it without removing. No interruptions. No wasted movement.</li>
