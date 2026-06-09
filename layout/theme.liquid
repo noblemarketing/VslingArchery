@@ -24,16 +24,14 @@
     {%- include 'seo-meta-data' -%}
 
     <title>
-      {%- if seo_page_title != blank -%}
-        {{ seo_page_title | escape }}
-        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- else -%}
-        {{ page_title }}
-        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-      {%- endif -%}
-    </title>
+  {%- if request.page_type == 'index' -%}
+    {{ page_title }}
+  {%- elsif page_title == blank -%}
+    {{ shop.name }}
+  {%- else -%}
+    {{ page_title }} – {{ shop.name }}
+  {%- endif -%}
+</title>
 
     {%- if seo_meta_description != blank -%}
       <meta name="description" content="{{ seo_meta_description | escape }}">
