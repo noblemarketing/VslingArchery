@@ -21,7 +21,15 @@
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- assign header_learn_more_rendered = false -%}
               {%- for link in section.settings.menu.links -%}
+                {%- assign menu_link_title_downcase = link.title | downcase -%}
+                {%- if menu_link_title_downcase == 'contact' or link.handle == 'contact' -%}
+                  {%- unless header_learn_more_rendered -%}
+                    {% render 'header-learn-more-menu', menu_style: 'drawer' %}
+                    {%- assign header_learn_more_rendered = true -%}
+                  {%- endunless -%}
+                {%- endif -%}
                 <li>
                   {%- if link.links != blank -%}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
@@ -133,7 +141,9 @@
                   {%- endif -%}
                 </li>
               {%- endfor -%}
-              {% render 'header-learn-more-menu', menu_style: 'drawer' %}
+              {%- unless header_learn_more_rendered -%}
+                {% render 'header-learn-more-menu', menu_style: 'drawer' %}
+              {%- endunless -%}
             </ul>
           </nav>
           <div class="menu-drawer__utility-links">

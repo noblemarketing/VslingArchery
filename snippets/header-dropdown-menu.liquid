@@ -7,7 +7,15 @@
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
+    {%- assign header_learn_more_rendered = false -%}
     {%- for link in section.settings.menu.links -%}
+      {%- assign menu_link_title_downcase = link.title | downcase -%}
+      {%- if menu_link_title_downcase == 'contact' or link.handle == 'contact' -%}
+        {%- unless header_learn_more_rendered -%}
+          {% render 'header-learn-more-menu', menu_style: 'dropdown' %}
+          {%- assign header_learn_more_rendered = true -%}
+        {%- endunless -%}
+      {%- endif -%}
       <li>
         {%- if link.links != blank -%}
           <header-menu>
@@ -99,6 +107,8 @@
         {%- endif -%}
       </li>
     {%- endfor -%}
-    {% render 'header-learn-more-menu', menu_style: 'dropdown' %}
+    {%- unless header_learn_more_rendered -%}
+      {% render 'header-learn-more-menu', menu_style: 'dropdown' %}
+    {%- endunless -%}
   </ul>
 </nav>
