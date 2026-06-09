@@ -23,7 +23,7 @@
             "show_overlay": true,
             "overlay_opacity": 30,
             "show_content": true,
-            "heading": "Hands-Free Bow Sling You Can Shoot With On",
+            "heading": "",
             "subheading": "",
             "heading_size": 48,
             "subheading_size": 20,
@@ -66,6 +66,7 @@
           "type": "row",
           "settings": {
             "image": "shopify://shop_images/IMG_7445.jpg",
+            "image_alt": "",
             "caption": "ALWAYS READY TO SHOOT",
             "heading": "<em>BOW CARRYING MADE EASY</em>",
             "text": "<p>➤ Works slung and during the shot</p><p>➤ Universal Fit - No Extra Parts</p><p>➤ Fast, Simple Install</p><p>➤ No More Dangling Slings</p><p>➤ Silent Operation</p>",
@@ -182,6 +183,7 @@
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
         "image": "shopify://shop_images/Vsling_6c982ff7-839e-4ce3-894c-8148e4998896.jpg",
+        "image_alt": "",
         "height": "medium",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -203,6 +205,7 @@
           "type": "row",
           "settings": {
             "image": "shopify://shop_images/BD895B0B-B369-437E-AD6F-167EFEA8F6B7.jpg",
+            "image_alt": "",
             "caption": "Straps Are Outdated",
             "heading": "WHY CHOOSE VSLING?",
             "text": "<p>Vsling® is the upgrade hunters have been waiting for:</p><p>➤ Silent elastic carry system</p><p>➤ Elastic Stability Advantage — constant tension, steadier Binos.</p><p>➤ Faster sling-to-shoot transitions</p><p>➤ More comfortable all-day carry</p><p>➤ Hands-free movement in the field </p><p>➤ Shoot With Sling On</p><p></p><p></p><h2>A BETTER DESIGN</h2><p>The 100% elastic Vsling® keeps your bow <strong>comfortably snug</strong> to your body. No more floppy straps slapping, snagging, or slowing you down. It's sleek, quiet, and simple - designed so you can move from carry to full draw in seconds. Explore the <a href=\"/products/bow-sling\" title=\"Vsling Hands-Free Compound Bow Sling\">hands-free Vsling compound bow sling</a>, <a href=\"/products/vsling-crossbow-gun-sling\" title=\"Vsling Crossbow Sling\">crossbow sling</a>, and <a href=\"/products/vsling-bino-sling\" title=\"Vsling Bino Sling\">bino sling</a>.</p>",
@@ -214,6 +217,7 @@
           "type": "row",
           "settings": {
             "image": "shopify://shop_images/2ABF8D9A-4D02-4310-BA48-EAFA7D8055C9.jpg",
+            "image_alt": "",
             "caption": "The Future of Bow Carrying",
             "heading": "THE GAME CHANGER",
             "text": "<h3>SHOOT WITH THE SLING ON</h3><p>Unlike old slings that must be unclipped or removed before shooting, Patent Pending Vsling® is engineered so you can draw and shoot instantly without taking it off. This \"always-ready\" design keeps your muscles relaxed and your focus sharp. </p><p></p><h3>HANDS FREE COMFORT</h3><p>Think of it like a baby carrier for your bow - comfortable, balanced, and freeing your hands for glassing, climbing, or calling. The elastic stretch makes long hikes easier while keeping your bow tight and ready. Crossbow hunters can run the same system with the <a href=\"/products/vsling-crossbow-gun-sling\" title=\"Vsling Crossbow Sling\">Vsling crossbow sling</a>, and glass hands-free with the <a href=\"/products/vsling-bino-sling\" title=\"Vsling Bino Sling\">Vsling bino sling</a>.</p>",
@@ -299,11 +303,56 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/Screenshot_2026-01-21_101548.png",
+        "image_alt": "",
+        "image_2_alt": "",
         "image_overlay_opacity": 0,
         "image_height": "adapt",
         "image_behavior": "none",
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "image_banner_6xc3Xk": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_7MK8nK": {
+          "type": "heading",
+          "settings": {
+            "heading": "SEE HOW IT WORKS",
+            "heading_size": "h1"
+          }
+        },
+        "buttons_xKcDMW": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "WATCH NOW",
+            "button_link_1": "https://youtube.com/shorts/zmkgFhbN6K4?si=pWNTuv9qKuUNizFX",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_7MK8nK",
+        "buttons_xKcDMW"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/683920710_122153296328981170_1918040051791031295_n.jpg",
+        "image_alt": "",
+        "image_2_alt": "",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
         "show_text_box": true,
         "color_scheme": "",
         "stack_images_on_mobile": true,
@@ -318,6 +367,7 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/4.png",
+            "image_alt": "",
             "title": "Easy Installation & Custom Fit",
             "text": "<p>Installing the Vsling® is simple and intuitive. The final step uses a snug double knot, which not only secures the sling but also makes it effortless to fine-tune. Let the elasticity do the work! This design allows for quick, mindless adjustments to perfectly match any body type, hunting style, or carry preference. No complicated buckles or clips which allows for a clean custom fit every time.<br/><br/></p>",
             "link_label": "",
@@ -328,6 +378,7 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/2.png",
+            "image_alt": "",
             "title": "The Last Sling You'll Ever Need",
             "text": "<p>Hunters don't settle for outdated gear. Just like the shift from wood arrows to carbon, it's time to leave floppy slings behind. The Vsling® Bow Sling is the hands-free, always-ready, shoot-with-it-on solution every bowhunter needs. <a href=\"/products/bow-sling\" title=\"Vsling Shoot-Ready Bow Sling\">Shop the shoot-ready elastic bow sling</a>.</p>",
             "link_label": "",
@@ -445,14 +496,23 @@
           "type": "ai_gen_block_04731b8",
           "settings": {
             "image_1": "shopify://shop_images/10AE7B26-6F68-48BD-8785-86112E3D605A.jpg",
+            "alt_1": "",
             "image_2": "shopify://shop_images/260BAE6A-6B4F-47FD-A2A7-1993570E6A1C.jpg",
+            "alt_2": "",
             "image_3": "shopify://shop_images/F6B85301-DCB2-4081-9B75-82121AE98211.jpg",
+            "alt_3": "",
             "image_4": "shopify://shop_images/A69AACE6-EE00-475F-9027-712CE937DA07.jpg",
+            "alt_4": "",
             "image_5": "shopify://shop_images/A12E40D4-BF5B-480C-AE72-12DD78BBA44C.jpg",
+            "alt_5": "",
             "image_6": "shopify://shop_images/IMG_6434.jpg",
+            "alt_6": "",
             "image_7": "shopify://shop_images/2B218436-BD49-4CA3-970E-04233C75C4E9.jpg",
+            "alt_7": "",
             "image_8": "shopify://shop_images/IMG_8474.jpg",
+            "alt_8": "",
             "image_9": "shopify://shop_images/IMG_8475_bdeb157e-8f63-40aa-8bff-59a4d3d97c23.png",
+            "alt_9": "",
             "max_width": 1200,
             "padding_vertical": 15,
             "padding_horizontal": 20,
@@ -521,47 +581,6 @@
         "ai_gen_block_5a2e6ce_f4hetr"
       ],
       "settings": {}
-    },
-    "image_banner_6xc3Xk": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_7MK8nK": {
-          "type": "heading",
-          "settings": {
-            "heading": "SEE HOW IT WORKS",
-            "heading_size": "h1"
-          }
-        },
-        "buttons_xKcDMW": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "WATCH NOW",
-            "button_link_1": "https://youtube.com/shorts/zmkgFhbN6K4?si=pWNTuv9qKuUNizFX",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_7MK8nK",
-        "buttons_xKcDMW"
-      ],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/683920710_122153296328981170_1918040051791031295_n.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
     }
   },
   "order": [
