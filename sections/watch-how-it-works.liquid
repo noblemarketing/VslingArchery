@@ -1,7 +1,10 @@
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
-
 {%- liquid
-  assign hero_alt = section.settings.image_alt | default: 'Bowhunter using Vsling bow sling in the field'
+  assign hero_alt = section.settings.image_alt | default: 'Vsling bow sling, crossbow sling, and bino sling on a rock with hunting gear'
+  if section.settings.image != blank
+    assign background_image = section.settings.image | image_url: width: 3840
+  else
+    assign background_image = 'watch-how-it-works-bg.png' | asset_url
+  endif
 -%}
 
 {%- style -%}
@@ -12,6 +15,7 @@
     justify-content: center;
     min-height: 34rem;
     overflow: hidden;
+    width: 100%;
   }
 
   @media screen and (min-width: 750px) {
@@ -20,17 +24,14 @@
     }
   }
 
-  #WatchHowItWorks-{{ section.id }} .watch-how-it-works__media {
+  #WatchHowItWorks-{{ section.id }} .watch-how-it-works__bg {
     position: absolute;
     inset: 0;
     z-index: 0;
-  }
-
-  #WatchHowItWorks-{{ section.id }} .watch-how-it-works__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    background-image: url('{{ background_image }}');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
   #WatchHowItWorks-{{ section.id }}::after {
@@ -64,32 +65,10 @@
 <div
   id="WatchHowItWorks-{{ section.id }}"
   class="watch-how-it-works{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  role="img"
+  aria-label="{{ hero_alt | escape }}"
 >
-  <div class="watch-how-it-works__media media">
-    {%- if section.settings.image != blank -%}
-      {{
-        section.settings.image
-        | image_url: width: 3840
-        | image_tag:
-          width: section.settings.image.width,
-          height: section.settings.image.width | divided_by: section.settings.image.aspect_ratio,
-          sizes: '100vw',
-          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
-          alt: hero_alt,
-          fetchpriority: 'auto',
-          class: 'watch-how-it-works__image'
-      }}
-    {%- else -%}
-      <img
-        src="{{ 'watch-how-it-works-bg.jpg' | asset_url }}"
-        alt="{{ hero_alt | escape }}"
-        width="2000"
-        height="1333"
-        loading="lazy"
-        class="watch-how-it-works__image"
-      >
-    {%- endif -%}
-  </div>
+  <div class="watch-how-it-works__bg" aria-hidden="true"></div>
 
   <div class="watch-how-it-works__content">
     {%- if section.settings.button_label != blank -%}
@@ -116,13 +95,14 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Background image"
+      "label": "Background image",
+      "info": "Leave blank to use the default hunting gear photo."
     },
     {
       "type": "text",
       "id": "image_alt",
       "label": "Image alt text",
-      "default": "Bowhunter using Vsling bow sling in the field"
+      "default": "Vsling bow sling, crossbow sling, and bino sling on a rock with hunting gear"
     },
     {
       "type": "range",
@@ -132,7 +112,7 @@
       "step": 5,
       "unit": "%",
       "label": "Image overlay",
-      "default": 15
+      "default": 20
     },
     {
       "type": "text",

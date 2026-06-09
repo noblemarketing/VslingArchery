@@ -6,9 +6,10 @@
     menu_style: 'drawer' | 'inline'
 {%- endcomment -%}
 
-{%- include 'vsling-handles' -%}
-
 {%- liquid
+  assign vsling_faq_page_handle = 'faq'
+  assign vsling_faq_page = pages[vsling_faq_page_handle]
+  assign vsling_faq_url = vsling_faq_page.url | default: '/pages/faq'
   assign faq_fallback_url = '/pages/faq'
   assign show_faq_nav = true
 

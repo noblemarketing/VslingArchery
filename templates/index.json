@@ -314,9 +314,8 @@
     "image_with_text_KcnAie": {
       "type": "watch-how-it-works",
       "settings": {
-        "image": "shopify://shop_images/13A57599-7AE6-4C7E-8F23-17272DBA19CB.jpg",
-        "image_alt": "Bowhunter using Vsling bow sling in the field",
-        "overlay_opacity": 15,
+        "image_alt": "Vsling bow sling, crossbow sling, and bino sling on a rock with hunting gear",
+        "overlay_opacity": 20,
         "button_label": "WATCH HOW IT WORKS",
         "button_link": "https://www.youtube.com/shorts/v3zcB9qSfCc?si=h56SaslVO616aZFK",
         "button_style_secondary": false,
