@@ -6,11 +6,13 @@
     menu_style: 'drawer' | 'dropdown' | 'mega'
 {%- endcomment -%}
 
-{%- include 'vsling-handles' -%}
-
 {%- liquid
-  assign learn_more_faq_url = vsling_faq_url | default: '/pages/faq'
-  assign learn_more_comparison_url = vsling_comparison_url | default: '/pages/vsling-vs-traditional-bow-sling'
+  assign vsling_faq_page_handle = 'faq'
+  assign vsling_comparison_page_handle = 'vsling-vs-traditional-bow-sling'
+  assign vsling_faq_page = pages[vsling_faq_page_handle]
+  assign vsling_comparison_page = pages[vsling_comparison_page_handle]
+  assign learn_more_faq_url = vsling_faq_page.url | default: '/pages/faq'
+  assign learn_more_comparison_url = vsling_comparison_page.url | default: '/pages/vsling-vs-traditional-bow-sling'
   assign learn_more_faq_fallback_url = '/pages/faq'
   assign learn_more_comparison_fallback_url = '/pages/vsling-vs-traditional-bow-sling'
   assign show_learn_more_nav = true
