@@ -1,0 +1,228 @@
+{%- comment -%}
+  Appends a Learn More dropdown to header navigation when the main menu
+  does not already include one with FAQ and comparison links.
+
+  Accepts:
+    menu_style: 'drawer' | 'dropdown' | 'mega'
+{%- endcomment -%}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign learn_more_faq_url = vsling_faq_url | default: '/pages/faq'
+  assign learn_more_comparison_url = vsling_comparison_url | default: '/pages/vsling-vs-traditional-bow-sling'
+  assign learn_more_faq_fallback_url = '/pages/faq'
+  assign learn_more_comparison_fallback_url = '/pages/vsling-vs-traditional-bow-sling'
+  assign show_learn_more_nav = true
+  assign faq_in_menu = false
+  assign comparison_in_menu = false
+
+  for link in section.settings.menu.links
+    assign link_title_downcase = link.title | downcase
+    if link_title_downcase == 'learn more' or link.handle == 'learn-more'
+      assign show_learn_more_nav = false
+    endif
+
+    if link.url == learn_more_faq_url or link.url == learn_more_faq_fallback_url
+      assign faq_in_menu = true
+    endif
+    if link.url == learn_more_comparison_url or link.url == learn_more_comparison_fallback_url
+      assign comparison_in_menu = true
+    endif
+
+    for childlink in link.links
+      if childlink.url == learn_more_faq_url or childlink.url == learn_more_faq_fallback_url
+        assign faq_in_menu = true
+      endif
+      if childlink.url == learn_more_comparison_url or childlink.url == learn_more_comparison_fallback_url
+        assign comparison_in_menu = true
+      endif
+
+      for grandchildlink in childlink.links
+        if grandchildlink.url == learn_more_faq_url or grandchildlink.url == learn_more_faq_fallback_url
+          assign faq_in_menu = true
+        endif
+        if grandchildlink.url == learn_more_comparison_url or grandchildlink.url == learn_more_comparison_fallback_url
+          assign comparison_in_menu = true
+        endif
+      endfor
+    endfor
+  endfor
+
+  if faq_in_menu and comparison_in_menu
+    assign show_learn_more_nav = false
+  endif
+
+  assign learn_more_active = false
+  if request.page_type == 'page' and page.handle == vsling_faq_page_handle
+    assign learn_more_active = true
+  elsif request.page_type == 'page' and page.handle == vsling_comparison_page_handle
+    assign learn_more_active = true
+  endif
+
+  assign faq_nav_active = false
+  if request.page_type == 'page' and page.handle == vsling_faq_page_handle
+    assign faq_nav_active = true
+  endif
+
+  assign comparison_nav_active = false
+  if request.page_type == 'page' and page.handle == vsling_comparison_page_handle
+    assign comparison_nav_active = true
+  endif
+-%}
+
+{%- if show_learn_more_nav -%}
+  {%- if menu_style == 'drawer' -%}
+    <li>
+      <details id="Details-menu-drawer-learn-more">
+        <summary
+          id="HeaderDrawer-learn-more"
+          class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if learn_more_active %} menu-drawer__menu-item--active{% endif %}"
+        >
+          Learn More
+          <span class="svg-wrapper">
+            {{- 'icon-arrow.svg' | inline_asset_content -}}
+          </span>
+          <span class="svg-wrapper">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </summary>
+        <div
+          id="link-learn-more"
+          class="menu-drawer__submenu has-submenu gradient motion-reduce"
+          tabindex="-1"
+        >
+          <div class="menu-drawer__inner-submenu">
+            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+              <span class="svg-wrapper">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
+              Learn More
+            </button>
+            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+              <li>
+                <a
+                  id="HeaderDrawer-learn-more-faq"
+                  href="{{ learn_more_faq_url }}"
+                  class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if faq_nav_active %} menu-drawer__menu-item--active{% endif %}"
+                  {% if faq_nav_active %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  Bowhunter FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  id="HeaderDrawer-learn-more-comparison"
+                  href="{{ learn_more_comparison_url }}"
+                  class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if comparison_nav_active %} menu-drawer__menu-item--active{% endif %}"
+                  {% if comparison_nav_active %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  Vsling vs. Traditional Bow Sling
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </li>
+  {%- elsif menu_style == 'mega' -%}
+    <li>
+      <header-menu>
+        <details id="Details-HeaderMenu-learn-more" class="mega-menu">
+          <summary
+            id="HeaderMenu-learn-more"
+            class="header__menu-item list-menu__item link focus-inset"
+          >
+            <span{% if learn_more_active %} class="header__active-menu-item"{% endif %}>
+              Learn More
+            </span>
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </summary>
+          <div
+            id="MegaMenu-Content-learn-more"
+            class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
+            tabindex="-1"
+          >
+            <ul class="mega-menu__list page-width mega-menu__list--condensed" role="list">
+              <li>
+                <a
+                  id="HeaderMenu-learn-more-faq"
+                  href="{{ learn_more_faq_url }}"
+                  class="mega-menu__link mega-menu__link--level-2 link{% if faq_nav_active %} mega-menu__link--active{% endif %}"
+                  {% if faq_nav_active %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  Bowhunter FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  id="HeaderMenu-learn-more-comparison"
+                  href="{{ learn_more_comparison_url }}"
+                  class="mega-menu__link mega-menu__link--level-2 link{% if comparison_nav_active %} mega-menu__link--active{% endif %}"
+                  {% if comparison_nav_active %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  Vsling vs. Traditional Bow Sling
+                </a>
+              </li>
+            </ul>
+          </div>
+        </details>
+      </header-menu>
+    </li>
+  {%- else -%}
+    <li>
+      <header-menu>
+        <details id="Details-HeaderMenu-learn-more">
+          <summary
+            id="HeaderMenu-learn-more"
+            class="header__menu-item list-menu__item link focus-inset"
+          >
+            <span{% if learn_more_active %} class="header__active-menu-item"{% endif %}>
+              Learn More
+            </span>
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </summary>
+          <ul
+            id="HeaderMenu-MenuList-learn-more"
+            class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
+            role="list"
+            tabindex="-1"
+          >
+            <li>
+              <a
+                id="HeaderMenu-learn-more-faq"
+                href="{{ learn_more_faq_url }}"
+                class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if faq_nav_active %} list-menu__item--active{% endif %}"
+                {% if faq_nav_active %}
+                  aria-current="page"
+                {% endif %}
+              >
+                Bowhunter FAQ
+              </a>
+            </li>
+            <li>
+              <a
+                id="HeaderMenu-learn-more-comparison"
+                href="{{ learn_more_comparison_url }}"
+                class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if comparison_nav_active %} list-menu__item--active{% endif %}"
+                {% if comparison_nav_active %}
+                  aria-current="page"
+                {% endif %}
+              >
+                Vsling vs. Traditional Bow Sling
+              </a>
+            </li>
+          </ul>
+        </details>
+      </header-menu>
+    </li>
+  {%- endif -%}
+{%- endif -%}
