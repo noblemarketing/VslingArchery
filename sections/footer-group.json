@@ -58,20 +58,7 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "email_popup": {
-      "type": "email-popup",
-      "settings": {
-        "enable_popup": true,
-        "delay_seconds": 8,
-        "show_once": true,
-        "heading": "Get Vsling hunting tips",
-        "subheading": "Join our list for new gear drops and bowhunting carry tips.",
-        "success_heading": "You're in!",
-        "success_message": "Thanks for subscribing. Ready to upgrade your carry?",
-        "success_link_text": "Shop the Vsling hands-free compound bow sling"
-      }
     }
   },
-  "order": ["newsletter_AHgGjx", "footer", "email_popup"]
+  "order": ["newsletter_AHgGjx", "footer"]
 }

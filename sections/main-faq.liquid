@@ -1,6 +1,13 @@
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
 {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-{{ 'component-product-faq.css' | asset_url | stylesheet_tag }}
+{{ 'component-site-faq.css' | asset_url | stylesheet_tag }}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign bow_product_url = vsling_bow_url
+  assign comparison_page_url = vsling_comparison_url
+-%}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -14,39 +21,46 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-
-  .site-faq__intro {
-    margin-bottom: 2.5rem;
-  }
-
-  .site-faq__group-title {
-    margin: 2.5rem 0 0.5rem;
-  }
-
-  .site-faq__group-title:first-of-type {
-    margin-top: 0;
-  }
-
-  .site-faq__product-link {
-    margin: 0 0 1rem;
-  }
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | default: section.settings.heading | escape }}
-  </h1>
+<div class="page-width page-width--narrow section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <header class="site-faq__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <h1 id="SiteFaqHeading" class="main-page-title page-title h0">
+      {{ section.settings.heading | default: 'Vsling® Bowhunter FAQ' | escape }}
+    </h1>
+    {%- if section.settings.subheading != blank -%}
+      <p class="site-faq__subheading">{{ section.settings.subheading | escape }}</p>
+    {%- endif -%}
+  </header>
 
-  {%- if section.settings.intro != blank -%}
-    <div class="rte site-faq__intro{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      {{ section.settings.intro }}
-    </div>
-  {%- endif -%}
+  <nav class="site-faq__nav" aria-label="FAQ categories">
+    <a href="#faq-product" class="button button--secondary site-faq__nav-pill">Product</a>
+    <a href="#faq-compatibility" class="button button--secondary site-faq__nav-pill">Compatibility</a>
+    <a href="#faq-installation" class="button button--secondary site-faq__nav-pill">Installation</a>
+    <a href="#faq-field" class="button button--secondary site-faq__nav-pill">In The Field</a>
+    <a href="#faq-purchasing" class="button button--secondary site-faq__nav-pill">Purchasing &amp; Shipping</a>
+  </nav>
 
   {% render 'site-faq', section_id: section.id, render_part: 'accordion' %}
+
+  <div class="site-faq__cta color-{{ section.settings.cta_color_scheme }} gradient content-container">
+    <h2 class="h1 site-faq__cta-heading">{{ section.settings.cta_heading | escape }}</h2>
+    <p class="site-faq__cta-subtext">{{ section.settings.cta_subtext | escape }}</p>
+    <div class="site-faq__cta-buttons">
+      <a href="{{ bow_product_url }}" class="button button--primary">
+        {{ section.settings.cta_primary_label | escape }}
+      </a>
+      <a href="{{ comparison_page_url }}" class="button button--secondary">
+        {{ section.settings.cta_secondary_label | escape }}
+      </a>
+    </div>
+  </div>
+
   {% render 'site-faq', section_id: section.id, render_part: 'schema' %}
   {% render 'breadcrumb-json-ld' %}
 </div>
+
+<script src="{{ 'site-faq.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {
@@ -57,15 +71,50 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Fallback heading",
-      "default": "Vsling FAQ for Bowhunters",
-      "info": "Used only if the Shopify page title is empty."
+      "label": "Page heading (H1)",
+      "default": "Vsling® Bowhunter FAQ"
     },
     {
-      "type": "richtext",
-      "id": "intro",
-      "label": "Introduction",
-      "default": "<p>Answers about the Vsling bow sling, crossbow sling, shipping, and support. Shop the <a href=\"/products/bow-sling\">hands-free compound bow sling</a> or the <a href=\"/products/vsling-crossbow-gun-sling\">Vsling crossbow sling</a>, read the <a href=\"/pages/vsling-vs-traditional-bow-sling\">Vsling vs traditional bow sling comparison</a>, or <a href=\"/collections/all\">browse all Vsling products</a>.</p>"
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Everything you need to know before you buy, install, and hunt with the Vsling®."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Page color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Ready to make the switch?"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtext",
+      "label": "CTA subtext",
+      "default": "Join bowhunters who've left the floppy sling behind."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "CTA primary button",
+      "default": "Shop the Vsling® Bow Sling"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "CTA secondary button",
+      "default": "See How It Compares"
+    },
+    {
+      "type": "color_scheme",
+      "id": "cta_color_scheme",
+      "label": "CTA color scheme",
+      "default": "scheme-4"
     },
     {
       "type": "range",

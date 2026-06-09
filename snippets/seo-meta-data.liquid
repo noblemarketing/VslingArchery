@@ -29,13 +29,13 @@
     assign product_handle_downcase = product.handle | downcase
     assign product_title_downcase = product.title | downcase
 
-    if product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
-      assign seo_page_title = 'Vsling Crossbow Sling — Hands-Free Carry'
-      assign seo_meta_description = 'The Vsling keeps your crossbow hands-free and shoot-ready — elastic, silent, and built for stand hunts, long walks, and the shot that counts.'
-      assign product_schema_description = seo_meta_description
-      assign seo_meta_keywords = 'crossbow sling, hands-free crossbow carrier'
-      assign seo_og_title = 'Vsling Crossbow Sling — Shoot With It On'
-      assign seo_og_description = 'The Vsling holds your crossbow tight and quiet, so you stay hands-free from the stand to the shot.'
+    if product.handle == 'vsling-crossbow-gun-sling' or product.handle == 'untitled-mar22_12-23' or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+      assign seo_page_title = 'Vsling™ Crossbow Sling — Shoot-Ready Treestand Carry'
+      assign seo_meta_description = 'The Vsling™ Crossbow/Gun Sling stays on for the shot. 100% elastic, hands-free carry for treestand hunters. Ships with 2 key rings. Made in the USA.'
+      assign product_schema_description = 'The Vsling™ Crossbow/Gun Sling is built from the same 100% elastic material that made the original Vsling® famous — now engineered for crossbow and firearm carry. Stays on for the shot. No removal needed. Transfers from carry to shoot in seconds. Ships with two key rings for a custom fit on any setup. Made in Hector, Minnesota, USA.'
+      assign seo_meta_keywords = 'crossbow sling, crossbow sling for treestand hunting, hands-free crossbow carrier'
+      assign seo_og_title = 'Vsling™ Crossbow Sling — Shoot-Ready Treestand Carry'
+      assign seo_og_description = seo_meta_description
 
     elsif product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
       assign seo_page_title = product.title | append: ' | Vsling Archery'
@@ -103,18 +103,18 @@
     assign seo_twitter_description = seo_og_description
 
   elsif request.page_type == 'page' and page.handle == 'faq'
-    assign seo_page_title = 'Vsling FAQ for Bowhunters | Vsling Archery'
-    assign seo_meta_description = 'Get answers about the Vsling bow sling, crossbow sling, shipping, warranty, and fit — built for compound bow and crossbow hunters in North America.'
-    assign seo_og_title = 'Vsling Product FAQ for Bowhunters'
-    assign seo_og_description = 'Common questions about Vsling hands-free bow slings, crossbow slings, installation, treestand use, and orders answered in one place.'
+    assign seo_page_title = 'Vsling® Bowhunter FAQ | Bow Sling Questions Answered'
+    assign seo_meta_description = 'Does the Vsling® get in the way? What bows does it fit? How do you install it? Every question answered — straight from Vsling Archery.'
+    assign seo_og_title = 'Vsling® Bowhunter FAQ | Bow Sling Questions Answered'
+    assign seo_og_description = 'Does the Vsling® get in the way? What bows does it fit? How do you install it? Every question answered — straight from Vsling Archery.'
     assign seo_twitter_title = seo_og_title
     assign seo_twitter_description = seo_og_description
 
   elsif request.page_type == 'page' and page.handle == 'vsling-vs-traditional-bow-sling'
-    assign seo_page_title = 'Vsling vs Traditional Bow Sling | Shoot-Ready Comparison'
-    assign seo_meta_description = 'Compare the Vsling elastic bow sling to a traditional bow sling — shoot with sling on, hands-free treestand carry, silent elastic tension, and universal compound bow fit.'
-    assign seo_og_title = 'Vsling vs Traditional Bow Sling'
-    assign seo_og_description = 'See how the shoot-ready Vsling hands-free bow sling compares to old strap slings for compound bow and treestand hunting.'
+    assign seo_page_title = 'Vsling vs Traditional Bow Sling — Why Bowhunters Are Making the Switch'
+    assign seo_meta_description = 'Traditional bow slings get in the way. The Vsling® stays on for the shot — 100% elastic, hands-free, and silent. See the full comparison.'
+    assign seo_og_title = 'Vsling vs Traditional Bow Sling — Why Bowhunters Are Making the Switch'
+    assign seo_og_description = 'Traditional bow slings get in the way. The Vsling® stays on for the shot — 100% elastic, hands-free, and silent. See the full comparison.'
     assign seo_twitter_title = seo_og_title
     assign seo_twitter_description = seo_og_description
   endif

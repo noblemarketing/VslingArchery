@@ -16,12 +16,12 @@
     assign section_subtext = section.settings.subtext_bow
     assign companion_one = all_products[crossbow_handle]
     assign companion_two = all_products[bino_handle]
-  elsif product.handle == crossbow_handle
+  elsif product.handle == crossbow_handle or product.handle == 'untitled-mar22_12-23'
     assign show_section = true
     assign section_heading = section.settings.heading_crossbow | default: 'Complete Your Setup'
     assign section_subtext = section.settings.subtext_crossbow
     assign companion_one = all_products[bow_handle]
-    assign companion_two = all_products[bino_handle]
+    assign companion_two = blank
   elsif product.handle == bino_handle
     assign show_section = true
     assign section_heading = section.settings.heading_bino | default: 'Complete Your Setup'

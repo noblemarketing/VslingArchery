@@ -1,0 +1,43 @@
+{%- include 'product-crossbow-data' -%}
+
+{%- if is_crossbow_page -%}
+{%- if part == 'description' -%}
+  <div class="product__description rte quick-add-hidden product-crossbow-hero__description">
+    <p>{{ crossbow_hero_description }}</p>
+  </div>
+{%- elsif part == 'features' -%}
+  {%- style -%}
+    .product-crossbow-hero__features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.2rem;
+      margin-top: 1.6rem;
+      padding-top: 1.6rem;
+      border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
+    }
+
+    @media screen and (min-width: 750px) {
+      .product-crossbow-hero__features {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .product-crossbow-hero__feature {
+      margin: 0;
+      font-size: 1.3rem;
+      line-height: 1.45;
+    }
+
+    .product-crossbow-hero__feature::before {
+      content: '➤ ';
+      font-weight: 700;
+    }
+  {%- endstyle -%}
+  <ul class="product-crossbow-hero__features quick-add-hidden" role="list">
+    <li class="product-crossbow-hero__feature">Stays on for the shot — no removal needed</li>
+    <li class="product-crossbow-hero__feature">100% elastic — silent, snug, always ready</li>
+    <li class="product-crossbow-hero__feature">Ships with 2 key rings — fits any crossbow or firearm</li>
+    <li class="product-crossbow-hero__feature">Made in the USA — Hector, Minnesota</li>
+  </ul>
+{%- endif -%}
+{%- endif -%}

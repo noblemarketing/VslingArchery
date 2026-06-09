@@ -14,7 +14,7 @@
   assign is_bow_sling_product = false
   assign is_crossbow_product = false
 
-  if product.handle == vsling_crossbow_handle or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+  if product.handle == vsling_crossbow_handle or product.handle == 'untitled-mar22_12-23' or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
     assign is_crossbow_product = true
   elsif product.handle == vsling_bow_handle or product_handle_downcase contains 'bow-sling' or product_title_downcase contains 'bow sling'
     unless product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
@@ -24,6 +24,11 @@
 -%}
 
 {%- if is_bow_sling_product or is_crossbow_product -%}
+  {%- if is_crossbow_product -%}
+    {%- include 'product-crossbow-data' -%}
+    {%- assign faq_questions = crossbow_faq_questions -%}
+    {%- assign faq_answers = crossbow_faq_answers -%}
+  {%- else -%}
   {%- liquid
     if is_bow_sling_product
       assign faq_q1 = 'Will this get in the way when I draw?'
@@ -52,32 +57,9 @@
 
       assign faq_questions = faq_q1 | append: '|||' | append: faq_q2 | append: '|||' | append: faq_q3 | append: '|||' | append: faq_q4 | append: '|||' | append: faq_q5 | append: '|||' | append: faq_q6 | append: '|||' | append: faq_q7 | append: '|||' | append: faq_q8 | split: '|||'
       assign faq_answers = faq_a1 | append: '|||' | append: faq_a2 | append: '|||' | append: faq_a3 | append: '|||' | append: faq_a4 | append: '|||' | append: faq_a5 | append: '|||' | append: faq_a6 | append: '|||' | append: faq_a7 | append: '|||' | append: faq_a8 | split: '|||'
-    else
-      assign faq_q1 = 'Will the Vsling work on a pistol grip crossbow?'
-      assign faq_a1 = 'Yes. The Vsling fits pistol grip and rifle-style crossbows. Adjust the elastic once to your stock and you are set.'
-
-      assign faq_q2 = 'Can I keep my crossbow on me climbing down from a treestand?'
-      assign faq_a2 = 'Yes. The Vsling holds your crossbow tight to your body on the way down. Your hands stay free for the ladder and the bow stays quiet.'
-
-      assign faq_q3 = 'Will this get in the way when I shoot?'
-      assign faq_a3 = 'No. You shoot with the Vsling on — no need to pull it off first. The elastic stays out of your shooting path.'
-
-      assign faq_q4 = 'How do I put the Vsling on my crossbow?'
-      assign faq_a4 = 'Mount it to your crossbow, adjust the fit, and secure it with a tight double knot. A few minutes and you are done.'
-
-      assign faq_q5 = 'Is this good for hunting out of a treestand?'
-      assign faq_a5 = 'Yes. The Vsling keeps your crossbow close in the stand so your hands are free for glassing and climbing. You stay ready when the shot comes.'
-
-      assign faq_q6 = 'How tough is the Vsling?'
-      assign faq_a6 = 'The Vsling is made from durable elastic built for field use. Machine wash and air dry. Give it a quick check before each hunt.'
-
-      assign faq_q7 = 'Does the Vsling have a warranty?'
-      assign faq_a7 = 'Yes — every Vsling has a 1-year warranty. Email sam@vslingarchery.com if something is off and we will fix it.'
-
-      assign faq_questions = faq_q1 | append: '|||' | append: faq_q2 | append: '|||' | append: faq_q3 | append: '|||' | append: faq_q4 | append: '|||' | append: faq_q5 | append: '|||' | append: faq_q6 | append: '|||' | append: faq_q7 | split: '|||'
-      assign faq_answers = faq_a1 | append: '|||' | append: faq_a2 | append: '|||' | append: faq_a3 | append: '|||' | append: faq_a4 | append: '|||' | append: faq_a5 | append: '|||' | append: faq_a6 | append: '|||' | append: faq_a7 | split: '|||'
     endif
   -%}
+  {%- endif -%}
 
   {%- if render_part == 'accordion' -%}
     <div class="product-faq quick-add-hidden">

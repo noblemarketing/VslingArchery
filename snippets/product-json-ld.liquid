@@ -8,6 +8,8 @@
   Update the shipping/return defaults below to match your store policies.
 {%- endcomment -%}
 
+{%- include 'product-crossbow-data' -%}
+
 {%- if product_schema_description == blank and seo_meta_description == blank -%}
   {%- include 'seo-meta-data' -%}
 {%- endif -%}
@@ -17,12 +19,23 @@
   assign product_price = product.price | divided_by: 100.0
   assign product_url = canonical_url
 
+  if is_crossbow_page
+    assign product_schema_name = crossbow_schema_name
+  else
+    assign product_schema_name = product.title
+  endif
+
   if product_schema_description != blank
     assign product_description = product_schema_description
   elsif seo_meta_description != blank
     assign product_description = seo_meta_description
   else
     assign product_description = product.description | strip_html | strip_newlines
+  endif
+
+  if is_crossbow_page
+    assign product_material_schema = '100% elastic'
+    assign product_country_origin = 'US'
   endif
   assign brand_url = 'https://vslingarchery.com'
   assign product_sku = current_variant.id | append: ''
@@ -135,7 +148,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": {{ product.title | json }},
+    "name": {{ product_schema_name | json }},
     "url": {{ product_url | json }},
     "description": {{ product_description | json }},
     {%- if schema_image_count > 0 -%}
@@ -151,14 +164,34 @@
     {%- if product_color != blank -%}
     "color": {{ product_color | json }},
     {%- endif -%}
-    {%- if product_material != blank -%}
+    {%- if product_material_schema != blank -%}
+    "material": {{ product_material_schema | json }},
+    {%- elsif product_material != blank -%}
     "material": {{ product_material | json }},
+    {%- endif -%}
+    {%- if product_country_origin != blank -%}
+    "countryOfOrigin": {
+      "@type": "Country",
+      "name": {{ product_country_origin | json }}
+    },
     {%- endif -%}
     "brand": {
       "@type": "Organization",
       "name": "Vsling Archery",
       "url": {{ brand_url | json }}
     },
+    {%- if is_crossbow_page -%}
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Vsling Archery",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hector",
+        "addressRegion": "MN",
+        "addressCountry": "US"
+      }
+    },
+    {%- endif -%}
     "offers": {
       "@type": "Offer",
       "url": {{ product_url | json }},

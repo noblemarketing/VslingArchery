@@ -38,7 +38,7 @@ Pages not found. Create them in Shopify Admin:
 1. Online Store -> Pages -> Add page
 
    PAGE 1 — FAQ
-   - Title: Vsling FAQ for Bowhunters
+   - Title: Vsling® Bowhunter FAQ
    - Handle: faq
    - Template: faq
    - Body: leave empty (theme supplies content)

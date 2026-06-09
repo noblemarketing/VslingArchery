@@ -1,0 +1,147 @@
+.site-faq__subheading {
+  margin: 0.8rem 0 0;
+  font-size: 1.6rem;
+  opacity: 0.85;
+}
+
+.site-faq__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 2.4rem 0 3.2rem;
+}
+
+.site-faq__nav-pill {
+  min-height: auto;
+  min-width: auto;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.3rem;
+  border-radius: var(--variant-pills-radius, 4rem);
+}
+
+.site-faq__category {
+  scroll-margin-top: 12rem;
+  margin: 3.6rem 0 0;
+}
+
+.site-faq__category:first-of-type {
+  margin-top: 0;
+}
+
+.site-faq__category-title {
+  margin: 0 0 0.4rem;
+}
+
+.site-faq details.site-faq__item {
+  margin-top: 0;
+  border-top: none;
+}
+
+.site-faq details.site-faq__item + details.site-faq__item {
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+
+.site-faq details.site-faq__item summary {
+  padding: 1.6rem 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.site-faq details.site-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-faq__summary-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  width: 100%;
+}
+
+.site-faq__question {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: rgb(var(--color-foreground));
+  flex: 1;
+}
+
+.site-faq__toggle-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 2.2rem;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform 0.35s ease;
+}
+
+.site-faq details[open] .site-faq__toggle-icon {
+  transform: rotate(45deg);
+}
+
+.site-faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.site-faq details[open] .site-faq__panel {
+  grid-template-rows: 1fr;
+}
+
+.site-faq__panel-inner {
+  overflow: hidden;
+}
+
+.site-faq__answer {
+  margin: 0 0 1.6rem;
+  padding: 0 0.2rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.site-faq__answer a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.site-faq__cta {
+  margin-top: 4rem;
+  padding: 3.6rem 2rem;
+  text-align: center;
+}
+
+.site-faq__cta-heading {
+  margin: 0 0 0.8rem;
+}
+
+.site-faq__cta-subtext {
+  margin: 0 0 2rem;
+  font-size: 1.6rem;
+  opacity: 0.85;
+}
+
+.site-faq__cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+@media screen and (max-width: 749px) {
+  .site-faq__nav {
+    max-width: 100%;
+  }
+
+  .site-faq__nav-pill {
+    flex: 1 1 calc(50% - 0.8rem);
+    text-align: center;
+  }
+}

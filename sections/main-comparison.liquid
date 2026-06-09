@@ -1,153 +1,444 @@
-{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{{ 'section-multicolumn.css' | asset_url | stylesheet_tag }}
+{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 
 {%- include 'vsling-handles' -%}
 
 {%- liquid
   assign bow_product_url = vsling_bow_url
   assign crossbow_product_url = vsling_crossbow_url
+  assign all_products_url = '/collections/all-products'
   assign faq_url = vsling_faq_url
+
+  assign hero_image = section.settings.hero_image
+  assign scenario_1_image = section.settings.scenario_1_image
+  assign scenario_2_image = section.settings.scenario_2_image
+  assign scenario_3_image = section.settings.scenario_3_image
 -%}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
+  #ComparisonHero-{{ section.id }}::after {
+    opacity: {{ section.settings.hero_overlay_opacity | divided_by: 100.0 }};
+  }
+
+  .comparison-section-{{ section.id }} {
+    --comparison-vsling-accent: rgb(var(--color-button));
+    --comparison-traditional-muted: rgba(var(--color-foreground), 0.5);
+  }
+
+  .comparison-section-{{ section.id }} .comparison__block {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
+    .comparison-section-{{ section.id }} .comparison__block {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 
-  .comparison__intro {
-    margin-bottom: 2rem;
-  }
-
-  .comparison__table-wrapper {
+  .comparison-section-{{ section.id }} .comparison__table-wrapper {
     overflow-x: auto;
     margin: 2rem 0;
   }
 
-  .comparison__table {
+  .comparison-section-{{ section.id }} .comparison__table {
     width: 100%;
     border-collapse: collapse;
     font-size: 1.5rem;
   }
 
-  .comparison__table th,
-  .comparison__table td {
+  .comparison-section-{{ section.id }} .comparison__table th,
+  .comparison-section-{{ section.id }} .comparison__table td {
     border: 0.1rem solid rgba(var(--color-foreground), 0.15);
     padding: 1.2rem 1.4rem;
-    text-align: left;
-    vertical-align: top;
+    text-align: center;
+    vertical-align: middle;
   }
 
-  .comparison__table th {
+  .comparison-section-{{ section.id }} .comparison__table th[scope='row'] {
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__table thead th {
     background: rgba(var(--color-foreground), 0.05);
     font-weight: 700;
   }
 
-  .comparison__cta {
-    margin-top: 2.5rem;
+  .comparison-section-{{ section.id }} .comparison__table .comparison__col-vsling {
+    color: var(--comparison-vsling-accent);
+    font-weight: 700;
+    background: rgba(var(--color-button), 0.06);
+  }
+
+  .comparison-section-{{ section.id }} .comparison__table .comparison__col-traditional {
+    color: var(--comparison-traditional-muted);
+  }
+
+  .comparison-section-{{ section.id }} .comparison__mark-yes {
+    color: var(--comparison-vsling-accent);
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__mark-no {
+    color: var(--comparison-traditional-muted);
+    font-size: 1.8rem;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__press-bar {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.5rem;
+    padding: 1.6rem 2rem;
+    background: rgba(var(--color-foreground), 0.04);
+    border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  }
+
+  .comparison-section-{{ section.id }} .comparison__press-bar a {
+    font-weight: 600;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .comparison-section-{{ section.id }} .comparison__scenario-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0">
-    {{ page.title | default: section.settings.heading | escape }}
-  </h1>
-
-  <div class="rte comparison__intro">
-    {%- if section.settings.intro != blank -%}
-      {{ section.settings.intro }}
+<div class="comparison-section-{{ section.id }}">
+  {%- comment -%} 1. Hero {%- endcomment -%}
+  <div
+    id="ComparisonHero-{{ section.id }}"
+    class="banner banner--content-align-center banner--content-align-mobile-center banner--medium{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  >
+    {%- if hero_image != blank -%}
+      <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+        {{
+          hero_image
+          | image_url: width: 3840
+          | image_tag:
+            width: hero_image.width,
+            height: hero_image.width | divided_by: hero_image.aspect_ratio,
+            sizes: '100vw',
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+            alt: 'Hunter carrying a compound bow with Vsling bow sling in the field',
+            fetchpriority: 'high'
+        }}
+      </div>
     {%- else -%}
-      <p>
-        Choosing between a traditional bow sling and the Vsling comes down to one question: do you want to remove your sling before every shot?
-        The Vsling is a shoot-ready, hands-free elastic bow sling built for compound bow hunters who need quiet carry and instant draw readiness in the stand or on the ground.
-      </p>
+      <div class="banner__media media placeholder">
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
     {%- endif -%}
+
+    <div class="banner__content banner__content--middle-center page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.hero_color_scheme }} gradient">
+        <h1 class="banner__heading inline-richtext h0">
+          Vsling® vs Traditional Bow Sling — There's No Comparison
+        </h1>
+        <div class="banner__text rte">
+          <p>Hunters don't settle for outdated gear. Here's why bowhunters are making the switch.</p>
+        </div>
+        <div class="banner__buttons">
+          <a href="{{ bow_product_url }}" class="button button--primary">Shop the Vsling®</a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="comparison__table-wrapper">
-    <table class="comparison__table">
-      <thead>
-        <tr>
-          <th scope="col">Feature</th>
-          <th scope="col">Traditional bow sling</th>
-          <th scope="col">Vsling elastic bow sling</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Shoot with sling on</th>
-          <td>Usually removed or unclipped before drawing</td>
-          <td>Draw and shoot without removing — always ready</td>
-        </tr>
-        <tr>
-          <th scope="row">Carry style</th>
-          <td>Loose strap that dangles and flaps</td>
-          <td>Elastic tension keeps bow snug and quiet on your body</td>
-        </tr>
-        <tr>
-          <th scope="row">Hands-free movement</th>
-          <td>Limited — bow swings when you climb or glass</td>
-          <td>Hands free for treestands, ladders, and glassing</td>
-        </tr>
-        <tr>
-          <th scope="row">Noise in the field</th>
-          <td>Strap slap on brush and gear</td>
-          <td>Silent elastic carry — no dangling hardware</td>
-        </tr>
-        <tr>
-          <th scope="row">Installation</th>
-          <td>Buckles, clips, or extra hardware</td>
-          <td>Universal fit with a simple double-knot adjustment</td>
-        </tr>
-        <tr>
-          <th scope="row">Treestand hunting</th>
-          <td>Bow hangs loose; extra handling before the shot</td>
-          <td>Bow stays tight in the stand — draw-ready when game appears</td>
-        </tr>
-        <tr>
-          <th scope="row">Crossbow option</th>
-          <td>Separate strap systems for crossbows</td>
-          <td>Same Vsling system available for <a href="{{ crossbow_product_url }}">crossbow and treestand hunting</a></td>
-        </tr>
-      </tbody>
-    </table>
+  {%- comment -%} 2. The Core Problem {%- endcomment -%}
+  <div class="page-width page-width--narrow comparison__block">
+    <div class="rte">
+      <h2>The Core Problem — Traditional Slings</h2>
+      <p>
+        The Vsling® is a 100% elastic, patent-pending bow sling that stays on the bow during the shot, requires no removal before drawing, and keeps the bow comfortably snug to the hunter's body for hands-free carry.
+        Traditional bow slings hang loose on the body, get in the way, slap and snag on brush and gear, and must be removed or unclipped before taking a shot — creating extra movement and noise that spooks game.
+        That last-second fumble is exactly what quiet hunters try to avoid when a buck or gobbler is close.
+        The <a href="{{ bow_product_url }}">Vsling® Bow Sling</a> was built to eliminate that problem entirely.
+      </p>
+      <blockquote>
+        <p><strong>Old slings must be removed before the shot. The Vsling® stays on — always.</strong></p>
+      </blockquote>
+    </div>
   </div>
 
-  <div class="rte">
-    <h2>Why hunters upgrade to Vsling</h2>
-    <p>
-      A traditional bow sling was designed for carry, not for the shot. That means fumbling with clips, sliding a strap off your shoulder,
-      or letting your bow swing while you climb — all noise and movement you do not want when a buck is close.
-    </p>
-    <p>
-      The Vsling uses 100% elastic to hold your compound bow comfortably against your body. You move hands-free through cover,
-      sit quietly in a treestand, and transition to full draw in seconds without removing the sling.
-      It is the same shoot-ready philosophy behind the <a href="{{ bow_product_url }}">Vsling hands-free compound bow sling</a>
-      and the <a href="{{ crossbow_product_url }}">Vsling crossbow sling</a>.
-    </p>
+  {%- comment -%} 3. Side-by-Side Comparison Table {%- endcomment -%}
+  <div class="page-width comparison__block">
+    <h2 class="h1 center">Side-by-Side Comparison</h2>
+    <div class="comparison__table-wrapper">
+      <table class="comparison__table">
+        <thead>
+          <tr>
+            <th scope="col">Feature</th>
+            <th scope="col" class="comparison__col-traditional">Traditional Bow Sling</th>
+            <th scope="col" class="comparison__col-vsling">Vsling®</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Stays on bow during the shot</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">No removal needed before drawing</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">100% elastic — moves with your body</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Silent carry — no slapping or snagging</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Bow held snug to the body</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Hands-free carry</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Shoot-ready in seconds</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Comfortable for all-day wear</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Works on climbs, fence crossings, and tough terrain</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Patent-pending design</th>
+            <td class="comparison__col-traditional"><span class="comparison__mark-no" aria-label="No">✗</span></td>
+            <td class="comparison__col-vsling"><span class="comparison__mark-yes" aria-label="Yes">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-    <h2>Which sling is right for you?</h2>
+  {%- comment -%} 4. Does It Get In The Way? {%- endcomment -%}
+  <div class="page-width page-width--narrow comparison__block color-{{ section.settings.content_color_scheme }} gradient">
+    <div class="rte">
+      <h2>Will it interfere with my shot?</h2>
+      <p>
+        A simple design that keeps the sling snug to your bow and out of the way during the shot.
+        Unlike traditional slings that hang loose or require removal before the shot, the Vsling system allows smooth, quiet transitions from carry to full draw without interfering with the arrow path.
+      </p>
+      <p>
+        With patent-pending technology, the Vsling® doesn't restrict movement — it enhances it.
+        Crossbow hunters get the same shoot-with-it-on advantage from the <a href="{{ crossbow_product_url }}">Vsling® Crossbow Sling</a> when climbing stands or moving through cover.
+      </p>
+      <p><strong>The Vsling® stays completely clear of your arrow path — you draw, shoot, and never think about it.</strong></p>
+    </div>
+  </div>
+
+  {%- comment -%} 5. Comfort Section {%- endcomment -%}
+  <div class="page-width page-width--narrow comparison__block">
+    <div class="rte">
+      <h2>Carry all day. Never feel it.</h2>
+      <p>
+        100% elastic construction keeps the bow comfortably snug to the body.
+        Engineered stretch adapts to your body, gear, and movement.
+        All-day comfort builds confidence — reduced fatigue keeps you focused when it matters.
+      </p>
+      <p>
+        Like a baby carrier for your bow — comfortable, balanced, freeing your hands for glassing, climbing, or calling.
+        The elastic stretch makes long hikes easier while keeping your bow tight and ready.
+        Pair your setup with the <a href="{{ bow_product_url }}">Vsling® Bow Sling</a> for compound bows or the <a href="{{ crossbow_product_url }}">Vsling® Crossbow Sling</a> for crossbow season.
+      </p>
+      <ul>
+        <li>Built to stay on — use it without removing. No interruptions. No wasted movement.</li>
+        <li>Total gear management — carry comfortably, move freely, and stay in control at all times.</li>
+        <li>All-day comfort builds confidence — reduced fatigue keeps you focused and performing when it matters.</li>
+        <li>Silent-focused design — eliminates unnecessary noise and movement in the field.</li>
+        <li>Engineered stretch adapts to your body, gear, and movement.</li>
+      </ul>
+    </div>
+  </div>
+
+  {%- comment -%} 6. Real Hunting Scenarios {%- endcomment -%}
+  <div class="multicolumn color-{{ section.settings.content_color_scheme }} gradient background-primary comparison__block">
+    <div class="page-width isolate">
+      <h2 class="title h1 center">Real Hunting Scenarios</h2>
+      <ul class="comparison__scenario-grid grid grid--1-col-tablet-down grid--3-col-desktop" role="list">
+        <li class="grid__item">
+          <div class="multicolumn-card content-container">
+            {%- if scenario_1_image != blank -%}
+              <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
+                <div class="media media--transparent media--adapt">
+                  {{
+                    scenario_1_image
+                    | image_url: width: 1100
+                    | image_tag:
+                      widths: '275, 550, 750, 1100',
+                      sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
+                      class: 'multicolumn-card__image',
+                      alt: 'Hunter climbing a treestand with Vsling bow sling securing compound bow hands-free'
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="multicolumn-card__info">
+              <h3 class="inline-richtext">Treestand Access</h3>
+              <div class="rte">
+                <p>Climb with both hands free while your bow stays secure and silent against your body. No dangling strap slapping the ladder or stand on the way up.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="grid__item">
+          <div class="multicolumn-card content-container">
+            {%- if scenario_2_image != blank -%}
+              <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
+                <div class="media media--transparent media--adapt">
+                  {{
+                    scenario_2_image
+                    | image_url: width: 1100
+                    | image_tag:
+                      widths: '275, 550, 750, 1100',
+                      sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
+                      class: 'multicolumn-card__image',
+                      alt: 'Bowhunter spot and stalk with Vsling bow sling moving quietly through terrain'
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="multicolumn-card__info">
+              <h3 class="inline-richtext">Spot and Stalk</h3>
+              <div class="rte">
+                <p>Move fast through terrain without noise or bounce from a loose traditional sling. The Vsling holds your bow tight so you stay quiet when closing the distance.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="grid__item">
+          <div class="multicolumn-card content-container">
+            {%- if scenario_3_image != blank -%}
+              <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
+                <div class="media media--transparent media--adapt">
+                  {{
+                    scenario_3_image
+                    | image_url: width: 1100
+                    | image_tag:
+                      widths: '275, 550, 750, 1100',
+                      sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
+                      class: 'multicolumn-card__image',
+                      alt: 'Turkey hunter with Vsling bow sling ready for instant draw on gobbler'
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="multicolumn-card__info">
+              <h3 class="inline-richtext">Turkey Hunting</h3>
+              <div class="rte">
+                <p>When a gobbler steps in range, transition from carry to full draw in seconds — no unclipping, no sliding a strap off your shoulder. Stay shoot-ready without extra movement.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  {%- comment -%} 7. Press & Credibility Bar {%- endcomment -%}
+  <div class="comparison__press-bar page-width">
     <p>
-      If you only need basic shoulder carry and always remove your sling before shooting, a traditional strap may be enough.
-      If you hunt from treestands, hike rough terrain, or want your bow tight and quiet until the moment of truth, the Vsling is built for that hunt.
-    </p>
-    <p>
-      Still deciding? Read <a href="{{ faq_url }}">common questions about the Vsling</a> or shop the
-      <a href="{{ bow_product_url }}">shoot-ready Vsling bow sling</a> built for Mathews, Hoyt, Bear, and other modern compounds.
+      As featured in
+      <a href="https://www.grandviewoutdoors.com/product-profile/vsling-bow-sling" target="_blank" rel="noopener noreferrer">Grand View Outdoors</a>
+      and
+      <a href="https://www.archerybusiness.com/vsling-archery-bow-sling" target="_blank" rel="noopener noreferrer">Archery Business</a>.
     </p>
   </div>
 
-  <div class="comparison__cta">
-    <a href="{{ bow_product_url }}" class="button button--primary">
-      {{ section.settings.cta_label | default: 'Shop the Vsling Bow Sling' | escape }}
-    </a>
+  {%- comment -%} 8. Final CTA {%- endcomment -%}
+  <div class="page-width page-width--narrow comparison__block center">
+    <div class="rte">
+      <h2>Leave the old sling behind.</h2>
+      <p>
+        Hunters don't settle for outdated gear. Just like the shift from wood arrows to carbon, it's time to upgrade to a sling that works the way you hunt.
+        Still have questions? Read the <a href="{{ faq_url }}">Vsling FAQ</a> or compare gear on the <a href="{{ bow_product_url }}">Vsling® Bow Sling</a> product page.
+      </p>
+    </div>
+    <div class="comparison__cta-group center">
+      <a href="{{ bow_product_url }}" class="button button--primary">Shop the Vsling® Bow Sling</a>
+      <a href="{{ all_products_url }}" class="button button--secondary">View All Products</a>
+    </div>
   </div>
+
+  {%- comment -%} FAQPage JSON-LD {%- endcomment -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does the Vsling get in the way during the shot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A simple design keeps the sling snug to your bow and out of the way during the shot. Unlike traditional slings that hang loose or require removal before the shot, the Vsling system allows smooth, quiet transitions from carry to full draw without interfering with the arrow path. The Vsling stays completely clear of your arrow path."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to remove the Vsling before I draw?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Old slings must be removed before the shot. The Vsling stays on always — you draw and shoot without unclipping or sliding a strap off your shoulder."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Vsling comfortable for all-day hunting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. 100% elastic construction keeps the bow comfortably snug to the body. Engineered stretch adapts to your body, gear, and movement. All-day comfort builds confidence and reduced fatigue keeps you focused when it matters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the Vsling different from a traditional bow sling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traditional bow slings hang loose, slap and snag, and must be removed or unclipped before taking a shot. The Vsling is 100% elastic, stays on during the shot, keeps the bow snug to your body for hands-free carry, and uses a patent-pending design built for silent, shoot-ready hunting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Vsling made of?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Vsling is made from durable elastic construction built for long-term field use. It is machine washable with air dry recommended. Engineered stretch adapts to your body, gear, and movement in the field."
+          }
+        }
+      ]
+    }
+  </script>
 
   {% render 'breadcrumb-json-ld' %}
 </div>
@@ -159,22 +450,46 @@
   "class": "section",
   "settings": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Fallback heading",
-      "default": "Vsling vs Traditional Bow Sling"
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
     },
     {
-      "type": "richtext",
-      "id": "intro",
-      "label": "Introduction",
-      "default": "<p>Choosing between a traditional bow sling and the Vsling comes down to one question: do you want to remove your sling before every shot? The Vsling is a shoot-ready, hands-free elastic bow sling built for compound bow hunters who need quiet carry and instant draw readiness in the stand or on the ground.</p>"
+      "type": "range",
+      "id": "hero_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Hero image overlay",
+      "default": 30
     },
     {
-      "type": "text",
-      "id": "cta_label",
-      "label": "CTA button label",
-      "default": "Shop the Vsling Bow Sling"
+      "type": "color_scheme",
+      "id": "hero_color_scheme",
+      "label": "Hero text box color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "content_color_scheme",
+      "label": "Content section color scheme",
+      "default": "scheme-4"
+    },
+    {
+      "type": "image_picker",
+      "id": "scenario_1_image",
+      "label": "Scenario image — Treestand"
+    },
+    {
+      "type": "image_picker",
+      "id": "scenario_2_image",
+      "label": "Scenario image — Spot and stalk"
+    },
+    {
+      "type": "image_picker",
+      "id": "scenario_3_image",
+      "label": "Scenario image — Turkey hunting"
     },
     {
       "type": "range",
@@ -183,7 +498,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Top padding",
+      "label": "Section padding top",
       "default": 36
     },
     {
@@ -193,7 +508,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "Bottom padding",
+      "label": "Section padding bottom",
       "default": 36
     }
   ],

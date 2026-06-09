@@ -1,0 +1,289 @@
+{{ 'section-multicolumn.css' | asset_url | stylesheet_tag }}
+{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
+
+{%- include 'product-crossbow-data' -%}
+
+{%- unless is_crossbow_page -%}
+  {%- comment -%} Section only renders on crossbow product pages {%- endcomment -%}
+{%- else -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .crossbow-content__press-bar {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.5rem;
+    padding: 1.6rem 2rem;
+    margin: 3.6rem 0;
+    background: rgba(var(--color-foreground), 0.04);
+    border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  }
+
+  .crossbow-content__cta {
+    margin-top: 4rem;
+    padding: 3.6rem 2rem;
+    text-align: center;
+  }
+
+  .crossbow-content__scenario-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .crossbow-content__install-list {
+    padding-left: 2rem;
+  }
+
+  .crossbow-content__install-list li {
+    margin-bottom: 0.8rem;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width page-width--narrow">
+    <div class="rte crossbow-content__body">
+      <h2>The Crossbow Sling That Stays On For The Shot</h2>
+      <p>
+        {{ crossbow_aio_sentence }}
+        Traditional crossbow slings are bulky. They bounce during carry. They have to be removed or repositioned before you shoot. That creates noise and movement at the worst possible moment.
+      </p>
+      <p>
+        The Vsling™ Crossbow/Gun Sling is made from 100% elastic material — the same system as the original <a href="{{ bow_product_url }}">Vsling® Bow Sling</a>.
+        Each sling ships with two loose key rings so you can install it exactly how you prefer.
+        It stays on your crossbow or firearm during the shot, transfers from transport mode to shoot mode in seconds, and uses a quiet flexible design you can set and forget.
+        No complicated buckles or clips — just a clean custom fit every time with a double knot that makes tension adjustment effortless.
+      </p>
+      <p>
+        Best sling on the market. Its quiet flexible design allows hunters to set it and forget it. This sling transfers from transport mode to shoot mode in seconds. Stays on your crossbow for the shot.
+        Want to see how it stacks up against old strap slings? Read the <a href="{{ comparison_page_url }}">Vsling vs Traditional Bow Sling</a> comparison.
+      </p>
+
+      <h2 id="CrossbowTreestandSection">Built for Treestand Hunting</h2>
+      <p id="CrossbowTreestandLead">
+        Treestand hunters need both hands free for climbing. They need a secure crossbow that does not swing or bang against the stand. They need a crossbow sling for treestand hunting that does not interfere with the shot when a deer steps in at close range.
+      </p>
+      <p>
+        The Vsling™ solves each of those problems. The 100% elastic design keeps your crossbow snug and silent during the climb. Your hands stay free on the ladder. When game appears, the sling stays on for the shot — no fumbling and no noise.
+        If you are looking for the best crossbow sling for treestand hunting, this is the always-ready system built for that exact hunt.
+        Compound bow hunters in your group can run the same carry philosophy with the <a href="{{ bow_product_url }}">Vsling® Bow Sling</a>.
+      </p>
+
+      <h2>Works on Crossbows and Firearms</h2>
+      <p>
+        The Vsling™ Crossbow/Gun Edition fits any crossbow or firearm with standard sling attachment points.
+        Two key rings ship with every sling so you can build a custom install on pistol-grip crossbows, rifle-style crossbows, or firearms.
+        Bowhunters carrying a compound can pair this rig with the <a href="{{ bow_product_url }}">Vsling® Bow Sling</a> for the same shoot-with-it-on elastic system.
+      </p>
+
+      <h2>How to Install the Vsling™ Crossbow/Gun Sling</h2>
+      <ol class="crossbow-content__install-list">
+        <li>Attach the two included key rings to your crossbow or firearm front and rear sling attachment points.</li>
+        <li>Loop the sling through itself on the ring nearest the butt of the weapon, then run it forward through the front ring, then back to the butt and tie a snug double knot.</li>
+        <li>Let the elasticity do the work. Adjust until you reach your preferred tension, re-snug the knot, and you are ready to go.</li>
+      </ol>
+      <p>
+        No tools required. Installation takes under two minutes. A full video walkthrough is available at @VslingArchery on YouTube.
+        More answers live on the <a href="{{ faq_page_url }}">Bowhunter FAQ</a>.
+      </p>
+
+      <h2>Three Hunting Scenarios Where The Vsling™ Changes Everything</h2>
+    </div>
+  </div>
+
+  <div class="multicolumn color-{{ section.settings.card_color_scheme }} gradient background-primary">
+    <div class="page-width isolate">
+      <ul class="crossbow-content__scenario-grid grid grid--1-col-tablet-down grid--3-col-desktop" role="list">
+        <li class="grid__item">
+          <div class="multicolumn-card content-container">
+            {%- if section.settings.scenario_1_image != blank -%}
+              <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
+                <div class="media media--transparent media--adapt">
+                  {{
+                    section.settings.scenario_1_image
+                    | image_url: width: 1100
+                    | image_tag:
+                      widths: '275, 550, 750, 1100',
+                      sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
+                      class: 'multicolumn-card__image',
+                      alt: 'Hunter climbing treestand with Vsling crossbow sling for treestand hunting hands-free'
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="multicolumn-card__info">
+              <h3 class="inline-richtext">Treestand Hunting</h3>
+              <div class="rte">
+                <p>Climb with both hands free. Your crossbow stays tight to your body and silent on the ascent. When a buck steps in below, the Vsling™ is already out of the way. Draw and shoot — no removal, no noise, no wasted movement.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="grid__item">
+          <div class="multicolumn-card content-container">
+            {%- if section.settings.scenario_2_image != blank -%}
+              <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
+                <div class="media media--transparent media--adapt">
+                  {{
+                    section.settings.scenario_2_image
+                    | image_url: width: 1100
+                    | image_tag:
+                      widths: '275, 550, 750, 1100',
+                      sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
+                      class: 'multicolumn-card__image',
+                      alt: 'Ground blind hunter with Vsling crossbow sling keeping weapon snug and silent'
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="multicolumn-card__info">
+              <h3 class="inline-richtext">Ground Blind Hunting</h3>
+              <div class="rte">
+                <p>Move into position quietly with your crossbow snug to your body. No swinging, no slapping against your blind walls. When the shot presents itself, the Vsling™ stays on and out of the way.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="grid__item">
+          <div class="multicolumn-card content-container">
+            {%- if section.settings.scenario_3_image != blank -%}
+              <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--third-width multicolumn-card-spacing">
+                <div class="media media--transparent media--adapt">
+                  {{
+                    section.settings.scenario_3_image
+                    | image_url: width: 1100
+                    | image_tag:
+                      widths: '275, 550, 750, 1100',
+                      sizes: '(min-width: 990px) 320px, (min-width: 750px) 280px, calc(100vw - 3rem)',
+                      class: 'multicolumn-card__image',
+                      alt: 'Spot and stalk hunter with Vsling crossbow sling secured for fast quiet movement'
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+            <div class="multicolumn-card__info">
+              <h3 class="inline-richtext">Spot and Stalk</h3>
+              <div class="rte">
+                <p>Cover ground fast with your crossbow or rifle secured hands-free. The 100% elastic design adapts to your movement and stays silent over any terrain. Ready to shoot the instant you stop.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="crossbow-content__press-bar page-width">
+    <p>
+      As featured in
+      <a href="https://www.grandviewoutdoors.com/product-profile/vsling-bow-sling" target="_blank" rel="noopener noreferrer">Grand View Outdoors</a>
+      and
+      <a href="https://www.archerybusiness.com/vsling-archery-bow-sling" target="_blank" rel="noopener noreferrer">Archery Business</a>.
+    </p>
+  </div>
+
+  <div class="page-width page-width--narrow crossbow-content__cta color-{{ section.settings.cta_color_scheme }} gradient content-container">
+    <h2 class="h1">Leave the bulky sling behind.</h2>
+    <p class="rte">
+      Hunters do not settle for outdated gear. The Vsling™ Crossbow/Gun Sling is the hands-free, always-ready, shoot-with-it-on solution every crossbow and firearm hunter needs.
+    </p>
+    <a href="#MainProduct-main" class="button button--primary">Add to Cart</a>
+  </div>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": {{ crossbow_schema_name | json }},
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["#CrossbowProductHeading", "#CrossbowTreestandLead"]
+      }
+    }
+  </script>
+</div>
+
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Crossbow product content",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Content color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "Scenario cards color scheme",
+      "default": "scheme-4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "cta_color_scheme",
+      "label": "CTA color scheme",
+      "default": "scheme-4"
+    },
+    {
+      "type": "image_picker",
+      "id": "scenario_1_image",
+      "label": "Scenario image — Treestand"
+    },
+    {
+      "type": "image_picker",
+      "id": "scenario_2_image",
+      "label": "Scenario image — Ground blind"
+    },
+    {
+      "type": "image_picker",
+      "id": "scenario_3_image",
+      "label": "Scenario image — Spot and stalk"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Crossbow product content"
+    }
+  ]
+}
+{% endschema %}

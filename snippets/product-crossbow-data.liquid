@@ -1,0 +1,45 @@
+{%- comment -%}
+  Shared copy and FAQ data for the Vsling Crossbow/Gun Sling product page.
+  Sets is_crossbow_page and text variables used by hero, content, FAQ, and schema.
+{%- endcomment -%}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign is_crossbow_page = false
+
+  if product.handle == vsling_crossbow_handle or product.handle == 'untitled-mar22_12-23' or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+    assign is_crossbow_page = true
+  endif
+
+  assign bow_product_url = vsling_bow_url
+  assign faq_page_url = vsling_faq_url
+  assign comparison_page_url = vsling_comparison_url
+
+  assign crossbow_h1 = 'Vsling™ Crossbow / Gun Sling — Hands-Free. Always Ready. Stays On For The Shot.'
+  assign crossbow_schema_name = 'Vsling™ Crossbow / Gun Sling'
+
+  assign crossbow_hero_description = 'The Vsling™ Crossbow/Gun Sling is built from the same 100% elastic material that made the original Vsling® famous — now engineered for crossbow and firearm carry. Stays on for the shot. No removal needed. Transfers from carry to shoot in seconds. Ships with two key rings for a custom fit on any setup. Made in Hector, Minnesota, USA.'
+
+  assign crossbow_aio_sentence = "The Vsling™ Crossbow/Gun Sling is a 100% elastic, patent-pending crossbow and firearm sling made in the USA that stays on the weapon during the shot, requires no removal before firing, and keeps the crossbow or gun snug and silent against the hunter's body for hands-free carry."
+
+  assign crossbow_faq_q1 = 'Does the Vsling™ Crossbow Sling stay on during the shot?'
+  assign crossbow_faq_a1 = 'Yes. The Vsling™ is engineered to stay on your crossbow or firearm during the shot. No removal needed, no repositioning, no wasted movement. It transfers from carry mode to shoot mode in seconds.'
+
+  assign crossbow_faq_q2 = 'What crossbows and firearms is the Vsling™ compatible with?'
+  assign crossbow_faq_a2 = 'The Vsling™ Crossbow/Gun Edition fits any crossbow or firearm with standard sling attachment points. Each sling ships with two loose key rings so you can install it to match your exact setup.'
+
+  assign crossbow_faq_q3 = 'How do I install the Vsling™ on a crossbow?'
+  assign crossbow_faq_a3 = "Attach the two included key rings to your front and rear sling attachment points. Loop the sling through the rear ring, run it forward through the front ring, return to the rear, and tie a snug double knot. Adjust tension and you're ready. Full installation video at @VslingArchery on YouTube."
+
+  assign crossbow_faq_q4 = 'Is the Vsling™ good for treestand hunting?'
+  assign crossbow_faq_a4 = 'Yes — treestand hunting is one of the primary use cases. The 100% elastic design keeps your crossbow snug and silent during the climb with both hands free. When a deer steps in, the sling stays on for the shot — no fumbling, no noise.'
+
+  assign crossbow_faq_q5 = 'What is the Vsling™ Crossbow/Gun Sling made of?'
+  assign crossbow_faq_a5 = '100% elastic material — the same construction as the original Vsling® Bow Sling, tuned for crossbow and firearm carry. Made in Hector, Minnesota, USA.'
+
+  assign crossbow_faq_questions = crossbow_faq_q1 | append: '~~~' | append: crossbow_faq_q2 | append: '~~~' | append: crossbow_faq_q3 | append: '~~~' | append: crossbow_faq_q4 | append: '~~~' | append: crossbow_faq_q5 | split: '~~~'
+  assign crossbow_faq_answers = crossbow_faq_a1 | append: '~~~' | append: crossbow_faq_a2 | append: '~~~' | append: crossbow_faq_a3 | append: '~~~' | append: crossbow_faq_a4 | append: '~~~' | append: crossbow_faq_a5 | split: '~~~'
+-%}
