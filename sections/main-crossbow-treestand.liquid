@@ -17,32 +17,8 @@
 -%}
 
 {%- style -%}
-  #CrossbowTreestandHero-{{ section.id }}::after,
-  #CrossbowTreestandHero-{{ section.id }} .banner__media::after {
+  #CrossbowTreestandHero-{{ section.id }}::after {
     opacity: {{ section.settings.hero_overlay_opacity | divided_by: 100.0 }};
-  }
-
-  #CrossbowTreestandHero-{{ section.id }} .banner__box {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  #CrossbowTreestandHero-{{ section.id }} .banner__box.content-container:after {
-    display: none;
-  }
-
-  #CrossbowTreestandHero-{{ section.id }} .banner__heading {
-    font-family: 'Menseal', sans-serif;
-    font-weight: 900;
-    font-style: normal;
-    color: #fff;
-  }
-
-  #CrossbowTreestandHero-{{ section.id }} .banner__text,
-  #CrossbowTreestandHero-{{ section.id }} .banner__text p {
-    color: #fff;
   }
 
   .section-{{ section.id }}-padding {
@@ -60,7 +36,7 @@
 
 <div
   id="CrossbowTreestandHero-{{ section.id }}"
-  class="crossbow-treestand__hero banner banner--content-align-center banner--content-align-mobile-center banner--medium banner--desktop-transparent{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  class="crossbow-treestand__hero banner banner--content-align-center banner--content-align-mobile-center banner--medium{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
   <div class="banner__media media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {%- if hero_image != blank -%}
@@ -90,7 +66,7 @@
   </div>
 
   <div class="banner__content banner__content--middle-center page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <div class="banner__box content-container content-container--full-width-mobile">
+    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.hero_color_scheme }} gradient">
       <h1 class="banner__heading inline-richtext h0" id="CrossbowTreestandHeading">
         {{ section.settings.heading | default: 'Vsling Crossbow Sling for Treestand Hunting' | escape }}
       </h1>
@@ -187,7 +163,7 @@
     </p>
 
     <h2>Treestand Crossbow Sling FAQ</h2>
-    {% include 'crossbow-treestand-faq', section_id: section.id, render_part: 'accordion' %}
+    {% render 'crossbow-treestand-faq', section_id: section.id, render_part: 'accordion' %}
   </div>
 
   <div class="crossbow-treestand__cta color-{{ section.settings.cta_color_scheme }} gradient content-container">
@@ -203,7 +179,7 @@
     </div>
   </div>
 
-  {% include 'crossbow-treestand-faq', section_id: section.id, render_part: 'schema' %}
+  {% render 'crossbow-treestand-faq', section_id: section.id, render_part: 'schema' %}
   {% render 'breadcrumb-json-ld' %}
 
   <script type="application/ld+json">
@@ -248,7 +224,13 @@
       "step": 10,
       "unit": "%",
       "label": "Hero image overlay",
-      "default": 55
+      "default": 30
+    },
+    {
+      "type": "color_scheme",
+      "id": "hero_color_scheme",
+      "label": "Hero text box color scheme",
+      "default": "scheme-3"
     },
     {
       "type": "text",

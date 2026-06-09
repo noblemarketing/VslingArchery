@@ -1,9 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-comparison",
       "settings": {
-        "hero_overlay_opacity": 55,
+        "hero_overlay_opacity": 30,
+        "hero_color_scheme": "scheme-3",
         "content_color_scheme": "scheme-4",
         "scenario_1_image": "shopify://shop_images/2ABF8D9A-4D02-4310-BA48-EAFA7D8055C9.jpg",
         "scenario_2_image": "shopify://shop_images/BD895B0B-B369-437E-AD6F-167EFEA8F6B7.jpg",
