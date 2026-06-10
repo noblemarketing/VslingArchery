@@ -54,7 +54,6 @@ class EmailPopup extends HTMLElement {
   open(persistDismissal = false) {
     this.hidden = false;
     this.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
 
     if (persistDismissal && this.showOnce) {
       window.localStorage.setItem(this.storageKey, 'true');
@@ -64,7 +63,6 @@ class EmailPopup extends HTMLElement {
   close(persistDismissal = true) {
     this.classList.remove('is-open');
     this.hidden = true;
-    document.body.style.overflow = '';
 
     if (persistDismissal && this.showOnce) {
       window.localStorage.setItem(this.storageKey, 'true');

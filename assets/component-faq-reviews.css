@@ -43,26 +43,60 @@
 
 .faq-reviews__stars {
   color: #ffd700;
-  font-size: 1.6rem;
-  letter-spacing: 0.15rem;
-  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
 }
 
 .faq-reviews__quote {
-  margin: 0 0 1.6rem;
-  font-size: 1.5rem;
-  line-height: 1.6;
+  margin: 0 0 1.2rem;
+  font-size: 1.2rem;
+  line-height: 1.55;
   font-style: italic;
+  hyphens: none;
+  text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.faq-reviews__quote p {
+  margin: 0;
+  hyphens: none;
+  text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .faq-reviews__author {
   margin: 0;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  hyphens: none;
+  text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .faq-reviews__detail {
   margin: 0.4rem 0 0;
-  font-size: 1.3rem;
+  font-size: 1.05rem;
+  line-height: 1.4;
   opacity: 0.75;
+  hyphens: none;
+  text-wrap: pretty;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+@media screen and (min-width: 990px) {
+  .faq-reviews__grid--3-col .faq-reviews__quote,
+  .faq-reviews__grid--3-col .faq-reviews__quote p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .faq-reviews__grid--3-col .faq-reviews__author {
+    font-size: 1.05rem;
+  }
 }

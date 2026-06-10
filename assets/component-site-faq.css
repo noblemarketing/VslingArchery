@@ -121,6 +121,15 @@
   line-height: 1.6;
 }
 
+.site-faq__answer ul {
+  margin: 1rem 0 1.2rem;
+  padding-left: 2rem;
+}
+
+.site-faq__answer li + li {
+  margin-top: 0.6rem;
+}
+
 .site-faq__answer a {
   font-weight: 600;
   text-decoration: underline;

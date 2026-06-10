@@ -27,12 +27,12 @@
           </summary>
           <div class="site-faq__panel">
             <div class="site-faq__panel-inner">
-              <p
+              <div
                 class="site-faq__answer rte"
                 {% if global_index == 1 %}id="SiteFaqFirstAnswer"{% endif %}
               >
                 {{ answer_html }}
-              </p>
+              </div>
             </div>
           </div>
         </details>
@@ -41,8 +41,8 @@
 
     <section id="{{ cat_2_id }}" class="site-faq__category">
       <h2 class="h1 site-faq__category-title">{{ cat_2_title }}</h2>
-      {%- assign questions = c_q1 | append: '~~~' | append: c_q2 | append: '~~~' | append: c_q3 | append: '~~~' | append: c_q4 | split: '~~~' -%}
-      {%- assign answers = c_a1_plain | append: '~~~' | append: c_a2_plain | append: '~~~' | append: c_a3_plain | append: '~~~' | append: c_a4_plain | split: '~~~' -%}
+      {%- assign questions = c_q1 | append: '~~~' | append: c_q2 | append: '~~~' | append: c_q3 | append: '~~~' | append: c_q4 | append: '~~~' | append: c_q5 | append: '~~~' | append: c_q6 | append: '~~~' | append: c_q7 | split: '~~~' -%}
+      {%- assign answers = c_a1_plain | append: '~~~' | append: c_a2_plain | append: '~~~' | append: c_a3_plain | append: '~~~' | append: c_a4_plain | append: '~~~' | append: c_a5_plain | append: '~~~' | append: c_a6_plain | append: '~~~' | append: c_a7_plain | split: '~~~' -%}
       {%- for question in questions -%}
         {%- assign answer_plain = answers[forloop.index0] -%}
         {%- assign global_index = forloop.index | plus: 7 -%}
@@ -56,7 +56,7 @@
           </summary>
           <div class="site-faq__panel">
             <div class="site-faq__panel-inner">
-              <p class="site-faq__answer rte">{{ answer_html }}</p>
+              <div class="site-faq__answer rte">{{ answer_html }}</div>
             </div>
           </div>
         </details>
@@ -65,32 +65,8 @@
 
     <section id="{{ cat_3_id }}" class="site-faq__category">
       <h2 class="h1 site-faq__category-title">{{ cat_3_title }}</h2>
-      {%- assign questions = i_q1 | append: '~~~' | append: i_q2 | append: '~~~' | append: i_q3 | split: '~~~' -%}
-      {%- assign answers = i_a1_plain | append: '~~~' | append: i_a2_plain | append: '~~~' | append: i_a3_plain | split: '~~~' -%}
-      {%- for question in questions -%}
-        {%- assign answer_plain = answers[forloop.index0] -%}
-        {%- assign global_index = forloop.index | plus: 11 -%}
-        {%- include 'site-faq-answer-html', answer_plain: answer_plain, global_index: global_index -%}
-        <details class="site-faq__item accordion" id="Details-SiteFAQ-{{ global_index }}-{{ section_id }}">
-          <summary id="Summary-SiteFAQ-{{ global_index }}-{{ section_id }}">
-            <div class="site-faq__summary-inner">
-              <h3 class="site-faq__question">{{ question | escape }}</h3>
-              <span class="site-faq__toggle-icon" aria-hidden="true">+</span>
-            </div>
-          </summary>
-          <div class="site-faq__panel">
-            <div class="site-faq__panel-inner">
-              <p class="site-faq__answer rte">{{ answer_html }}</p>
-            </div>
-          </div>
-        </details>
-      {%- endfor -%}
-    </section>
-
-    <section id="{{ cat_4_id }}" class="site-faq__category">
-      <h2 class="h1 site-faq__category-title">{{ cat_4_title }}</h2>
-      {%- assign questions = f_q1 | append: '~~~' | append: f_q2 | append: '~~~' | append: f_q3 | append: '~~~' | append: f_q4 | split: '~~~' -%}
-      {%- assign answers = f_a1_plain | append: '~~~' | append: f_a2_plain | append: '~~~' | append: f_a3_plain | append: '~~~' | append: f_a4_plain | split: '~~~' -%}
+      {%- assign questions = i_q1 | append: '~~~' | append: i_q2 | append: '~~~' | append: i_q3 | append: '~~~' | append: i_q4 | split: '~~~' -%}
+      {%- assign answers = i_a1_plain | append: '~~~' | append: i_a2_plain | append: '~~~' | append: i_a3_plain | append: '~~~' | append: i_a4_plain | split: '~~~' -%}
       {%- for question in questions -%}
         {%- assign answer_plain = answers[forloop.index0] -%}
         {%- assign global_index = forloop.index | plus: 14 -%}
@@ -104,7 +80,31 @@
           </summary>
           <div class="site-faq__panel">
             <div class="site-faq__panel-inner">
-              <p class="site-faq__answer rte">{{ answer_html }}</p>
+              <div class="site-faq__answer rte">{{ answer_html }}</div>
+            </div>
+          </div>
+        </details>
+      {%- endfor -%}
+    </section>
+
+    <section id="{{ cat_4_id }}" class="site-faq__category">
+      <h2 class="h1 site-faq__category-title">{{ cat_4_title }}</h2>
+      {%- assign questions = f_q1 | append: '~~~' | append: f_q2 | append: '~~~' | append: f_q3 | append: '~~~' | append: f_q4 | append: '~~~' | append: f_q5 | split: '~~~' -%}
+      {%- assign answers = f_a1_plain | append: '~~~' | append: f_a2_plain | append: '~~~' | append: f_a3_plain | append: '~~~' | append: f_a4_plain | append: '~~~' | append: f_a5_plain | split: '~~~' -%}
+      {%- for question in questions -%}
+        {%- assign answer_plain = answers[forloop.index0] -%}
+        {%- assign global_index = forloop.index | plus: 18 -%}
+        {%- include 'site-faq-answer-html', answer_plain: answer_plain, global_index: global_index -%}
+        <details class="site-faq__item accordion" id="Details-SiteFAQ-{{ global_index }}-{{ section_id }}">
+          <summary id="Summary-SiteFAQ-{{ global_index }}-{{ section_id }}">
+            <div class="site-faq__summary-inner">
+              <h3 class="site-faq__question">{{ question | escape }}</h3>
+              <span class="site-faq__toggle-icon" aria-hidden="true">+</span>
+            </div>
+          </summary>
+          <div class="site-faq__panel">
+            <div class="site-faq__panel-inner">
+              <div class="site-faq__answer rte">{{ answer_html }}</div>
             </div>
           </div>
         </details>
