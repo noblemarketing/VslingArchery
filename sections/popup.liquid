@@ -1,0 +1,176 @@
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+{{ 'section-popup.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.enable_popup or request.design_mode -%}
+
+{%- include 'vsling-handles' -%}
+
+{%- assign bow_product_url = vsling_bow_url -%}
+
+<newsletter-popup
+  id="NewsletterPopup-{{ section.id }}"
+  class="newsletter-popup color-{{ section.settings.color_scheme }} gradient{% if form.posted_successfully? %} newsletter-popup--success{% endif %}"
+  data-delay="{{ section.settings.delay_seconds }}"
+  data-show-once="{{ section.settings.show_once }}"
+  {% if form.posted_successfully? or request.design_mode %}
+    open
+  {% endif %}
+>
+  <div
+    role="dialog"
+    aria-label="{{ section.settings.heading | escape }}"
+    aria-modal="false"
+    class="newsletter-popup__dialog color-{{ section.settings.color_scheme }} gradient"
+    tabindex="-1"
+  >
+    <button
+      id="ModalClose-{{ section.id }}"
+      type="button"
+      class="newsletter-popup__close"
+      aria-label="{{ 'accessibility.close' | t }}"
+    >
+      <span class="newsletter-popup__close-icon" aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="newsletter-popup__content">
+      <div class="newsletter-popup__form" data-popup-form{% if form.posted_successfully? %} hidden{% endif %}>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="newsletter-popup__heading">
+            {{ section.settings.heading | escape }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="newsletter-popup__subheading">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+
+        {%- form 'customer', id: 'NewsletterPopupForm', class: 'newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter,popup">
+          <div class="newsletter-form__field-wrapper">
+            <div class="field">
+              <input
+                id="NewsletterPopupEmail-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                class="field__input"
+                value="{{ form.email }}"
+                aria-required="true"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="email"
+                placeholder="{{ 'newsletter.label' | t }}"
+                required
+              >
+              <label class="field__label" for="NewsletterPopupEmail-{{ section.id }}">
+                {{ 'newsletter.label' | t }}
+              </label>
+              <button
+                type="submit"
+                class="newsletter-form__button field__button"
+                name="commit"
+                aria-label="{{ 'newsletter.button_label' | t }}"
+              >
+                <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <small class="newsletter-form__message form__message">
+                <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
+                {{- form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email -}}
+              </small>
+            {%- endif -%}
+          </div>
+        {%- endform -%}
+      </div>
+
+      <div class="newsletter-popup__success" data-popup-success{% unless form.posted_successfully? %} hidden{% endunless %}>
+        <h2 class="newsletter-popup__heading">{{ section.settings.success_heading | escape }}</h2>
+        <p class="newsletter-popup__subheading">{{ section.settings.success_message | escape }}</p>
+        <p class="newsletter-popup__success-link">
+          <a href="{{ bow_product_url }}" class="link">
+            {{ section.settings.success_link_text | escape }}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</newsletter-popup>
+
+<script src="{{ 'popup.js' | asset_url }}" defer="defer"></script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Pop-up",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Enable pop-up",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay_seconds",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay before pop-up appears",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_once",
+      "label": "Show once per visitor",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get Vsling hunting tips"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Join our list for new gear drops and bowhunting carry tips."
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Success heading",
+      "default": "You're in!"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing. Ready to upgrade your carry?"
+    },
+    {
+      "type": "text",
+      "id": "success_link_text",
+      "label": "Success link text",
+      "default": "Shop the Vsling hands-free compound bow sling"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pop-up"
+    }
+  ]
+}
+{% endschema %}

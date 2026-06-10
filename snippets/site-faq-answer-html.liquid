@@ -14,6 +14,9 @@
     assign comparison_tail = 'See the full comparison at vslingarchery.com/pages/vsling-vs-traditional-bow-sling.'
     assign comparison_linked = 'See the full comparison at <a href="' | append: comparison_page_url | append: '">vslingarchery.com/pages/vsling-vs-traditional-bow-sling</a>.'
     assign answer_html = answer_plain | replace: comparison_tail, comparison_linked
+  elsif global_index == 7
+    assign custom_color_link = '<a href="' | append: vsling_custom_color_url | append: '">custom color page</a>'
+    assign answer_html = answer_plain | replace: 'custom color page', custom_color_link
   elsif global_index == 11
     assign bino_tail = 'Shop it at vslingarchery.com/products/vsling-bino-sling.'
     assign bino_linked = 'Shop the <a href="' | append: vsling_bino_url | append: '">Vsling® Bino Sling</a> at vslingarchery.com/products/vsling-bino-sling.'

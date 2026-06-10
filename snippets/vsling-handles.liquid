@@ -10,6 +10,7 @@
   assign vsling_bino_handle = 'vsling-bino-sling'
   assign vsling_faq_page_handle = 'faq'
   assign vsling_comparison_page_handle = 'vsling-vs-traditional-bow-sling'
+  assign vsling_custom_color_handle = 'custom-color-vsling™'
 
   assign vsling_bow_product = all_products[vsling_bow_handle]
   assign vsling_crossbow_product = all_products[vsling_crossbow_handle]
@@ -24,5 +25,7 @@
   assign vsling_faq_url = vsling_faq_page.url | default: '/pages/faq'
   assign vsling_comparison_page = pages['vsling-vs-traditional-bow-sling']
   assign vsling_comparison_url = vsling_comparison_page.url | default: '/pages/vsling-vs-traditional-bow-sling'
+  assign vsling_custom_color_product = all_products[vsling_custom_color_handle]
+  assign vsling_custom_color_url = vsling_custom_color_product.url | default: '/products/custom-color-vsling™'
   assign vsling_all_products_url = routes.all_products_collection_url | default: '/collections/all'
 -%}
