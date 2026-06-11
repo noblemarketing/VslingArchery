@@ -101,18 +101,20 @@
       "type": "complete-your-setup",
       "settings": {
         "heading_bow": "Complete Your Setup",
-        "subtext_bow": "Pair your compound bow sling with a Vsling crossbow sling or bino sling for full hands-free carry in the field.",
+        "subtext_bow": "Pair your compound bow sling with a Vsling crossbow sling or Bino sling for full hands-free carry in the field.",
         "heading_crossbow": "Complete Your Setup",
         "subtext_crossbow": "Run a Vsling bow sling on your compound and a crossbow sling on your rig — same shoot-ready carry system, built for every hunt.",
+        "heading_bino": "Complete Your Setup",
+        "subtext_bino": "Add a Vsling bow sling or crossbow sling to match your hands-free bino carry.",
         "heading_size": "h2",
         "columns_desktop": 2,
         "columns_mobile": "1",
-        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
+        "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -144,4 +146,3 @@
     "related-products"
   ]
 }
-
