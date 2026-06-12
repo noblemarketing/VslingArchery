@@ -49,7 +49,7 @@
   assign p_a7_plain = 'The Vsling® Bow Sling is available in Black, Brown, Camouflage, and Red. Custom colors are also available for your Vsling® — order on the custom color page.'
 
   assign c_q1 = 'What bow models is the Vsling® compatible with?'
-  assign c_a1_plain = 'The Vsling® has been tested on Mathews V3 31, Mathews Phase 4, Hoyt RX-7 Ultra, Hoyt Ventum Pro 33, Elite EnKore, Elite Remedy, Prime Nexus 2, Bear Refine EKO, PSE Fortis, Bowtech Revolt X, and Darton Spectra E. It fits most modern compound bows with no extra hardware.'
+  assign c_a1_plain = 'All modern compound bows! The Vsling® has been tested on Mathews V3 31, Mathews Phase 4, Mathews ARC, Hoyt RX-7 Ultra, Hoyt Ventum Pro 33, Elite EnKore, Elite Remedy, Prime Nexus 2, Bear Refine EKO, PSE Fortis, PSE Sicario, Bowtech Revolt X, and Darton Spectra E.'
 
   assign c_q2 = 'Will the Vsling® fit my gun or crossbow?'
   assign c_a2_plain = 'Yes. The Vsling® will attach to any gun or crossbow with two swivel studs. The Vsling® Crossbow/Gun Edition is built from the same 100% elastic material and ships with two loose key rings for a custom install on any setup.'
@@ -59,9 +59,6 @@
 
   assign c_q4 = 'Does Vsling make a bino sling?'
   assign c_a4_plain = 'Yes. The Vsling® Bino Sling uses the same 100% elastic system for hands-free binocular carry — steady, quiet, and comfortable while you glass. Shop it at vslingarchery.com/products/vsling-bino-sling.'
-
-  assign c_q5 = 'Will the Vsling® fit my bow?'
-  assign c_a5_plain = 'Yes. The Vsling® is built to be universal. Whether you shoot a flagship compound or a budget-friendly bow, the elastic design adjusts to fit securely. Universal fit works with virtually any compound bow. Easy setup with a snug double knot. Field adjustable in seconds with no tools needed.'
 
   assign c_q6 = 'Will the Vsling® Bino Sling keep my binoculars tight to my chest without restricting use?'
   assign c_a6_plain = 'Yes. The Vsling® Bino Sling uses 100% elastic tension to keep your optics snug, stable, and quiet against your chest while still allowing full range of motion. You can glass instantly without straps tangling or pulling tight.'
@@ -96,6 +93,9 @@
   assign f_q5 = 'Will it work with a backpack?'
   assign f_a5_plain = '100% — Vsling® is built to adapt. Backpack, layers, whatever. Carry better. Shoot without removing it.'
 
+  assign f_q6 = 'Will the Vsling® help increase accuracy?'
+  assign f_a6_plain = 'Yes, it can. A fresher bow arm and steadier muscles can lead to more consistent shooting when the moment of truth arrives.'
+
   assign schema_q1 = p_q2
   assign schema_a1 = p_a2_plain
   assign schema_q2 = p_q3
@@ -113,7 +113,7 @@
   assign schema_q8 = f_q4
   assign schema_a8 = f_a4_plain
 
-  assign faq_questions = p_q1 | append: '~~~' | append: p_q2 | append: '~~~' | append: p_q3 | append: '~~~' | append: p_q4 | append: '~~~' | append: p_q5 | append: '~~~' | append: p_q6 | append: '~~~' | append: p_q7 | append: '~~~' | append: c_q1 | append: '~~~' | append: c_q2 | append: '~~~' | append: c_q3 | append: '~~~' | append: c_q4 | append: '~~~' | append: c_q5 | append: '~~~' | append: c_q6 | append: '~~~' | append: c_q7 | append: '~~~' | append: i_q1 | append: '~~~' | append: i_q2 | append: '~~~' | append: i_q3 | append: '~~~' | append: i_q4 | append: '~~~' | append: f_q1 | append: '~~~' | append: f_q2 | append: '~~~' | append: f_q3 | append: '~~~' | append: f_q4 | append: '~~~' | append: f_q5 | split: '~~~'
+  assign faq_questions = p_q1 | append: '~~~' | append: p_q2 | append: '~~~' | append: p_q3 | append: '~~~' | append: p_q4 | append: '~~~' | append: p_q5 | append: '~~~' | append: p_q6 | append: '~~~' | append: p_q7 | append: '~~~' | append: c_q1 | append: '~~~' | append: c_q2 | append: '~~~' | append: c_q3 | append: '~~~' | append: c_q4 | append: '~~~' | append: c_q6 | append: '~~~' | append: c_q7 | append: '~~~' | append: i_q1 | append: '~~~' | append: i_q2 | append: '~~~' | append: i_q3 | append: '~~~' | append: i_q4 | append: '~~~' | append: f_q1 | append: '~~~' | append: f_q2 | append: '~~~' | append: f_q3 | append: '~~~' | append: f_q4 | append: '~~~' | append: f_q5 | append: '~~~' | append: f_q6 | split: '~~~'
 
-  assign faq_answers_plain = p_a1_plain | append: '~~~' | append: p_a2_plain | append: '~~~' | append: p_a3_plain | append: '~~~' | append: p_a4_plain | append: '~~~' | append: p_a5_plain | append: '~~~' | append: p_a6_plain | append: '~~~' | append: p_a7_plain | append: '~~~' | append: c_a1_plain | append: '~~~' | append: c_a2_plain | append: '~~~' | append: c_a3_plain | append: '~~~' | append: c_a4_plain | append: '~~~' | append: c_a5_plain | append: '~~~' | append: c_a6_plain | append: '~~~' | append: c_a7_plain | append: '~~~' | append: i_a1_plain | append: '~~~' | append: i_a2_plain | append: '~~~' | append: i_a3_plain | append: '~~~' | append: i_a4_plain | append: '~~~' | append: f_a1_plain | append: '~~~' | append: f_a2_plain | append: '~~~' | append: f_a3_plain | append: '~~~' | append: f_a4_plain | append: '~~~' | append: f_a5_plain | split: '~~~'
+  assign faq_answers_plain = p_a1_plain | append: '~~~' | append: p_a2_plain | append: '~~~' | append: p_a3_plain | append: '~~~' | append: p_a4_plain | append: '~~~' | append: p_a5_plain | append: '~~~' | append: p_a6_plain | append: '~~~' | append: p_a7_plain | append: '~~~' | append: c_a1_plain | append: '~~~' | append: c_a2_plain | append: '~~~' | append: c_a3_plain | append: '~~~' | append: c_a4_plain | append: '~~~' | append: c_a6_plain | append: '~~~' | append: c_a7_plain | append: '~~~' | append: i_a1_plain | append: '~~~' | append: i_a2_plain | append: '~~~' | append: i_a3_plain | append: '~~~' | append: i_a4_plain | append: '~~~' | append: f_a1_plain | append: '~~~' | append: f_a2_plain | append: '~~~' | append: f_a3_plain | append: '~~~' | append: f_a4_plain | append: '~~~' | append: f_a5_plain | append: '~~~' | append: f_a6_plain | split: '~~~'
 -%}
