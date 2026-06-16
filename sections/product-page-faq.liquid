@@ -1,0 +1,83 @@
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-faq.css' | asset_url | stylesheet_tag }}
+
+{%- include 'vsling-handles' -%}
+
+{%- liquid
+  assign product_handle_downcase = product.handle | downcase
+  assign product_title_downcase = product.title | downcase
+  assign show_product_faq = false
+
+  if product.handle == vsling_crossbow_handle or product.handle == 'untitled-mar22_12-23' or product_handle_downcase contains 'crossbow' or product_handle_downcase contains 'gun-sling' or product_title_downcase contains 'crossbow' or product_title_downcase contains 'gun sling'
+    assign show_product_faq = true
+  elsif product.handle == vsling_bow_handle or product_handle_downcase contains 'bow-sling' or product_title_downcase contains 'bow sling'
+    unless product_handle_downcase contains 'bino' or product_title_downcase contains 'bino'
+      assign show_product_faq = true
+    endunless
+  endif
+-%}
+
+{%- if show_product_faq -%}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {% render 'product-faq', section_id: section.id, render_part: 'accordion' %}
+  </div>
+</div>
+
+{% render 'product-faq', section_id: section.id, render_part: 'schema' %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQ"
+    }
+  ]
+}
+{% endschema %}

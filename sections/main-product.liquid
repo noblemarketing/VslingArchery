@@ -11,7 +11,6 @@
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-  {{ 'component-product-faq.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
@@ -514,7 +513,6 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
-                {% include 'product-faq', section_id: section.id, render_part: 'accordion' %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -764,7 +762,6 @@
 
     {% include 'product-json-ld', product: product %}
     {% render 'breadcrumb-json-ld' %}
-    {% include 'product-faq', section_id: section.id, render_part: 'schema' %}
   </div>
 </product-info>
 

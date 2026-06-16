@@ -20,6 +20,13 @@
           "type": "price",
           "settings": {}
         },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
         "buy_buttons_Mn4njH": {
           "type": "buy_buttons",
           "settings": {
@@ -59,6 +66,7 @@
       "block_order": [
         "title",
         "price",
+        "variant_picker",
         "buy_buttons_Mn4njH",
         "description",
         "collapsible-row-1",
@@ -96,6 +104,14 @@
       "type": "_blocks",
       "name": "Hero video",
       "settings": {}
+    },
+    "product-page-faq": {
+      "type": "product-page-faq",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "complete-your-setup": {
       "type": "complete-your-setup",
@@ -142,6 +158,7 @@
     "main",
     "quick-order-list",
     "blocks_YbpwHk",
+    "product-page-faq",
     "complete-your-setup",
     "related-products"
   ]
