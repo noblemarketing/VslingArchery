@@ -27,6 +27,14 @@
             "swatch_shape": "circle"
           }
         },
+        "quick_order_list": {
+          "type": "quick_order_list",
+          "settings": {
+            "variants_per_page": 50,
+            "show_image": true,
+            "show_sku": true
+          }
+        },
         "buy_buttons_Mn4njH": {
           "type": "buy_buttons",
           "settings": {
@@ -67,6 +75,7 @@
         "title",
         "price",
         "variant_picker",
+        "quick_order_list",
         "buy_buttons_Mn4njH",
         "description",
         "collapsible-row-1",
@@ -87,17 +96,6 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "quick-order-list": {
-      "type": "quick-order-list",
-      "settings": {
-        "variants_per_page": 50,
-        "show_image": true,
-        "show_sku": true,
-        "color_scheme": "scheme-2",
-        "padding_top": 36,
-        "padding_bottom": 16
       }
     },
     "blocks_YbpwHk": {
@@ -156,7 +154,6 @@
   },
   "order": [
     "main",
-    "quick-order-list",
     "blocks_YbpwHk",
     "product-page-faq",
     "complete-your-setup",

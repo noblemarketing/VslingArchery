@@ -5,20 +5,28 @@
   - product: {Object} Product Liquid object
   - show_image: {Boolean} Shows image of the variant in the row
   - is_modal: {Boolean} Defines if this snippet lives in a modal (optional)
+  - is_inline: {Boolean} Renders inside the product info column (optional)
+  - variants_per_page: {Number} Variants per page for pagination (optional)
 
   Usage:
   {% render 'quick-order-list', product: product %}
 {% endcomment %}
 
+{%- liquid
+  assign qol_variants_per_page = variants_per_page | default: section.settings.variants_per_page | default: 50
+  assign qol_color_scheme = color_scheme | default: section.settings.color_scheme | default: 'scheme-1'
+  assign qol_section_id = section_id | default: section.id
+-%}
+
 {% comment %} TODO: enable theme-check once `line_items_for` is accepted as valid filter {% endcomment %}
 {% # theme-check-disable %}
 {%- assign items_in_cart = cart | line_items_for: product | sum: 'quantity' -%}
 {% # theme-check-enable %}
-<div class="quick-order-list-container color-{{ section.settings.color_scheme }}{% unless is_modal %} gradient{% endunless %}">
+<div class="quick-order-list-container color-{{ qol_color_scheme }}{% unless is_modal or is_inline %} gradient{% endunless %}">
   <quick-order-list
-    class="page-width section-{{ section.id }}-padding"
-    id="{{ section.id }}-{{ product.id }}"
-    data-section="{{ section.id }}"
+    class="{% if is_inline %}quick-order-list--inline{% else %}page-width section-{{ qol_section_id }}-padding{% endif %}"
+    id="{{ qol_section_id }}-{{ product.id }}"
+    data-section="{{ qol_section_id }}"
     data-product-id="{{ product.id }}"
     data-url="{{ product.url }}"
   >
@@ -28,7 +36,7 @@
       method="post"
       id="QuickOrderList"
     >
-      {% paginate product.variants by section.settings.variants_per_page %}
+      {% paginate product.variants by qol_variants_per_page %}
         <div class="quick-order-list__container" id="main-variant-items">
           <table class="quick-order-list__table">
             <caption class="visually-hidden">
@@ -127,8 +135,8 @@
       </span>
     {%- else -%}
       <div
-        class="quick-order-list__total{% unless is_modal %} gradient{% endunless %}"
-        id="quick-order-list-total-{{ product.id }}-{{ section.id }}"
+        class="quick-order-list__total{% unless is_modal or is_inline %} gradient{% endunless %}"
+        id="quick-order-list-total-{{ product.id }}-{{ qol_section_id }}"
       >
         <div class="quick-order-list-total__info">
           <div class="quick-order-list-total__column small-hide medium-hide">

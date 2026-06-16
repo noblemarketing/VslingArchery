@@ -1,0 +1,31 @@
+.product__quick-order-list {
+  margin: 0 0 1.6rem;
+  width: 100%;
+}
+
+.product__quick-order-list .quick-order-list-container {
+  background: transparent;
+}
+
+quick-order-list.quick-order-list--inline {
+  width: 100%;
+  max-width: 100%;
+}
+
+.product__quick-order-list .quick-order-list__total {
+  position: relative;
+  bottom: auto;
+  z-index: 1;
+  margin-top: 1.2rem;
+  padding: 1.2rem 0 0;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  box-shadow: none;
+}
+
+.product__quick-order-list .quick-order-list__table {
+  width: 100%;
+}
+
+.product__quick-order-list .variant-item__media {
+  width: 4.8rem;
+}

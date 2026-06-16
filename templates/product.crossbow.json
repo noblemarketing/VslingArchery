@@ -33,6 +33,14 @@
             "swatch_shape": "circle"
           }
         },
+        "quick_order_list": {
+          "type": "quick_order_list",
+          "settings": {
+            "variants_per_page": 50,
+            "show_image": true,
+            "show_sku": true
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -51,6 +59,7 @@
         "title",
         "price",
         "variant_picker",
+        "quick_order_list",
         "hero_description",
         "buy_buttons",
         "feature_strip"
