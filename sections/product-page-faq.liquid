@@ -1,9 +1,10 @@
 {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-faq.css' | asset_url | stylesheet_tag }}
 
-{%- include 'vsling-handles' -%}
-
 {%- liquid
+  assign vsling_bow_handle = 'bow-sling'
+  assign vsling_crossbow_handle = 'vsling-crossbow-gun-sling'
+
   assign product_handle_downcase = product.handle | downcase
   assign product_title_downcase = product.title | downcase
   assign show_product_faq = false

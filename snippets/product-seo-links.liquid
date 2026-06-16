@@ -3,9 +3,24 @@
   Renders FAQ and comparison page links with keyword-rich anchor text.
 {%- endcomment -%}
 
-{%- include 'vsling-handles' -%}
-
 {%- liquid
+  assign vsling_bow_handle = 'bow-sling'
+  assign vsling_crossbow_handle = 'vsling-crossbow-gun-sling'
+  assign vsling_bino_handle = 'vsling-bino-sling'
+  assign vsling_faq_page_handle = 'faq'
+  assign vsling_comparison_page_handle = 'vsling-vs-traditional-bow-sling'
+
+  assign vsling_bow_product = all_products[vsling_bow_handle]
+  assign vsling_crossbow_product = all_products[vsling_crossbow_handle]
+  assign vsling_bino_product = all_products[vsling_bino_handle]
+  assign vsling_bow_url = vsling_bow_product.url | default: '/products/bow-sling'
+  assign vsling_crossbow_url = vsling_crossbow_product.url | default: '/products/vsling-crossbow-gun-sling'
+  assign vsling_bino_url = vsling_bino_product.url | default: '/products/vsling-bino-sling'
+  assign vsling_faq_page = pages[vsling_faq_page_handle]
+  assign vsling_faq_url = vsling_faq_page.url | default: '/pages/faq'
+  assign vsling_comparison_page = pages[vsling_comparison_page_handle]
+  assign vsling_comparison_url = vsling_comparison_page.url | default: '/pages/vsling-vs-traditional-bow-sling'
+
   assign product_handle_downcase = product.handle | downcase
   assign product_title_downcase = product.title | downcase
   assign is_bow_sling_product = false
