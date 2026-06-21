@@ -49,7 +49,7 @@
         "ai_gen_block_15c8da0_XkFnJU": {
           "type": "ai_gen_block_15c8da0",
           "settings": {
-            "button_text": "Shop now",
+            "button_text": "Buy Now",
             "button_link": "shopify://collections/all",
             "alignment": "center",
             "desktop_width_percent": 30,
