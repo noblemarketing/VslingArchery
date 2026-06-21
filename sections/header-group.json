@@ -50,7 +50,7 @@
           "type": "ai_gen_block_15c8da0",
           "settings": {
             "button_text": "Buy Now",
-            "button_link": "shopify://collections/all",
+            "button_link": "shopify://collections/all-products",
             "alignment": "center",
             "desktop_width_percent": 30,
             "button_color": "#E40505",
