@@ -1,1 +1,103 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement_QyyN7D":{"type":"announcement","settings":{"text":"FREE SHIPPING ON ORDERS OVER $99","link":"shopify:\/\/collections\/all-products"}},"announcement-bar-0":{"type":"announcement","settings":{"text":"COMFORT BUILDS CONFIDENCE","link":"shopify:\/\/collections\/all"}}},"block_order":["announcement_QyyN7D","announcement-bar-0"],"settings":{"auto_rotate":true,"change_slides_speed":5,"color_scheme":"scheme-4","show_line_separator":true,"show_social":true,"enable_country_selector":false,"enable_language_selector":false}},"header":{"type":"header","settings":{"logo_position":"top-center","mobile_logo_position":"center","menu":"main-menu","menu_type_desktop":"drawer","sticky_header_type":"reduce-logo-size","show_line_separator":true,"color_scheme":"scheme-1","menu_color_scheme":"","enable_country_selector":true,"enable_language_selector":true,"enable_customer_avatar":false,"margin_bottom":0,"padding_top":8,"padding_bottom":8}}},"order":["announcement-bar","header"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_QyyN7D": {
+          "type": "announcement",
+          "settings": {
+            "text": "FREE SHIPPING ON ORDERS OVER $99",
+            "link": "shopify://collections/all-products"
+          }
+        },
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "COMFORT BUILDS CONFIDENCE",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_QyyN7D",
+        "announcement-bar-0"
+      ],
+      "settings": {
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-4",
+        "show_line_separator": true,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "blocks_9iHQxM": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_15c8da0_XkFnJU": {
+          "type": "ai_gen_block_15c8da0",
+          "settings": {
+            "button_text": "Shop now",
+            "button_link": "shopify://collections/all",
+            "alignment": "center",
+            "desktop_width_percent": 30,
+            "button_color": "#E40505",
+            "text_color": "#262626",
+            "hover_color": "#E40505",
+            "hover_text_color": "#ffffff",
+            "font_size": 16,
+            "font_weight": "500",
+            "padding_vertical": 14,
+            "padding_horizontal": 32,
+            "border_thickness": 1,
+            "border_color": "#E40505",
+            "hover_border_color": "#E40505",
+            "border_radius": 6
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_15c8da0_XkFnJU"
+      ],
+      "name": "Button",
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "top-center",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "drawer",
+        "sticky_header_type": "reduce-logo-size",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": false,
+        "margin_bottom": 0,
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "blocks_9iHQxM",
+    "header"
+  ]
+}
