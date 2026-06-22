@@ -24,7 +24,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Happy Father's Day!",
+            "text": "Farm Tested. Hunter Approved.",
             "link": "shopify://collections/all"
           }
         }
@@ -53,17 +53,17 @@
             "button_link": "shopify://collections/all-products",
             "alignment": "center",
             "desktop_width_percent": 30,
-            "button_color": "#E40505",
+            "button_color": "#e40505",
             "text_color": "#262626",
-            "hover_color": "#E40505",
+            "hover_color": "#e40505",
             "hover_text_color": "#ffffff",
             "font_size": 16,
             "font_weight": "500",
             "padding_vertical": 14,
             "padding_horizontal": 32,
             "border_thickness": 1,
-            "border_color": "#E40505",
-            "hover_border_color": "#E40505",
+            "border_color": "#e40505",
+            "hover_border_color": "#e40505",
             "border_radius": 6
           },
           "blocks": {}
