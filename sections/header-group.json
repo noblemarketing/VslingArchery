@@ -24,7 +24,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Farm Tested. Hunter Approved.",
+            "text": "Made by American Farmers 🇺🇸",
             "link": "shopify://collections/all"
           }
         }
@@ -57,8 +57,8 @@
             "text_color": "#262626",
             "hover_color": "#e40505",
             "hover_text_color": "#ffffff",
-            "font_size": 16,
-            "font_weight": "500",
+            "font_size": 19,
+            "font_weight": "700",
             "padding_vertical": 14,
             "padding_horizontal": 32,
             "border_thickness": 1,
