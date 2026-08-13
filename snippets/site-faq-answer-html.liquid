@@ -21,5 +21,8 @@
     assign bino_tail = 'Shop it at vslingarchery.com/products/vsling-bino-sling.'
     assign bino_linked = 'Shop the <a href="' | append: vsling_bino_url | append: '">Vsling® Bino Sling</a> at vslingarchery.com/products/vsling-bino-sling.'
     assign answer_html = answer_plain | replace: bino_tail, bino_linked
+  elsif global_index == 21
+    assign warranty_link = '<a href="' | append: vsling_warranty_url | append: '">warranty page</a>'
+    assign answer_html = answer_plain | replace: 'warranty page', warranty_link
   endif
 -%}
