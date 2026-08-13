@@ -15,12 +15,37 @@
 {%- endstyle -%}
 
 <div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | escape }}
-  </h1>
-  <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
-  </div>
+  {%- if page.handle == 'warranty-policy' -%}
+    <article class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      <h1 class="main-page-title page-title h0">Vsling® No-Hassle Warranty</h1>
+      <p>
+        We stand behind every Vsling® we make. If your Vsling has a defect or fails due to materials or workmanship, contact us and we’ll make it right—no hassle.
+      </p>
+      <h2>Made for Comfort</h2>
+      <p>
+        Vsling® is made from 100% elastic to provide a comfortable, flexible fit that keeps your bow secure while allowing you to move naturally.
+      </p>
+      <p>
+        Like any elastic product, normal stretching and wear will occur over time. Lifespan will vary depending on frequency of use, conditions, and how the product is cared for.
+      </p>
+      <h2>What’s Covered</h2>
+      <p>Manufacturing defects and premature failures caused by materials or workmanship.</p>
+      <h2>What’s Not Covered</h2>
+      <p>
+        Normal wear and tear, gradual loss of elasticity, abrasion, fraying from use, cuts, misuse, modifications, accidents, or improper storage.
+      </p>
+      <h2>Have an Issue?</h2>
+      <p>Contact us with your order information, a photo of the product, and a brief description of the issue.</p>
+      <p>If it’s a legitimate product problem, we’ll make it right—no hassle.</p>
+    </article>
+  {%- else -%}
+    <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {{ page.title | escape }}
+    </h1>
+    <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ page.content }}
+    </div>
+  {%- endif -%}
 </div>
 
 {% schema %}

@@ -1,37 +1,19 @@
-.warranty-page__header {
-  margin-bottom: 3rem;
+.warranty-page h2 {
+  margin: 2.8rem 0 1.2rem;
 }
 
-.warranty-page__header p {
+.warranty-page p {
   margin: 0;
   font-size: 1.6rem;
   line-height: 1.6;
 }
 
-.warranty-page__section + .warranty-page__section {
-  margin-top: 2.8rem;
-}
-
-.warranty-page__section h2 {
-  margin: 0 0 1.2rem;
-}
-
-.warranty-page__section p {
-  margin: 0;
-  font-size: 1.6rem;
-  line-height: 1.6;
-}
-
-.warranty-page__section p + p {
+.warranty-page p + p {
   margin-top: 1.2rem;
 }
 
 @media screen and (min-width: 750px) {
-  .warranty-page__header {
-    margin-bottom: 4rem;
-  }
-
-  .warranty-page__section + .warranty-page__section {
+  .warranty-page h2 {
     margin-top: 3.2rem;
   }
 }
