@@ -61,7 +61,7 @@
       assign faq_a4 = 'All modern compound bows! The Vsling has been tested on Mathews V3 31, Mathews Phase 4, Mathews ARC, Hoyt RX-7 Ultra, Hoyt Ventum Pro 33, Elite EnKore, Elite Remedy, Prime Nexus 2, Prime Inline 5, Bear Refine EKO, Bear Alaskan XT, PSE Fortis, PSE Sicario, Bowtech Revolt X, and Darton Spectra E.'
 
       assign faq_q5 = 'How do I put the Vsling on my bow?'
-      assign faq_a5 = 'Attach it to your bow, adjust the elastic to your body, and lock it in with a snug double knot. Takes a few minutes and you fine-tune it once.'
+      assign faq_a5 = 'Loop the Vsling through itself in a riser cutout below the grip. Run it up the back of the riser, through a cutout just above the sight, then back down and tie a snug double knot through the riser cutout where you started. Fine-tune the tension by choosing a different riser cutout or simply using more or less of Vsling before double knot.<br><br>View the Installation video:<br><a href="https://youtube.com/shorts/PxJchokcBO8?si=4zCJeis_TVhGb9y1" target="_blank" rel="noopener">https://youtube.com/shorts/PxJchokcBO8?si=4zCJeis_TVhGb9y1</a>'
 
       assign faq_q6 = 'Is the Vsling good for treestand hunting?'
       assign faq_a6 = 'Yes. The Vsling keeps your bow tight while you climb and sit in the stand. Your hands stay free and you are draw-ready when a deer steps out. Pair it with the Vsling Bino Sling for the same hands-free carry on your binoculars.'
@@ -100,7 +100,11 @@
               role="region"
               aria-labelledby="Summary-FAQ-{{ forloop.index }}-{{ section_id }}"
             >
-              <p>{{ answer | escape }}</p>
+              {%- if answer contains '<br>' or answer contains '<a ' -%}
+                <div>{{ answer }}</div>
+              {%- else -%}
+                <p>{{ answer | escape }}</p>
+              {%- endif -%}
             </div>
           </details>
         </div>
@@ -121,7 +125,7 @@
             "name": {{ question | json }},
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": {{ faq_answers[forloop.index0] | json }}
+              "text": {{ faq_answers[forloop.index0] | strip_html | json }}
             }
           }{%- unless forloop.last -%},{%- endunless -%}
           {%- endfor -%}
